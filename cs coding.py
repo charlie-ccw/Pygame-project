@@ -11,5 +11,4 @@ size = (700,500)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Charlie's 'bullet hell'")
 
-import 
 
