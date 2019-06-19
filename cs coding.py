@@ -12,10 +12,7 @@ size = (700, 500)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Charlie's 'bullet hell'")
 
-pygame.draw.rect(screen, RED, [55, 50, 20, 25], 1)
- 
-
-# Loop until the user clicks the close button.
+ # Loop until the user clicks the close button.
 done = False
  # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
@@ -27,6 +24,7 @@ while not done:
             done = True
     # Here, we clear the screen to black
     screen.fill(BLACK)
+    
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
     # --- Limit to 60 frames per second
