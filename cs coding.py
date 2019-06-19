@@ -8,7 +8,7 @@ RED = (255, 0, 0)
 
 # here define the player's plane
 def draw_stick_figure(screen,x,y):
-    pygame.draw.rect(screen,WHITE,[x-10,y-10,30,30],20)
+    pygame.draw.rect(screen,WHITE,[x-10,y-10,20,20],20)
     
 pygame.init()
  # Set the width and height of the screen [width, height]
@@ -62,13 +62,13 @@ while not done:
             
         # here we give the speed
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_a:
+            if event.key == pygame.K_a and x_coord > 20:
                 x_speed = -3
-            if event.key == pygame.K_d:
+            if event.key == pygame.K_d and x_coord < 680:
                 x_speed = 3
-            if event.key == pygame.K_w:
+            if event.key == pygame.K_w and y_coord > 20:
                 y_speed = -3
-            if event.key == pygame.K_s:
+            if event.key == pygame.K_s and y_coord < 480:
                 y_speed = 3
 
         if event.type == pygame.KEYUP:
@@ -86,7 +86,7 @@ while not done:
     # Here, we clear the screen to black
     screen.fill(BLACK)
     
-    
+    # draw the player's plane
     draw_stick_figure(screen,x_coord,y_coord)
 
     # mybullet update here and redraw
