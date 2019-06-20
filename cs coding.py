@@ -44,8 +44,10 @@ all_sprites_list.add(mybullet)
 x_coord = 350
 y_coord = 470
 # set up the speed of x and y 
-x_speed = 0
-y_speed = 0
+x_speed1 = 0
+x_speed2 = 0
+y_speed1 = 0
+y_speed2 = 0
 
 
  # Loop until the user clicks the close button.
@@ -62,14 +64,14 @@ while not done:
             
         # here we give the speed
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_a and x_coord > 20:
-                x_speed = -3
-            if event.key == pygame.K_d and x_coord < 680:
-                x_speed = 3
-            if event.key == pygame.K_w and y_coord > 20:
-                y_speed = -3
-            if event.key == pygame.K_s and y_coord < 480:
-                y_speed = 3
+            if event.key == pygame.K_a:
+                x_speed2 = -3
+            if event.key == pygame.K_d:
+                x_speed1 = 3
+            if event.key == pygame.K_w:
+                y_speed2 = -3
+            if event.key == pygame.K_s:
+                y_speed1 = 3
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_a:
@@ -80,9 +82,15 @@ while not done:
                 y_speed = 0
             if event.key == pygame.K_s:
                 y_speed = 0
-
-    x_coord += x_speed
-    y_coord += y_speed
+    # here add the speed to object
+    if x_coord > 20:
+        x_coord += x_speed2
+    if x_coord < 680:
+        x_coord += x_speed1
+    if y_coord > 20:
+        y_coord += y_speed2
+    if y_coord < 480:
+        y_coord += y_speed1
     # Here, we clear the screen to black
     screen.fill(BLACK)
     
