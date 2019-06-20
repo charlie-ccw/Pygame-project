@@ -6,9 +6,7 @@ WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 
-# here define the player's plane
-def draw_stick_figure(screen,x,y):
-    pygame.draw.rect(screen,WHITE,[x-10,y-10,20,20],20)
+
     
 pygame.init()
  # Set the width and height of the screen [width, height]
@@ -17,6 +15,39 @@ screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Charlie's 'bullet hell'")
 
 
+
+class Plane(pygame.sprite.Sprite):
+    def __init__(self,x,y):
+
+        super().__init__()
+        self.image = pygame.Surface([30,30])
+        self.image.fill(WHITE)
+        self.rect = self.image.get_rect()
+        self.rect.x=x
+        self.rect.y=y
+
+    def update(self):
+        if self.rect.x <= 730 and self.rect.x >= 0:
+            #self.rect.x += -1
+            self.rect.x += x_speed
+        if self.rect.y <= 530 and self.rect.y >= 0:
+            #self.rect.y += -1
+            self.rect.y += y_speed
+        if self.rect.x<0:
+            self.rect.x=0
+        if self.rect.x>670:
+            self.rect.x=670
+        if self.rect.y<0:
+            self.rect.y=0
+        if self.rect.y>470:
+            self.rect.y=470
+        print(self.rect.x)
+        print(self.rect.y)
+
+myplane = Plane(350,400)
+
+
+    
 class Bullet(pygame.sprite.Sprite):
     # This class represents a simple block the player collects. 
  
@@ -34,20 +65,19 @@ class Bullet(pygame.sprite.Sprite):
         # Automatically called when we need to move the block. 
         self.rect.y -= 5
 
-mybullet = Bullet(200,400)
+
 
 all_sprites_list = pygame.sprite.Group()
 
-all_sprites_list.add(mybullet)
 
-# set up the coordinate of x and y  
-x_coord = 350
-y_coord = 470
+all_sprites_list.add(myplane)
+
+
 # set up the speed of x and y 
-x_speed1 = 0
-x_speed2 = 0
-y_speed1 = 0
-y_speed2 = 0
+x_speed = 0
+
+y_speed = 0
+
 
 
  # Loop until the user clicks the close button.
@@ -65,13 +95,17 @@ while not done:
         # here we give the speed
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_a:
-                x_speed2 = -3
+                x_speed = -3
             if event.key == pygame.K_d:
-                x_speed1 = 3
+                x_speed = 3
             if event.key == pygame.K_w:
-                y_speed2 = -3
+                y_speed = -3
             if event.key == pygame.K_s:
-                y_speed1 = 3
+                y_speed = 3
+            if event.key==pygame.K_SPACE:
+                mybullet = Bullet(myplane.rect.x+15,myplane.rect.y)
+                all_sprites_list.add(mybullet)
+                
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_a:
@@ -82,20 +116,10 @@ while not done:
                 y_speed = 0
             if event.key == pygame.K_s:
                 y_speed = 0
-    # here add the speed to object
-    if x_coord > 20:
-        x_coord += x_speed2
-    if x_coord < 680:
-        x_coord += x_speed1
-    if y_coord > 20:
-        y_coord += y_speed2
-    if y_coord < 480:
-        y_coord += y_speed1
+                
     # Here, we clear the screen to black
     screen.fill(BLACK)
     
-    # draw the player's plane
-    draw_stick_figure(screen,x_coord,y_coord)
 
     # mybullet update here and redraw
     all_sprites_list.update()
