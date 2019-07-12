@@ -1,7 +1,9 @@
 import pygame
 import sys
 import traceback
+import myplane
 from pygame.locals import *
+from random import *
 
 pygame.init()
 pygame.mixer.init()
@@ -16,6 +18,10 @@ background = pygame.image.load("images/background.png.jpg").convert()
 
  # here is the main program
 def main():
+
+    # here we creat myplane
+    myplane1 = myplane.Myplane(size)
+    
     running = True
     clock = pygame.time.Clock()
 
@@ -27,8 +33,23 @@ def main():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
-        
+
+        # here we check the keyboard of user
+        key_pressed = pygame.key.get_pressed()
+        if key_pressed[K_w]:
+            myplane1.moveUp()
+        if key_pressed[K_s]:
+            myplane1.moveDown()
+        if key_pressed[K_a]:
+            myplane1.moveLeft()
+        if key_pressed[K_d]:
+            myplane1.moveRight()
+        print(myplane1.rect.left)
+        print(myplane1.rect.top)
         screen.blit(background,(0,0))
+
+        # here we draw the user's plane
+        screen.blit(myplane1.image, myplane1.rect)
 
         pygame.display.flip()
         
