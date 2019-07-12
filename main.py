@@ -46,6 +46,7 @@ def main():
             myplane1.moveRight()
         print(myplane1.rect.left)
         print(myplane1.rect.top)
+
         screen.blit(background,(0,0))
 
         # here we draw the user's plane
