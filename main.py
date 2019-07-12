@@ -2,6 +2,7 @@ import pygame
 import sys
 import traceback
 import myplane
+import enemy
 from pygame.locals import *
 from random import *
 
@@ -16,11 +17,44 @@ pygame.display.set_caption("Charlie's bullet hell")
  # set the picture of the background
 background = pygame.image.load("images/background.png.jpg").convert()
 
+
+
+def add_enemy1(group1,group2,num):
+    for i in range(num):
+        e1 = enemy.Enemy1(size)
+        group1.add(e1)
+        group2.add(e1)
+
+def add_enemy2(group1,group2,num):
+    for i in range(num):
+        e2 = enemy.Enemy2(size)
+        group1.add(e2)
+        group2.add(e2)
+
+def add_enemy3(group1,group2,num):
+    for i in range(num):
+        e3 = enemy.Enemy3(size)
+        group1.add(e3)
+        group2.add(e3)
  # here is the main program
 def main():
 
     # here we creat myplane
     myplane1 = myplane.Myplane(size)
+
+     # here we creat the enemy planes
+    enemies = pygame.sprite.Group()
+
+    enemy1 = pygame.sprite.Group()
+    add_enemy1(enemy1, enemies, 15)
+
+    enemy2 = pygame.sprite.Group()
+    add_enemy2(enemy2, enemies, 5)
+
+    enemy3 = pygame.sprite.Group()
+    add_enemy3(enemy3, enemies, 2)
+    
+    
     
     running = True
     clock = pygame.time.Clock()
@@ -51,6 +85,19 @@ def main():
 
         # here we draw the user's plane
         screen.blit(myplane1.image, myplane1.rect)
+
+        # here we draw the enemy planes
+        for each in enemy3:
+            each.move()
+            screen.blit(each.image, each.rect)
+
+        for each in enemy2:
+            each.move()
+            screen.blit(each.image, each.rect)
+
+        for each in enemy1:
+            each.move()
+            screen.blit(each.image, each.rect)
 
         pygame.display.flip()
         
