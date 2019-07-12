@@ -10,9 +10,11 @@ RED = (255, 0, 0)
     
 pygame.init()
  # Set the width and height of the screen [width, height]
-size = (700, 500)
+size = (640, 960)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Charlie's 'bullet hell'")
+
+
 
 
 
@@ -27,24 +29,24 @@ class Plane(pygame.sprite.Sprite):
         self.rect.y=y
 
     def update(self):
-        if self.rect.x <= 730 and self.rect.x >= 0:
+        if self.rect.x <= 670 and self.rect.x >= 0:
             #self.rect.x += -1
             self.rect.x += x_speed
-        if self.rect.y <= 530 and self.rect.y >= 0:
+        if self.rect.y <= 990 and self.rect.y >= 0:
             #self.rect.y += -1
             self.rect.y += y_speed
         if self.rect.x<0:
             self.rect.x=0
-        if self.rect.x>670:
-            self.rect.x=670
+        if self.rect.x>610:
+            self.rect.x=610
         if self.rect.y<0:
             self.rect.y=0
-        if self.rect.y>470:
-            self.rect.y=470
+        if self.rect.y>930:
+            self.rect.y=930
         print(self.rect.x)
         print(self.rect.y)
 
-myplane = Plane(350,400)
+myplane = Plane(320,700)
 
 
     
