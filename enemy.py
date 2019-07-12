@@ -20,7 +20,7 @@ class Enemy1(pygame.sprite.Sprite):
         if self.rect.top < self.height:
             self.rect.top +=self.speed
         else:
-            reset()
+            self.reset()
 
      # here we define how the enemy reset in the game
     def reset(self):
@@ -51,7 +51,7 @@ class Enemy2(pygame.sprite.Sprite):
         if self.rect.top < self.height:
             self.rect.top +=self.speed
         else:
-            reset()
+            self.reset()
 
      # here we define how the enemy reset in the game
     def reset(self):
@@ -81,7 +81,7 @@ class Enemy3(pygame.sprite.Sprite):
         if self.rect.top < self.height:
             self.rect.top +=self.speed
         else:
-            reset()
+            self.reset()
 
      # here we define how the enemy reset in the game
     def reset(self):
