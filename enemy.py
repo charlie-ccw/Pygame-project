@@ -23,7 +23,7 @@ class Enemy1(pygame.sprite.Sprite):
             reset()
 
      # here we define how the enemy reset in the game
-    def rest(self):
+    def reset(self):
         self.rect.left = randint(0,self.width - self.rect.width)
         self.rect.bottom = randint(self.height*-5,0)
         
