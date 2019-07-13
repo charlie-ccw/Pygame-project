@@ -6,11 +6,21 @@ class Enemy1(pygame.sprite.Sprite):
     def __init__(self,size):
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = pygame.image.load("images/enemy1.jpg").convert_alpha()
+        self.image = pygame.image.load("images/6.png").convert_alpha()
+        # here we difine the destory picture of the enemy
+        self.destroy_images = []
+        self.destroy_images.extend([\
+             pygame.image.load("images/7.png").convert_alpha(),\
+             pygame.image.load("images/8.png").convert_alpha(),\
+             pygame.image.load("images/9.png").convert_alpha(),\
+             pygame.image.load("images/1.png").convert_alpha(),\
+             ])
         self.rect = self.image.get_rect()
         self.width = 700
         self.height = 960
-        self.speed = 4
+        self.speed = 5
+        # here we set the condition of the picture
+        self.active = True
         self.rect.left = randint(0,self.width - self.rect.width)
         self.rect.bottom = randint(self.height*-5,0)
 
@@ -24,6 +34,7 @@ class Enemy1(pygame.sprite.Sprite):
 
      # here we define how the enemy reset in the game
     def reset(self):
+        self.active = True
         self.rect.left = randint(0,self.width - self.rect.width)
         self.rect.bottom = randint(self.height*-5,0)
         
@@ -37,11 +48,21 @@ class Enemy2(pygame.sprite.Sprite):
     def __init__(self,size):
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = pygame.image.load("images/enemy2.jpg").convert_alpha()
+        self.image = pygame.image.load("images/14.png").convert_alpha()
+        # here we difine the destory picture of the enemy
+        self.destroy_images = []
+        self.destroy_images.extend([\
+             pygame.image.load("images/15.png").convert_alpha(),\
+             pygame.image.load("images/16.png").convert_alpha(),\
+             pygame.image.load("images/17.png").convert_alpha(),\
+             pygame.image.load("images/1.png").convert_alpha(),\
+             ])
         self.rect = self.image.get_rect()
         self.width = 700
         self.height = 960
         self.speed = 2
+        # here we set the condition of the picture
+        self.active = True
         self.rect.left = randint(0,self.width - self.rect.width)
         self.rect.bottom = randint(self.height*-10,-self.height)
 
@@ -55,6 +76,7 @@ class Enemy2(pygame.sprite.Sprite):
 
      # here we define how the enemy reset in the game
     def reset(self):
+        self.active = True
         self.rect.left = randint(0,self.width - self.rect.width)
         self.rect.bottom = randint(self.height*-10,0)
 
@@ -67,11 +89,21 @@ class Enemy3(pygame.sprite.Sprite):
     def __init__(self,size):
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = pygame.image.load("images/enemy3.jpg").convert_alpha()
+        self.image = pygame.image.load("images/2.png").convert_alpha()
+        # here we difine the destory picture of the enemy
+        self.destroy_images = []
+        self.destroy_images.extend([\
+             pygame.image.load("images/3.png").convert_alpha(),\
+             pygame.image.load("images/4.png").convert_alpha(),\
+             pygame.image.load("images/5.png").convert_alpha(),\
+             pygame.image.load("images/1.png").convert_alpha(),\
+             ])
         self.rect = self.image.get_rect()
         self.width = 700
         self.height = 960
         self.speed = 1
+        # here we set the condition of the picture
+        self.active = True
         self.rect.left = randint(0,self.width - self.rect.width)
         self.rect.bottom = randint(self.height*-12,-self.height*2)
 
@@ -85,5 +117,6 @@ class Enemy3(pygame.sprite.Sprite):
 
      # here we define how the enemy reset in the game
     def reset(self):
+        self.active = True
         self.rect.left = randint(0,self.width - self.rect.width)
         self.rect.bottom = randint(self.height*-10,0)

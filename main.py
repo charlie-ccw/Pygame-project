@@ -15,7 +15,7 @@ screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Charlie's bullet hell")
 
  # set the picture of the background
-background = pygame.image.load("images/background.png.jpg").convert()
+background = pygame.image.load("images/background.jpg").convert()
 
 
 
@@ -49,12 +49,16 @@ def main():
     add_enemy1(enemy1, enemies, 15)
 
     enemy2 = pygame.sprite.Group()
-    add_enemy2(enemy2, enemies, 5)
+    add_enemy2(enemy2, enemies, 7)
 
     enemy3 = pygame.sprite.Group()
-    add_enemy3(enemy3, enemies, 2)
+    add_enemy3(enemy3, enemies, 3)
     
-    
+    # the index of plane when it is destoried
+    e1_destory_index = 0
+    e2_destory_index = 0
+    e3_destory_index = 0
+    myplane1_destory_index = 0
     
     running = True
     clock = pygame.time.Clock()
@@ -83,21 +87,62 @@ def main():
 
         screen.blit(background,(0,0))
 
+
+        # here we check that if the user's plane is touched by the enemies
+        enemies_down = pygame.sprite.spritecollide(myplane1, enemies, False)
+        if enemies_down:
+            myplane1.active = False
+            for e in enemies_down:
+                e.active = False
+
         # here we draw the user's plane
-        screen.blit(myplane1.image, myplane1.rect)
+        if myplane1.active:
+            screen.blit(myplane1.image, myplane1.rect)
+        else:
+            if not(delay % 3):
+                # here we draw the destory pictures of the plane
+                screen.blit(each.destory_images[mhyplane1_destory_index], each.rect)
+                myplane1_destory_index = (myplane1_destory_index + 1) % 4
+                if myplane1_destory_index == 0:
+                    each.reset()
 
         # here we draw the enemy planes
         for each in enemy3:
-            each.move()
-            screen.blit(each.image, each.rect)
+            # here we check the condition of the plane
+            if each.active:
+                each.move()
+                screen.blit(each.image, each.rect)
+            else:
+                if not(delay % 3):
+                    # here we draw the destory pictures of the plane
+                    screen.blit(each.destory_images[e3_destory_index], each.rect)
+                    e3_destory_index = (e3_destory_index + 1) % 4
+                    if e3_destory_index == 0:
+                        each.reset()
 
         for each in enemy2:
-            each.move()
-            screen.blit(each.image, each.rect)
+            if each.active:
+                each.move()
+                screen.blit(each.image, each.rect)
+            else:
+                if not(delay % 3):
+                    # here we draw the destory pictures of the plane
+                    screen.blit(each.destory_images[e2_destory_index], each.rect)
+                    e2_destory_index = (e3_destory_index + 1) % 4
+                    if e2_destory_index == 0:
+                        each.reset()
 
         for each in enemy1:
-            each.move()
-            screen.blit(each.image, each.rect)
+            if each.active:
+                each.move()
+                screen.blit(each.image, each.rect)
+            else:
+                if not(delay % 3):
+                    # here we draw the destory pictures of the plane
+                    screen.blit(each.destory_images[e1_destory_index], each.rect)
+                    e1_destory_index = (e1_destory_index + 1) % 4
+                    if e1_destory_index == 0:
+                        each.reset()
 
         pygame.display.flip()
         

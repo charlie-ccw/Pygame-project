@@ -5,13 +5,25 @@ class Myplane(pygame.sprite.Sprite):
     def __init__(self,size):
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = pygame.image.load("images/myplane.jpg").convert_alpha()
+        self.image = pygame.image.load("images/10.png").convert_alpha()
+        self.destroy_images = []
+        self.destroy_images.extend([\
+            pygame.image.load("images/11.png").convert_alpha(),\
+            pygame.image.load("images/12.png").convert_alpha(),\
+            pygame.image.load("images/13.png").convert_alpha(),\
+            pygame.image.load("images/14.png").convert_alpha(),\
+            ])
         self.rect = self.image.get_rect()
         self.width = 700
         self.height = 960
         self.rect.left = (self.width - self.rect.width)/2
         self.rect.top = self.height - self.rect.height - 150
         self.speed = 10
+        # here we set the condition of the picture
+        self.active = True
+
+
+        
  # here we set the movement of my plane
     def moveUp(self):
         if self.rect.top > 0:
