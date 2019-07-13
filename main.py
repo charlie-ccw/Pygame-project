@@ -10,7 +10,7 @@ pygame.init()
 pygame.mixer.init()
 
  # set the background size of the game
-size = width,height = 640, 960
+size = width,height = 700, 960
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Charlie's bullet hell")
 

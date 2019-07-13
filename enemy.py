@@ -8,7 +8,7 @@ class Enemy1(pygame.sprite.Sprite):
 
         self.image = pygame.image.load("images/enemy1.jpg").convert_alpha()
         self.rect = self.image.get_rect()
-        self.width = 640
+        self.width = 700
         self.height = 960
         self.speed = 4
         self.rect.left = randint(0,self.width - self.rect.width)
@@ -39,7 +39,7 @@ class Enemy2(pygame.sprite.Sprite):
 
         self.image = pygame.image.load("images/enemy2.jpg").convert_alpha()
         self.rect = self.image.get_rect()
-        self.width = 640
+        self.width = 700
         self.height = 960
         self.speed = 2
         self.rect.left = randint(0,self.width - self.rect.width)
@@ -69,7 +69,7 @@ class Enemy3(pygame.sprite.Sprite):
 
         self.image = pygame.image.load("images/enemy3.jpg").convert_alpha()
         self.rect = self.image.get_rect()
-        self.width = 640
+        self.width = 700
         self.height = 960
         self.speed = 1
         self.rect.left = randint(0,self.width - self.rect.width)

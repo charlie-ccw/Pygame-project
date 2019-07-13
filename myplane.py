@@ -7,7 +7,7 @@ class Myplane(pygame.sprite.Sprite):
 
         self.image = pygame.image.load("images/myplane.jpg").convert_alpha()
         self.rect = self.image.get_rect()
-        self.width = 640
+        self.width = 700
         self.height = 960
         self.rect.left = (self.width - self.rect.width)/2
         self.rect.top = self.height - self.rect.height - 150
