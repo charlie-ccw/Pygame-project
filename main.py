@@ -3,6 +3,7 @@ import sys
 import traceback
 import myplane
 import enemy
+import bullet
 from pygame.locals import *
 from random import *
 
@@ -18,7 +19,7 @@ pygame.display.set_caption("Charlie's bullet hell")
 background = pygame.image.load("images/background.jpg").convert()
 
 
-
+# here we difine the group of enemy
 def add_enemy1(group1,group2,num):
     for i in range(num):
         e1 = enemy.Enemy1(size)
@@ -36,6 +37,7 @@ def add_enemy3(group1,group2,num):
         e3 = enemy.Enemy3(size)
         group1.add(e3)
         group2.add(e3)
+        
  # here is the main program
 def main():
 
@@ -47,13 +49,22 @@ def main():
     enemies = pygame.sprite.Group()
 
     enemy1 = pygame.sprite.Group()
-    add_enemy1(enemy1, enemies, 15)
+    add_enemy1(enemy1, enemies, 20)
 
     enemy2 = pygame.sprite.Group()
-    add_enemy2(enemy2, enemies, 7)
+    add_enemy2(enemy2, enemies, 8)
 
     enemy3 = pygame.sprite.Group()
     add_enemy3(enemy3, enemies, 3)
+
+
+    # here we creat the bullets
+    bullet1 = []
+    bullet1_index = 0
+    bullet1_number = 7
+    for i in range(bullet1_number):
+        bullet1.append(bullet.Bullet1(myplane1.rect.midtop))
+        
     
     # the index of plane when it is destoried
     e1_destroy_index = 0
@@ -69,6 +80,7 @@ def main():
 
     clock = pygame.time.Clock()
 
+
     # here we check if it is ok to run the game
     while running:
         for event in pygame.event.get():
@@ -77,6 +89,7 @@ def main():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
+
 
         # here we check the keyboard of user
         key_pressed = pygame.key.get_pressed()
@@ -113,6 +126,25 @@ def main():
                     print("game over")
                     running = False
 
+
+        # here we shot the bullets
+        if not(delay % 10):
+            bullet1[bullet1_index].reset(myplane1.rect.midtop)
+            bullet1_index = (bullet1_index + 1) % bullet1_number
+
+
+        # here we check if the bullet collides with the enemy plane
+        for b in bullet1:
+            if b.active:
+                b.move()
+                screen.blit(b.image, b.rect)
+                enemy_hit = pygame.sprite.spritecollide(b, enemies, False, pygame.sprite.collide_mask)
+                if enemy_hit:
+                    b.active = False
+                    for e in enemy_hit:
+                        e.active = False
+            
+            
         # here we draw the enemy planes
         for each in enemy3:
             # here we check the condition of the plane
@@ -127,6 +159,7 @@ def main():
                     if e3_destroy_index == 0:
                         each.reset()
 
+
         for each in enemy2:
             if each.active:
                 each.move()
@@ -135,9 +168,10 @@ def main():
                 if not(delay % 3):
                     # here we draw the destory pictures of the plane
                     screen.blit(each.destroy_images[e2_destroy_index], each.rect)
-                    e2_destroy_index = (e3_destroy_index + 1) % 4
+                    e2_destroy_index = (e2_destroy_index + 1) % 4
                     if e2_destroy_index == 0:
                         each.reset()
+
 
         for each in enemy1:
             if each.active:
@@ -151,6 +185,8 @@ def main():
                     if e1_destroy_index == 0:
                         each.reset()
 
+
+
         # here we change the value of delay
         delay -= 1
         if not delay:
@@ -159,6 +195,7 @@ def main():
         pygame.display.flip()
         
         clock.tick(60)
+
 
 if __name__ == "__main__":
     try:
