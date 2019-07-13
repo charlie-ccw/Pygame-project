@@ -23,6 +23,7 @@ class Enemy1(pygame.sprite.Sprite):
         self.active = True
         self.rect.left = randint(0,self.width - self.rect.width)
         self.rect.bottom = randint(self.height*-5,0)
+        self.mask = pygame.mask.from_surface(self.image)
 
 
      # here we difine the movemont of the enemy
@@ -65,6 +66,7 @@ class Enemy2(pygame.sprite.Sprite):
         self.active = True
         self.rect.left = randint(0,self.width - self.rect.width)
         self.rect.bottom = randint(self.height*-10,-self.height)
+        self.mask = pygame.mask.from_surface(self.image)
 
 
      # here we difine the movemont of the enemy
@@ -106,6 +108,7 @@ class Enemy3(pygame.sprite.Sprite):
         self.active = True
         self.rect.left = randint(0,self.width - self.rect.width)
         self.rect.bottom = randint(self.height*-12,-self.height*2)
+        self.mask = pygame.mask.from_surface(self.image)
 
 
      # here we difine the movemont of the enemy
