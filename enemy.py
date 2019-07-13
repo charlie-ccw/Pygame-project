@@ -46,6 +46,7 @@ class Enemy1(pygame.sprite.Sprite):
 
  # here we difine the middle size enemy plane
 class Enemy2(pygame.sprite.Sprite):
+    energy = 8
     def __init__(self,size):
         pygame.sprite.Sprite.__init__(self)
 
@@ -67,6 +68,7 @@ class Enemy2(pygame.sprite.Sprite):
         self.rect.left = randint(0,self.width - self.rect.width)
         self.rect.bottom = randint(self.height*-10,-self.height)
         self.mask = pygame.mask.from_surface(self.image)
+        self.energy = Enemy2.energy
 
 
      # here we difine the movemont of the enemy
@@ -79,6 +81,7 @@ class Enemy2(pygame.sprite.Sprite):
      # here we define how the enemy reset in the game
     def reset(self):
         self.active = True
+        self.energy = Enemy2.energy
         self.rect.left = randint(0,self.width - self.rect.width)
         self.rect.bottom = randint(self.height*-10,0)
 
@@ -88,6 +91,7 @@ class Enemy2(pygame.sprite.Sprite):
 
  # here we difine the biggest size enemy plane
 class Enemy3(pygame.sprite.Sprite):
+    energy = 20
     def __init__(self,size):
         pygame.sprite.Sprite.__init__(self)
 
@@ -107,8 +111,9 @@ class Enemy3(pygame.sprite.Sprite):
         # here we set the condition of the picture
         self.active = True
         self.rect.left = randint(0,self.width - self.rect.width)
-        self.rect.bottom = randint(self.height*-12,-self.height*2)
+        self.rect.bottom = randint(self.height*-12,self.height*-2)
         self.mask = pygame.mask.from_surface(self.image)
+        self.energy = Enemy3.energy
 
 
      # here we difine the movemont of the enemy
@@ -121,5 +126,6 @@ class Enemy3(pygame.sprite.Sprite):
      # here we define how the enemy reset in the game
     def reset(self):
         self.active = True
+        self.energy = Enemy3.energy
         self.rect.left = randint(0,self.width - self.rect.width)
         self.rect.bottom = randint(self.height*-10,0)

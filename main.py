@@ -18,6 +18,11 @@ pygame.display.set_caption("Charlie's bullet hell")
  # set the picture of the background
 background = pygame.image.load("images/background.jpg").convert()
 
+# set the basic color of the game
+BLACK = [0, 0, 0]
+GREEN = [0, 255, 0]
+RED = [255, 0, 0]
+
 
 # here we difine the group of enemy
 def add_enemy1(group1,group2,num):
@@ -142,7 +147,13 @@ def main():
                 if enemy_hit:
                     b.active = False
                     for e in enemy_hit:
-                        e.active = False
+                        # here we check which type of planes is attacked
+                        if e in enemy2 or e in enemy3:
+                            e.energy -= 1
+                            if e.energy == 0:
+                                e.active = False
+                        else:
+                            e.active = False
             
             
         # here we draw the enemy planes
@@ -151,6 +162,21 @@ def main():
             if each.active:
                 each.move()
                 screen.blit(each.image, each.rect)
+                # here we draw the total blood of the enemy plane
+                pygame.draw.line(screen, BLACK, \
+                                 (each.rect.left, each.rect.top - 5),\
+                                 (each.rect.right, each.rect.top - 5),\
+                                 2)
+                # when the energy is bigger than 20%, it will be green. else, it will be red
+                energy_remain = each.energy / enemy.Enemy3.energy
+                if energy_remain > 0.2:
+                    energy_color = GREEN
+                else:
+                    energy_color = RED
+                pygame.draw.line(screen, energy_color,\
+                                 (each.rect.left, each.rect.top - 5),\
+                                 (each.rect.left + each.rect.width * energy_remain,\
+                                 each.rect.top - 5), 2)
             else:
                 if not(delay % 3):
                     # here we draw the destory pictures of the plane
@@ -164,6 +190,21 @@ def main():
             if each.active:
                 each.move()
                 screen.blit(each.image, each.rect)
+                 # here we draw the total blood of the enemy plane
+                pygame.draw.line(screen, BLACK, \
+                                 (each.rect.left, each.rect.top - 5),\
+                                 (each.rect.right, each.rect.top - 5),\
+                                 2)
+                # when the energy is bigger than 20%, it will be green. else, it will be red
+                energy_remain = each.energy / enemy.Enemy2.energy
+                if energy_remain > 0.2:
+                    energy_color = GREEN
+                else:
+                    energy_color = RED
+                pygame.draw.line(screen, energy_color,\
+                                 (each.rect.left, each.rect.top - 5),\
+                                 (each.rect.left + each.rect.width * energy_remain,\
+                                 each.rect.top - 5), 2)
             else:
                 if not(delay % 3):
                     # here we draw the destory pictures of the plane
