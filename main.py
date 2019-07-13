@@ -41,6 +41,7 @@ def main():
 
     # here we creat myplane
     myplane1 = myplane.Myplane(size)
+   
 
      # here we creat the enemy planes
     enemies = pygame.sprite.Group()
@@ -55,12 +56,17 @@ def main():
     add_enemy3(enemy3, enemies, 3)
     
     # the index of plane when it is destoried
-    e1_destory_index = 0
-    e2_destory_index = 0
-    e3_destory_index = 0
-    myplane1_destory_index = 0
-    
+    e1_destroy_index = 0
+    e2_destroy_index = 0
+    e3_destroy_index = 0
+    myplane1_destroy_index = 0
+
+    # here we set the delay to make the picture change smoothly
+    delay = 100
+
+    # here we set the state of running to check if we need to end the game
     running = True
+
     clock = pygame.time.Clock()
 
     # here we check if it is ok to run the game
@@ -101,9 +107,9 @@ def main():
         else:
             if not(delay % 3):
                 # here we draw the destory pictures of the plane
-                screen.blit(each.destory_images[mhyplane1_destory_index], each.rect)
-                myplane1_destory_index = (myplane1_destory_index + 1) % 4
-                if myplane1_destory_index == 0:
+                screen.blit(myplane1.destroy_images[myplane1_destroy_index], myplane1.rect)
+                myplane1_destroy_index = (myplane1_destroy_index + 1) % 4
+                if myplane1_destroy_index == 0:
                     print("game over")
                     running = False
 
@@ -116,9 +122,9 @@ def main():
             else:
                 if not(delay % 3):
                     # here we draw the destory pictures of the plane
-                    screen.blit(each.destory_images[e3_destory_index], each.rect)
-                    e3_destory_index = (e3_destory_index + 1) % 4
-                    if e3_destory_index == 0:
+                    screen.blit(each.destroy_images[e3_destroy_index], each.rect)
+                    e3_destroy_index = (e3_destroy_index + 1) % 4
+                    if e3_destroy_index == 0:
                         each.reset()
 
         for each in enemy2:
@@ -128,9 +134,9 @@ def main():
             else:
                 if not(delay % 3):
                     # here we draw the destory pictures of the plane
-                    screen.blit(each.destory_images[e2_destory_index], each.rect)
-                    e2_destory_index = (e3_destory_index + 1) % 4
-                    if e2_destory_index == 0:
+                    screen.blit(each.destroy_images[e2_destroy_index], each.rect)
+                    e2_destroy_index = (e3_destroy_index + 1) % 4
+                    if e2_destroy_index == 0:
                         each.reset()
 
         for each in enemy1:
@@ -140,11 +146,16 @@ def main():
             else:
                 if not(delay % 3):
                     # here we draw the destory pictures of the plane
-                    screen.blit(each.destory_images[e1_destory_index], each.rect)
-                    e1_destory_index = (e1_destory_index + 1) % 4
-                    if e1_destory_index == 0:
+                    screen.blit(each.destroy_images[e1_destroy_index], each.rect)
+                    e1_destroy_index = (e1_destroy_index + 1) % 4
+                    if e1_destroy_index == 0:
                         each.reset()
 
+        # here we change the value of delay
+        delay -= 1
+        if not delay:
+            delay = 100
+        
         pygame.display.flip()
         
         clock.tick(60)

@@ -11,7 +11,7 @@ class Myplane(pygame.sprite.Sprite):
             pygame.image.load("images/11.png").convert_alpha(),\
             pygame.image.load("images/12.png").convert_alpha(),\
             pygame.image.load("images/13.png").convert_alpha(),\
-            pygame.image.load("images/14.png").convert_alpha(),\
+            pygame.image.load("images/1.png").convert_alpha(),\
             ])
         self.rect = self.image.get_rect()
         self.width = 700
@@ -21,7 +21,7 @@ class Myplane(pygame.sprite.Sprite):
         self.speed = 10
         # here we set the condition of the picture
         self.active = True
-
+        self.mask = pygame.mask.from_surface(self.image)
 
         
  # here we set the movement of my plane
