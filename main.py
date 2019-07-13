@@ -95,7 +95,7 @@ def main():
 
 
         # here we check that if the user's plane is touched by the enemies
-        enemies_down = pygame.sprite.spritecollide(myplane1, enemies, False)
+        enemies_down = pygame.sprite.spritecollide(myplane1, enemies, False, pygame.sprite.collide_mask)
         if enemies_down:
             myplane1.active = False
             for e in enemies_down:

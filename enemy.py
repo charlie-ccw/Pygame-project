@@ -18,7 +18,7 @@ class Enemy1(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.width = 700
         self.height = 960
-        self.speed = 5
+        self.speed = 4
         # here we set the condition of the picture
         self.active = True
         self.rect.left = randint(0,self.width - self.rect.width)
