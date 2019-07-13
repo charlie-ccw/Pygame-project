@@ -104,7 +104,8 @@ def main():
                 screen.blit(each.destory_images[mhyplane1_destory_index], each.rect)
                 myplane1_destory_index = (myplane1_destory_index + 1) % 4
                 if myplane1_destory_index == 0:
-                    each.reset()
+                    print("game over")
+                    running = False
 
         # here we draw the enemy planes
         for each in enemy3:
