@@ -169,7 +169,7 @@ def main():
                                  2)
                 # when the energy is bigger than 20%, it will be green. else, it will be red
                 energy_remain = each.energy / enemy.Enemy3.energy
-                if energy_remain > 0.2:
+                if energy_remain > 0.35:
                     energy_color = GREEN
                 else:
                     energy_color = RED
@@ -197,7 +197,7 @@ def main():
                                  2)
                 # when the energy is bigger than 20%, it will be green. else, it will be red
                 energy_remain = each.energy / enemy.Enemy2.energy
-                if energy_remain > 0.2:
+                if energy_remain > 0.35:
                     energy_color = GREEN
                 else:
                     energy_color = RED
