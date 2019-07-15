@@ -211,6 +211,21 @@ def main():
             inc_speed(enemy3, 1)
 
 
+        elif level == 5 and score > 25000:
+            level = 6
+
+            # add more enemy planes to increase the difficulty level
+            add_enemy1(enemy1, enemies, 5)
+            add_enemy2(enemy2, enemies, 3)
+            add_enemy3(enemy3, enemies, 2)
+            
+
+            # increase the speed of the small enemy plane
+            inc_speed(enemy1, 1)
+            inc_speed(enemy2, 1)
+            inc_speed(enemy3, 1)
+
+
         screen.blit(background,(0,0))
 
 
