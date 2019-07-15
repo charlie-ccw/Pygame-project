@@ -42,6 +42,11 @@ def add_enemy3(group1,group2,num):
         e3 = enemy.Enemy3(size)
         group1.add(e3)
         group2.add(e3)
+
+# here we difine the change of speed
+def inc_speed(target, inc):
+    for each in target:
+        each.speed += inc
         
  # here is the main program
 def main():
@@ -131,7 +136,67 @@ def main():
                     else:
                         paused_image = pause_nor_image
 
+
+        # here we change the levels
+        if level == 1 and score > 1000:
+            level = 2
+
+            # add more enemy planes to increase the difficulty level
+            add_enemy1(enemy1, enemies, 3)
+            add_enemy2(enemy2, enemies, 2)
+            add_enemy3(enemy3, enemies, 1)
+            
+
+            # increase the speed of the small enemy plane
+            inc_speed(enemy1, 1)
+
+
+
+        elif level == 2 and score > 3000:
+            level = 3
+
+            # add more enemy planes to increase the difficulty level
+            add_enemy1(enemy1, enemies, 5)
+            add_enemy2(enemy2, enemies, 3)
+            add_enemy3(enemy3, enemies, 2)
+            
+
+            # increase the speed of the small enemy plane
+            inc_speed(enemy1, 1)
+
+
+
+        elif level == 3 and score > 8000:
+            level = 4
+
+            # add more enemy planes to increase the difficulty level
+            add_enemy1(enemy1, enemies, 5)
+            add_enemy2(enemy2, enemies, 3)
+            add_enemy3(enemy3, enemies, 2)
+            
+
+            # increase the speed of the small enemy plane
+            inc_speed(enemy1, 1)
+            inc_speed(enemy2, 1)
+
+
+        elif level == 4 and score > 15000:
+            level = 5
+
+            # add more enemy planes to increase the difficulty level
+            add_enemy1(enemy1, enemies, 5)
+            add_enemy2(enemy2, enemies, 3)
+            add_enemy3(enemy3, enemies, 2)
+            
+
+            # increase the speed of the small enemy plane
+            inc_speed(enemy1, 1)
+            inc_speed(enemy2, 1)
+            inc_speed(enemy3, 1)
+
+
         screen.blit(background,(0,0))
+
 
         if not paused:
             # here we check the keyboard of user
