@@ -77,6 +77,11 @@ def main():
     e3_destroy_index = 0
     myplane1_destroy_index = 0
 
+
+    # here we add the score to the game
+    score = 0
+    score_font = pygame.font.Font("font/font.ttf.ttf", 36)
+
     # here we set the delay to make the picture change smoothly
     delay = 100
 
@@ -131,6 +136,10 @@ def main():
                     print("game over")
                     running = False
 
+        # here we draw the score
+        score_text = score_font.render("Score : %s" % str(score), True, BLACK)
+        screen.blit(score_text, (10,5))
+
 
         # here we shot the bullets
         if not(delay % 10):
@@ -183,6 +192,7 @@ def main():
                     screen.blit(each.destroy_images[e3_destroy_index], each.rect)
                     e3_destroy_index = (e3_destroy_index + 1) % 4
                     if e3_destroy_index == 0:
+                        score += 1000
                         each.reset()
 
 
@@ -211,6 +221,7 @@ def main():
                     screen.blit(each.destroy_images[e2_destroy_index], each.rect)
                     e2_destroy_index = (e2_destroy_index + 1) % 4
                     if e2_destroy_index == 0:
+                        score += 500
                         each.reset()
 
 
@@ -224,6 +235,7 @@ def main():
                     screen.blit(each.destroy_images[e1_destroy_index], each.rect)
                     e1_destroy_index = (e1_destroy_index + 1) % 4
                     if e1_destroy_index == 0:
+                        score += 100
                         each.reset()
 
 
