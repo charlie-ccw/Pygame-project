@@ -103,7 +103,7 @@ def main():
     level = 1
 
     # here we set the bomb skills
-    bomb_image = pygame.image.load("images/22.png").convert_alpha()
+    bomb_image = pygame.image.load("images/25.png").convert_alpha()
     bomb_rect = bomb_image.get_rect()
     bomb_font = pygame.font.Font("font/font.ttf.ttf", 48)
     bomb_number = 3
@@ -149,7 +149,7 @@ def main():
                         if bomb_number:
                             bomb_number -= 1
                             for each in enemies:
-                                if each.bottom > 0:
+                                if each.rect.bottom > 0:
                                     each.active = False
 
                             
