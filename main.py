@@ -82,6 +82,21 @@ def main():
     score = 0
     score_font = pygame.font.Font("font/font.ttf.ttf", 36)
 
+
+    #here we set the stop condtion to the game
+    paused = False
+    pause_nor_image = pygame.image.load("images/22.png").convert_alpha()
+    pause_pressed_image = pygame.image.load("images/23.png").convert_alpha()
+    resume_nor_image = pygame.image.load("images/21.png").convert_alpha()
+    resume_pressed_image = pygame.image.load("images/24.png").convert_alpha()
+    paused_rect = pause_nor_image.get_rect()
+    paused_rect.left, paused_rect.top = width - paused_rect.width - 10, 10
+    paused_image = pause_nor_image
+
+
+    # here we set the difficulty of the game
+    level = 1
+
     # here we set the delay to make the picture change smoothly
     delay = 100
 
@@ -100,144 +115,171 @@ def main():
                 pygame.quit()
                 sys.exit()
 
+            elif event.type == MOUSEBUTTONDOWN:
+                if event.button == 1 and paused_rect.collidepoint(event.pos):
+                    paused = not paused
 
-        # here we check the keyboard of user
-        key_pressed = pygame.key.get_pressed()
-        if key_pressed[K_w]:
-            myplane1.moveUp()
-        if key_pressed[K_s]:
-            myplane1.moveDown()
-        if key_pressed[K_a]:
-            myplane1.moveLeft()
-        if key_pressed[K_d]:
-            myplane1.moveRight()
-        print(myplane1.rect.left)
-        print(myplane1.rect.top)
+            elif event.type == MOUSEMOTION:
+                if paused_rect.collidepoint(event.pos):
+                    if paused:
+                        paused_image = resume_pressed_image
+                    else:
+                        paused_image = pause_pressed_image
+                else:
+                    if paused:
+                        paused_image = resume_nor_image
+                    else:
+                        paused_image = pause_nor_image
 
         screen.blit(background,(0,0))
 
+        if not paused:
+            # here we check the keyboard of user
+            key_pressed = pygame.key.get_pressed()
+            if key_pressed[K_w]:
+                myplane1.moveUp()
+            if key_pressed[K_s]:
+                myplane1.moveDown()
+            if key_pressed[K_a]:
+                myplane1.moveLeft()
+            if key_pressed[K_d]:
+                myplane1.moveRight()
+            print(myplane1.rect.left)
+            print(myplane1.rect.top)
 
-        # here we check that if the user's plane is touched by the enemies
-        enemies_down = pygame.sprite.spritecollide(myplane1, enemies, False, pygame.sprite.collide_mask)
-        if enemies_down:
-            myplane1.active = False
-            for e in enemies_down:
-                e.active = False
+            
 
-        # here we draw the user's plane
-        if myplane1.active:
-            screen.blit(myplane1.image, myplane1.rect)
-        else:
-            if not(delay % 3):
-                # here we draw the destory pictures of the plane
-                screen.blit(myplane1.destroy_images[myplane1_destroy_index], myplane1.rect)
-                myplane1_destroy_index = (myplane1_destroy_index + 1) % 4
-                if myplane1_destroy_index == 0:
-                    print("game over")
-                    running = False
+
+            # here we check that if the user's plane is touched by the enemies
+            enemies_down = pygame.sprite.spritecollide(myplane1, enemies, False, pygame.sprite.collide_mask)
+            if enemies_down:
+                myplane1.active = False
+                for e in enemies_down:
+                    e.active = False
+
+            # here we draw the user's plane
+            if myplane1.active:
+                screen.blit(myplane1.image, myplane1.rect)
+            else:
+                if not(delay % 3):
+                    # here we draw the destory pictures of the plane
+                    screen.blit(myplane1.destroy_images[myplane1_destroy_index], myplane1.rect)
+                    myplane1_destroy_index = (myplane1_destroy_index + 1) % 4
+                    if myplane1_destroy_index == 0:
+                        print("game over")
+                        running = False
+
+
+            # here we shot the bullets
+            if not(delay % 10):
+                bullet1[bullet1_index].reset(myplane1.rect.midtop)
+                bullet1_index = (bullet1_index + 1) % bullet1_number
+
+
+            # here we check if the bullet collides with the enemy plane
+            for b in bullet1:
+                if b.active:
+                    b.move()
+                    screen.blit(b.image, b.rect)
+                    enemy_hit = pygame.sprite.spritecollide(b, enemies, False, pygame.sprite.collide_mask)
+                    if enemy_hit:
+                        b.active = False
+                        for e in enemy_hit:
+                            # here we check which type of planes is attacked
+                            if e in enemy2 or e in enemy3:
+                                e.energy -= 1
+                                if e.energy == 0:
+                                    e.active = False
+                            else:
+                                e.active = False
+                
+                
+            # here we draw the enemy planes
+            for each in enemy3:
+                # here we check the condition of the plane
+                if each.active:
+                    each.move()
+                    screen.blit(each.image, each.rect)
+                    # here we draw the total blood of the enemy plane
+                    pygame.draw.line(screen, BLACK, \
+                                     (each.rect.left, each.rect.top - 5),\
+                                     (each.rect.right, each.rect.top - 5),\
+                                     2)
+                    # when the energy is bigger than 20%, it will be green. else, it will be red
+                    energy_remain = each.energy / enemy.Enemy3.energy
+                    if energy_remain > 0.35:
+                        energy_color = GREEN
+                    else:
+                        energy_color = RED
+                    pygame.draw.line(screen, energy_color,\
+                                     (each.rect.left, each.rect.top - 5),\
+                                     (each.rect.left + each.rect.width * energy_remain,\
+                                     each.rect.top - 5), 2)
+                else:
+                    if not(delay % 3):
+                        # here we draw the destory pictures of the plane
+                        screen.blit(each.destroy_images[e3_destroy_index], each.rect)
+                        e3_destroy_index = (e3_destroy_index + 1) % 4
+                        if e3_destroy_index == 0:
+                            score += 1000
+                            each.reset()
+
+
+            for each in enemy2:
+                if each.active:
+                    each.move()
+                    screen.blit(each.image, each.rect)
+                     # here we draw the total blood of the enemy plane
+                    pygame.draw.line(screen, BLACK, \
+                                     (each.rect.left, each.rect.top - 5),\
+                                     (each.rect.right, each.rect.top - 5),\
+                                     2)
+                    # when the energy is bigger than 20%, it will be green. else, it will be red
+                    energy_remain = each.energy / enemy.Enemy2.energy
+                    if energy_remain > 0.35:
+                        energy_color = GREEN
+                    else:
+                        energy_color = RED
+                    pygame.draw.line(screen, energy_color,\
+                                     (each.rect.left, each.rect.top - 5),\
+                                     (each.rect.left + each.rect.width * energy_remain,\
+                                     each.rect.top - 5), 2)
+                else:
+                    if not(delay % 3):
+                        # here we draw the destory pictures of the plane
+                        screen.blit(each.destroy_images[e2_destroy_index], each.rect)
+                        e2_destroy_index = (e2_destroy_index + 1) % 4
+                        if e2_destroy_index == 0:
+                            score += 500
+                            each.reset()
+
+
+           
+
+
+            for each in enemy1:
+                if each.active:
+                    each.move()
+                    screen.blit(each.image, each.rect)
+                else:
+                    if not(delay % 3):
+                        # here we draw the destory pictures of the plane
+                        screen.blit(each.destroy_images[e1_destroy_index], each.rect)
+                        e1_destroy_index = (e1_destroy_index + 1) % 4
+                        if e1_destroy_index == 0:
+                            score += 100
+                            each.reset()
+
 
         # here we draw the score
         score_text = score_font.render("Score : %s" % str(score), True, BLACK)
         screen.blit(score_text, (10,5))
 
 
-        # here we shot the bullets
-        if not(delay % 10):
-            bullet1[bullet1_index].reset(myplane1.rect.midtop)
-            bullet1_index = (bullet1_index + 1) % bullet1_number
 
 
-        # here we check if the bullet collides with the enemy plane
-        for b in bullet1:
-            if b.active:
-                b.move()
-                screen.blit(b.image, b.rect)
-                enemy_hit = pygame.sprite.spritecollide(b, enemies, False, pygame.sprite.collide_mask)
-                if enemy_hit:
-                    b.active = False
-                    for e in enemy_hit:
-                        # here we check which type of planes is attacked
-                        if e in enemy2 or e in enemy3:
-                            e.energy -= 1
-                            if e.energy == 0:
-                                e.active = False
-                        else:
-                            e.active = False
-            
-            
-        # here we draw the enemy planes
-        for each in enemy3:
-            # here we check the condition of the plane
-            if each.active:
-                each.move()
-                screen.blit(each.image, each.rect)
-                # here we draw the total blood of the enemy plane
-                pygame.draw.line(screen, BLACK, \
-                                 (each.rect.left, each.rect.top - 5),\
-                                 (each.rect.right, each.rect.top - 5),\
-                                 2)
-                # when the energy is bigger than 20%, it will be green. else, it will be red
-                energy_remain = each.energy / enemy.Enemy3.energy
-                if energy_remain > 0.35:
-                    energy_color = GREEN
-                else:
-                    energy_color = RED
-                pygame.draw.line(screen, energy_color,\
-                                 (each.rect.left, each.rect.top - 5),\
-                                 (each.rect.left + each.rect.width * energy_remain,\
-                                 each.rect.top - 5), 2)
-            else:
-                if not(delay % 3):
-                    # here we draw the destory pictures of the plane
-                    screen.blit(each.destroy_images[e3_destroy_index], each.rect)
-                    e3_destroy_index = (e3_destroy_index + 1) % 4
-                    if e3_destroy_index == 0:
-                        score += 1000
-                        each.reset()
-
-
-        for each in enemy2:
-            if each.active:
-                each.move()
-                screen.blit(each.image, each.rect)
-                 # here we draw the total blood of the enemy plane
-                pygame.draw.line(screen, BLACK, \
-                                 (each.rect.left, each.rect.top - 5),\
-                                 (each.rect.right, each.rect.top - 5),\
-                                 2)
-                # when the energy is bigger than 20%, it will be green. else, it will be red
-                energy_remain = each.energy / enemy.Enemy2.energy
-                if energy_remain > 0.35:
-                    energy_color = GREEN
-                else:
-                    energy_color = RED
-                pygame.draw.line(screen, energy_color,\
-                                 (each.rect.left, each.rect.top - 5),\
-                                 (each.rect.left + each.rect.width * energy_remain,\
-                                 each.rect.top - 5), 2)
-            else:
-                if not(delay % 3):
-                    # here we draw the destory pictures of the plane
-                    screen.blit(each.destroy_images[e2_destroy_index], each.rect)
-                    e2_destroy_index = (e2_destroy_index + 1) % 4
-                    if e2_destroy_index == 0:
-                        score += 500
-                        each.reset()
-
-
-        for each in enemy1:
-            if each.active:
-                each.move()
-                screen.blit(each.image, each.rect)
-            else:
-                if not(delay % 3):
-                    # here we draw the destory pictures of the plane
-                    screen.blit(each.destroy_images[e1_destroy_index], each.rect)
-                    e1_destroy_index = (e1_destroy_index + 1) % 4
-                    if e1_destroy_index == 0:
-                        score += 100
-                        each.reset()
-
+        # here we draw the pause and continue picture
+        screen.blit(paused_image, paused_rect)
 
 
         # here we change the value of delay
