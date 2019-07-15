@@ -102,6 +102,12 @@ def main():
     # here we set the difficulty of the game
     level = 1
 
+    # here we set the bomb skills
+    bomb_image = pygame.image.load("images/22.png").convert_alpha()
+    bomb_rect = bomb_image.get_rect()
+    bomb_font = pygame.font.Font("font/font.ttf.ttf", 48)
+    bomb_number = 3
+    
     # here we set the delay to make the picture change smoothly
     delay = 100
 
@@ -137,6 +143,16 @@ def main():
                         paused_image = pause_nor_image
 
 
+        # here we set the function of the bomb
+            elif event.type == KEYDOWN:
+                    if event.key == K_SPACE:
+                        if bomb_number:
+                            bomb_number -= 1
+                            for each in enemies:
+                                if each.bottom > 0:
+                                    each.active = False
+
+                            
         # here we change the levels
         if level == 1 and score > 1000:
             level = 2
@@ -341,7 +357,11 @@ def main():
         screen.blit(score_text, (10,5))
 
 
-
+        # here we draw the bomb
+        bomb_text = bomb_font.render("x %d" % bomb_number, True, BLACK)
+        text_rect = bomb_text.get_rect()
+        screen.blit(bomb_image, (10, height - 10 - bomb_rect.height))
+        screen.blit(bomb_text, (20 + bomb_rect.width, height - 5 - text_rect.height))
 
         # here we draw the pause and continue picture
         screen.blit(paused_image, paused_rect)
