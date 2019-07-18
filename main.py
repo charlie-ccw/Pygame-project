@@ -274,7 +274,7 @@ def main():
             # here we draw the bullet supply and indicate if the player get it
             if bullet_supply.active:
                 bullet_supply.move()
-                screen.blit(bullet_supply.image, bullet_supply,rect)
+                screen.blit(bullet_supply.image, bullet_supply.rect)
                 if pygame.sprite.collide_mask(bullet_supply, myplane1):
                     # creat and shoot the super bullet
                     bullet_supply.active = False
