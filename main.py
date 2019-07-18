@@ -81,7 +81,7 @@ def main():
     bullet2 = []
     bullet2_index = 0
     bullet2_number = 14
-    for i in range(bullet2_number):
+    for i in range(bullet2_number//2):
         bullet2.append(bullet.Bullet2((myplane1.rect.centerx - 33, myplane1.rect.centery)))
         bullet2.append(bullet.Bullet2((myplane1.rect.centerx + 33, myplane1.rect.centery)))
 
@@ -154,10 +154,10 @@ def main():
             elif event.type == MOUSEBUTTONDOWN:
                 if event.button == 1 and paused_rect.collidepoint(event.pos):
                     paused = not paused
-                    if pause:
-                        pygame.time.set_time(supply_time, 0)
+                    if paused:
+                        pygame.time.set_timer(supply_time, 0)
                     else:
-                        pygame.time.set_time(supply_time, 20*1000)
+                        pygame.time.set_timer(supply_time, 20*1000)
                         
 
             elif event.type == MOUSEMOTION:
@@ -334,7 +334,7 @@ def main():
                 if is_super_bullet:
                     bullets = bullet2
                     bullets[bullet2_index].reset((myplane1.rect.centerx - 33, myplane1.rect.centery))
-                    bullets[bullet2_index].reset((myplane1.rect.centerx + 33, myplane1.rect.centery))
+                    bullets[bullet2_index+1].reset((myplane1.rect.centerx + 33, myplane1.rect.centery))
                     bullet2_index = (bullet2_index + 1) % bullet2_number
                 else:
                     bullets = bullet1
