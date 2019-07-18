@@ -7,8 +7,8 @@ class Bullet1(pygame.sprite.Sprite):
         self.image = pygame.image.load("images/18.png").convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = position
-        self.speed = 13
-        self.active = True
+        self.speed = 12
+        self.active = False
         self.mask = pygame.mask.from_surface(self.image)
 
     # here we difine the movement of the bullets
@@ -31,7 +31,7 @@ class Bullet2(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = position
         self.speed = 15
-        self.active = True
+        self.active = False
         self.mask = pygame.mask.from_surface(self.image)
 
     # here we difine the movement of the bullets
