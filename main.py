@@ -122,12 +122,12 @@ def main():
     # here we set the supply
     bullet_supply = supply.Bullet_supply(size)
     bomb_supply = supply.Bomb_supply(size)
-    super_bullet_time = USEREVENT
+    supply_time = USEREVENT
     pygame.time.set_timer(supply_time, 20 * 1000)
 
 
     # here we set the timing of super bullet
-    supper_bullet_time = USEREVENT + 1
+    super_bullet_time = USEREVENT + 1
 
 
     # here we set condition of the super bullet
