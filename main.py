@@ -82,8 +82,8 @@ def main():
     bullet2_index = 0
     bullet2_number = 14
     for i in range(bullet2_number):
-        bullet2.append(bullet.Bullet2((myplane1.rect.centerx - 33), myplane1.rect.centery)))
-        bullet2.append(bullet.Bullet2((myplane1.rect.centerx + 33), myplane1.rect.centery)))
+        bullet2.append(bullet.Bullet2((myplane1.rect.centerx - 33), myplane1.rect.centery))
+        bullet2.append(bullet.Bullet2((myplane1.rect.centerx + 33), myplane1.rect.centery))
 
     
     # the index of plane when it is destoried
