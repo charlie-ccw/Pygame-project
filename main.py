@@ -75,7 +75,16 @@ def main():
     bullet1_number = 7
     for i in range(bullet1_number):
         bullet1.append(bullet.Bullet1(myplane1.rect.midtop))
-        
+
+
+    # here we creat the super bullet
+    bullet2 = []
+    bullet2_index = 0
+    bullet2_number = 14
+    for i in range(bullet2_number):
+        bullet2.append(bullet.Bullet2((myplane1.rect.centerx - 33), myplane1.rect.centery)))
+        bullet2.append(bullet.Bullet2((myplane1.rect.centerx + 33), myplane1.rect.centery)))
+
     
     # the index of plane when it is destoried
     e1_destroy_index = 0
@@ -115,7 +124,14 @@ def main():
     bomb_supply = supply.Bomb_supply(size)
     supply_time = USEREVENT
     pygame.time.set_timer(supply_time, 20 * 1000)
-    
+
+
+    # here we set the timing of super bullet
+    supper_bullet_time = USEREVENT + 1
+
+
+    # here we set condition of the super bullet
+    is_super_bullet = False
     
     # here we set the delay to make the picture change smoothly
     delay = 100
@@ -172,6 +188,11 @@ def main():
                     bomb_supply.reset()
                 else:
                     bullet_supply.reset()
+
+
+            elif event.type == super_bullet_time:
+                is_super_bullet = False
+                pygame.time.set_timer(super_bullet_time, 0)
 
 
                             
@@ -282,6 +303,8 @@ def main():
                 screen.blit(bullet_supply.image, bullet_supply.rect)
                 if pygame.sprite.collide_mask(bullet_supply, myplane1):
                     # creat and shoot the super bullet
+                    is_super_bullet = True
+                    pygame.time.set_timer(super_bullet_time, 12 * 1000)
                     bullet_supply.active = False
                     
 
@@ -308,12 +331,19 @@ def main():
 
             # here we shot the bullets
             if not(delay % 10):
-                bullet1[bullet1_index].reset(myplane1.rect.midtop)
-                bullet1_index = (bullet1_index + 1) % bullet1_number
+                if is_super_bullet:
+                    bullets = bullet2
+                    bullets[bullet2_index].reset((myplane1.rect.centerx - 33, myplane1.rect.centery))
+                    bullets[bullet2_index].reset((myplane1.rect.centerx + 33, myplane1.rect.centery))
+                    bullet2_index = (bullet2_index + 1) % bullet2_number
+                else:
+                    bullets = bullet1
+                    bullets[bullet1_index].reset(myplane1.rect.midtop)
+                    bullet1_index = (bullet1_index + 1) % bullet1_number
 
 
             # here we check if the bullet collides with the enemy plane
-            for b in bullet1:
+            for b in bullets:
                 if b.active:
                     b.move()
                     screen.blit(b.image, b.rect)
