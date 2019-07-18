@@ -162,7 +162,7 @@ def main():
                                     each.active = False
 
         # here we set the supply type
-            elif event.type = supply_time:
+            elif event.type == supply_time:
                 if choice([True, False]):
                     bomb_supply.reset()
                 else:
