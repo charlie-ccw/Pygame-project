@@ -20,7 +20,7 @@ class Bullet_supply(pygame.sprite.Sprite):
 
     def move(self):
         if self.rect.top < self.height:
-            self.rect.top += speed
+            self.rect.top += self.speed
         else:
             self.active = False
 
@@ -49,7 +49,7 @@ class Bomb_supply(pygame.sprite.Sprite):
 
     def move(self):
         if self.rect.top < self.height:
-            self.rect.top += speed
+            self.rect.top += self.speed
         else:
             self.active = False
 
