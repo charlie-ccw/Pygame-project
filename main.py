@@ -138,6 +138,11 @@ def main():
             elif event.type == MOUSEBUTTONDOWN:
                 if event.button == 1 and paused_rect.collidepoint(event.pos):
                     paused = not paused
+                    if pause:
+                        pygame.time.set_time(supply_time, 0)
+                    else:
+                        pygame.time.set_time(supply_time, 20*1000)
+                        
 
             elif event.type == MOUSEMOTION:
                 if paused_rect.collidepoint(event.pos):
