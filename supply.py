@@ -14,7 +14,7 @@ class Bullet_supply(pygame.sprite.Sprite):
         self.width, self.height = size[0], size[1]
         self.rect.left, self.rect.bottom = \
                         randint(0, self.width - self.rect.width), -100
-        self.speed = 5
+        self.speed = 2
         self.active = False
         self.mask = pygame.mask.from_surface(self.image)
 
@@ -43,7 +43,7 @@ class Bomb_supply(pygame.sprite.Sprite):
         self.width, self.height = size[0], size[1]
         self.rect.left, self.rect.bottom = \
                         randint(0, self.width - self.rect.width), -100
-        self.speed = 5
+        self.speed = 2
         self.active = False
         self.mask = pygame.mask.from_surface(self.image)
 
