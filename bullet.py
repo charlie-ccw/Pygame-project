@@ -7,7 +7,7 @@ class Bullet1(pygame.sprite.Sprite):
         self.image = pygame.image.load("images/18.png").convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = position
-        self.speed = 15
+        self.speed = 13
         self.active = True
         self.mask = pygame.mask.from_surface(self.image)
 
@@ -27,10 +27,10 @@ class Bullet1(pygame.sprite.Sprite):
 class Bullet2(pygame.sprite.Sprite):
     def __init__(self, position):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load("images/20.png").convert_alpha()
+        self.image = pygame.image.load("images/19.png").convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = position
-        self.speed = 17
+        self.speed = 15
         self.active = True
         self.mask = pygame.mask.from_surface(self.image)
 

@@ -80,10 +80,10 @@ def main():
     # here we creat the super bullet
     bullet2 = []
     bullet2_index = 0
-    bullet2_number = 14
+    bullet2_number = 26
     for i in range(bullet2_number//2):
-        bullet2.append(bullet.Bullet2((myplane1.rect.centerx - 33, myplane1.rect.centery)))
-        bullet2.append(bullet.Bullet2((myplane1.rect.centerx + 33, myplane1.rect.centery)))
+        bullet2.append(bullet.Bullet2((myplane1.rect.centerx - 23, myplane1.rect.centery)))
+        bullet2.append(bullet.Bullet2((myplane1.rect.centerx + 23, myplane1.rect.centery)))
 
     
     # the index of plane when it is destoried
@@ -116,7 +116,7 @@ def main():
     bomb_image = pygame.image.load("images/25.png").convert_alpha()
     bomb_rect = bomb_image.get_rect()
     bomb_font = pygame.font.Font("font/font.ttf.ttf", 48)
-    bomb_number = 3
+    bomb_num = 3
 
 
     # here we set the supply
@@ -176,8 +176,8 @@ def main():
         # here we set the function of the bomb
             elif event.type == KEYDOWN:
                     if event.key == K_SPACE:
-                        if bomb_number:
-                            bomb_number -= 1
+                        if bomb_num:
+                            bomb_num -= 1
                             for each in enemies:
                                 if each.rect.bottom > 0:
                                     each.active = False
@@ -290,7 +290,7 @@ def main():
             # here we draw the bomb and indicate if the player get it
             if bomb_supply.active:
                 bomb_supply.move()
-                screen.blit(bomb_supply.image, bomb_supply,rect)
+                screen.blit(bomb_supply.image, bomb_supply.rect)
                 if pygame.sprite.collide_mask(bomb_supply, myplane1):
                     if bomb_num < 3:
                         bomb_num += 1
@@ -333,8 +333,8 @@ def main():
             if not(delay % 10):
                 if is_super_bullet:
                     bullets = bullet2
-                    bullets[bullet2_index].reset((myplane1.rect.centerx - 33, myplane1.rect.centery))
-                    bullets[bullet2_index+1].reset((myplane1.rect.centerx + 33, myplane1.rect.centery))
+                    bullets[bullet2_index].reset((myplane1.rect.centerx - 23, myplane1.rect.centery))
+                    bullets[bullet2_index+1].reset((myplane1.rect.centerx + 23, myplane1.rect.centery))
                     bullet2_index = (bullet2_index + 1) % bullet2_number
                 else:
                     bullets = bullet1
@@ -443,7 +443,7 @@ def main():
 
 
         # here we draw the bomb
-        bomb_text = bomb_font.render("x %d" % bomb_number, True, BLACK)
+        bomb_text = bomb_font.render("x %d" % bomb_num, True, BLACK)
         text_rect = bomb_text.get_rect()
         screen.blit(bomb_image, (10, height - 10 - bomb_rect.height))
         screen.blit(bomb_text, (20 + bomb_rect.width, height - 5 - text_rect.height))
