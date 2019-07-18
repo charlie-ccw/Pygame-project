@@ -4,6 +4,7 @@ import traceback
 import myplane
 import enemy
 import bullet
+import supply
 from pygame.locals import *
 from random import *
 
@@ -107,6 +108,14 @@ def main():
     bomb_rect = bomb_image.get_rect()
     bomb_font = pygame.font.Font("font/font.ttf.ttf", 48)
     bomb_number = 3
+
+
+    # here we set the supply
+    bullet_supply = supply.Bullet_supply(size)
+    bomb_supply = supply.Bomb_supply(size)
+    supply_time = USEREVENT
+    pygame.time.set_timer(supply_time, 20 * 1000)
+    
     
     # here we set the delay to make the picture change smoothly
     delay = 100
@@ -151,6 +160,14 @@ def main():
                             for each in enemies:
                                 if each.rect.bottom > 0:
                                     each.active = False
+
+        # here we set the supply type
+            elif event.type = supply_time:
+                if choice([True, False]):
+                    bomb_supply.reset()
+                else:
+                    bullet_supply.reset()
+
 
                             
         # here we change the levels
@@ -244,6 +261,24 @@ def main():
             print(myplane1.rect.top)
 
             
+            # here we draw the bomb and indicate if the player get it
+            if bomb_supply.active:
+                bomb_supply.move()
+                screen.blit(bomb_supply.image, bomb_supply,rect)
+                if pygame.sprite.collide_mask(bomb_supply, myplane1):
+                    if bomb_num < 3:
+                        bomb_num += 1
+                    bomb_supply.active = False
+
+
+            # here we draw the bullet supply and indicate if the player get it
+            if bullet_supply.active:
+                bulet_supply.move()
+                screen.blit(bullet_supply.image, bullet_supply,rect)
+                if pygame.sprite.collide_mask(bullet_supply, myplane1):
+                    # creat and shoot the super bullet
+                    bullet_supply.active = False
+                    
 
 
             # here we check that if the user's plane is touched by the enemies
