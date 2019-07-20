@@ -202,6 +202,11 @@ def main():
                 pygame.time.set_timer(super_bullet_time, 0)
 
 
+            elif event.type == invincible_time:
+                myplane1.invincible = False
+                pygame.time.set_timer(invincible_time, 0)
+
+
                             
         # here we change the levels
         if level == 1 and score > 1000:
