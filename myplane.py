@@ -21,6 +21,7 @@ class Myplane(pygame.sprite.Sprite):
         self.speed = 10
         # here we set the condition of the picture
         self.active = True
+        self.invincible = False
         self.mask = pygame.mask.from_surface(self.image)
 
         
@@ -56,6 +57,7 @@ class Myplane(pygame.sprite.Sprite):
                         (self.width - self.rect.width) // 2, \
                         self.height - self. rect.height - 60
         self.active = True
+        self.invincible = True
         
 
     

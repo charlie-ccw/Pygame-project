@@ -129,6 +129,8 @@ def main():
     # here we set the timing of super bullet
     super_bullet_time = USEREVENT + 1
 
+    # here we add the timing of myplane's invincibe
+    invincible_time = USEREVENT + 2
 
     # here we set condition of the super bullet
     is_super_bullet = False
@@ -316,7 +318,7 @@ def main():
 
             # here we check that if the user's plane is touched by the enemies
             enemies_down = pygame.sprite.spritecollide(myplane1, enemies, False, pygame.sprite.collide_mask)
-            if enemies_down:
+            if enemies_down and not myplane1.invincible:
                 myplane1.active = False
                 for e in enemies_down:
                     e.active = False
@@ -331,7 +333,8 @@ def main():
                     myplane1_destroy_index = (myplane1_destroy_index + 1) % 4
                     if myplane1_destroy_index == 0:
                         life_num -= 1
-                        me.reset()
+                        myplane1.reset()
+                        pygame.time.set_timer(invincible_time, 3 * 1000)
 
 
             # here we shot the bullets
