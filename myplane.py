@@ -49,5 +49,14 @@ class Myplane(pygame.sprite.Sprite):
         else:
             self.rect.right = self.width
 
+
+    # here we set the reset of my plane
+    def reset(self):
+        self.rect.left, self.rect.top = \
+                        (self.width - self.rect.width) // 2, \
+                        self.height - self. rect.height - 60
+        self.active = True
+        
+
     
             

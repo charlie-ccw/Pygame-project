@@ -132,6 +132,11 @@ def main():
 
     # here we set condition of the super bullet
     is_super_bullet = False
+
+    # here we set the lives of my planes
+    life_image =  pygame.image.load("images/28.png").convert_alpha()
+    life_rect = life_image.get_rect()
+    life_num = 3
     
     # here we set the delay to make the picture change smoothly
     delay = 100
@@ -272,7 +277,7 @@ def main():
         screen.blit(background,(0,0))
 
 
-        if not paused:
+        if life_num and not paused:
             # here we check the keyboard of user
             key_pressed = pygame.key.get_pressed()
             if key_pressed[K_w]:
@@ -325,8 +330,8 @@ def main():
                     screen.blit(myplane1.destroy_images[myplane1_destroy_index], myplane1.rect)
                     myplane1_destroy_index = (myplane1_destroy_index + 1) % 4
                     if myplane1_destroy_index == 0:
-                        print("game over")
-                        running = False
+                        life_num -= 1
+                        me.reset()
 
 
             # here we shot the bullets
@@ -437,6 +442,9 @@ def main():
                             each.reset()
 
 
+        # here we creat the ending
+        elif life_num == 0:
+            print("game")
         # here we draw the score
         score_text = score_font.render("Score : %s" % str(score), True, BLACK)
         screen.blit(score_text, (10,5))
@@ -447,6 +455,14 @@ def main():
         text_rect = bomb_text.get_rect()
         screen.blit(bomb_image, (10, height - 10 - bomb_rect.height))
         screen.blit(bomb_text, (20 + bomb_rect.width, height - 5 - text_rect.height))
+
+
+        # here we draw the number of lives of myplane
+        if life_num:
+            for i in range(life_num):
+                screen.blit(life_image, \
+                            (width-10-(i+1)*life_rect.width, \
+                             height-10-life_rect.height))
 
         # here we draw the pause and continue picture
         screen.blit(paused_image, paused_rect)
