@@ -461,8 +461,8 @@ def main():
         if life_num:
             for i in range(life_num):
                 screen.blit(life_image, \
-                            (width-10-(i+1)*life_rect.width, \
-                             height-10-life_rect.height))
+                            (width-(i+1)*life_rect.width+30, \
+                             height-life_rect.height+35))
 
         # here we draw the pause and continue picture
         screen.blit(paused_image, paused_rect)
