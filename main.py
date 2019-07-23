@@ -481,7 +481,7 @@ def main():
                         f.write(str(score))
 
             # here we draw the ending picture
-            record_score_text = score_font.render("Best : %d" % record_score, True, BLACK)
+            record_score_text = score_font.render("Best was : %d" % record_score, True, BLACK)
             screen.blit(record_score_text, (50,50))
 
             gameover_text1 = gameover_font.render("Your Score", True, BLACK)
