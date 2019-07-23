@@ -1,4 +1,5 @@
 import pygame
+
 import sys
 import traceback
 import myplane
@@ -452,7 +453,17 @@ def main():
 
         # here we creat the ending
         elif life_num == 0:
-            print("game")
+            # here we stop dropping the support
+            pygame.timer.set_timer(supply_time, 0)
+
+            # here we read the highest record
+            with open("record.txt", "r") as f:
+                record_score = int(f.read())
+
+            # here we change the highest record
+            if score > record_score:
+                with open("record.txt", "w") as f:
+                    f.write(str(score))
         # here we draw the score
         score_text = score_font.render("Score : %s" % str(score), True, BLACK)
         screen.blit(score_text, (10,5))
