@@ -510,11 +510,11 @@ def main():
                 pos = pygame.mouse.get_pos()
                 # if the player click restart
                 if again_rect.left < pos[0] < again_rect.right and \
-                   again_rect.top < pos[0] < again_rect.bottom:
+                   again_rect.top < pos[1] < again_rect.bottom:
                     main()
                 # if the player click exit
                 elif gameover_rect.left < pos[0] < gameover_rect.right and \
-                     gameover_rect.top < pos[0] < gameover_rect.bottom:
+                     gameover_rect.top < pos[1] < gameover_rect.bottom:
                     pygame.quit()
                     sys.exit()
         # here we draw the score
