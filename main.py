@@ -119,7 +119,16 @@ def main():
     bomb_font = pygame.font.Font("font/font.ttf.ttf", 48)
     bomb_num = 3
 
+    # here we set record time
+    recorded = False
 
+    # here we set the ending picture
+    gameover_font = pygame.font.Font("font/font.ttf.ttf", 48)
+    again_image = pygame.image.load("images/29.png").convert_alpha()
+    again_rect = again_image.get_rect()
+    gameover_image = pygame.image.load("images/30.png").convert_alpha()
+    gameover_rect = gameover_image.get_rect()
+    
     # here we set the supply
     bullet_supply = supply.Bullet_supply(size)
     bomb_supply = supply.Bomb_supply(size)
@@ -454,16 +463,60 @@ def main():
         # here we creat the ending
         elif life_num == 0:
             # here we stop dropping the support
-            pygame.timer.set_timer(supply_time, 0)
+            pygame.time.set_timer(supply_time, 0)
 
-            # here we read the highest record
-            with open("record.txt", "r") as f:
-                record_score = int(f.read())
+            if not recorded:
+                recorded = True
+                # here we read the highest record
+                with open("record.txt.txt", "r") as f:
+                    record_score = int(f.read())
 
-            # here we change the highest record
-            if score > record_score:
-                with open("record.txt", "w") as f:
-                    f.write(str(score))
+                # here we change the highest record
+                if score > record_score:
+                    with open("record.txt.txt", "w") as f:
+                        f.write(str(score))
+
+            # here we draw the ending picture
+            record_score_text = score_font.render("Best : %d" % record_score, True, BLACK)
+            screen.blit(record_score_text, (50,50))
+
+            gameover_text1 = gameover_font.render("Your Score", True, BLACK)
+            gameover_text1_rect = gameover_text1.get_rect()
+            gameover_text1_rect.left, gameover_text1_rect.top = \
+                                      (width - gameover_text1_rect.width) // 2, height // 2
+            screen.blit(gameover_text1, gameover_text1_rect)
+
+            gameover_text2 = gameover_font.render(str(score), True, BLACK)
+            gameover_text2_rect = gameover_text2.get_rect()
+            gameover_text2_rect.left, gameover_text2_rect.top = \
+                                      (width - gameover_text2_rect.width) // 2, \
+                                      gameover_text1_rect.bottom + 10
+            screen.blit(gameover_text2, gameover_text2_rect)
+
+            again_rect.left, again_rect.top = \
+                             (width - again_rect.width) // 2, \
+                             gameover_text2_rect.bottom + 50
+            screen.blit(again_image, again_rect)
+
+            gameover_rect.left, gameover_rect.top = \
+                                (width - again_rect.width) // 2, \
+                                again_rect.bottom + 10
+            screen.blit(gameover_image, gameover_rect)
+
+            # here we set the mouse
+            # if the player click left mouse
+            if pygame.mouse.get_pressed()[0]:
+                # here we get the coordination of the mouse
+                pos = pygame.mouse.get_pos()
+                # if the player click restart
+                if again_rect.left < pos[0] < again_rect.right and \
+                   again_rect.top < pos[0] < again_rect.bottom:
+                    main()
+                # if the player click exit
+                elif gameover_rect.left < pos[0] < gameover_rect.right and \
+                     gameover_rect.top < pos[0] < gameover_rect.bottom:
+                    pygame.quit()
+                    sys.exit()
         # here we draw the score
         score_text = score_font.render("Score : %s" % str(score), True, BLACK)
         screen.blit(score_text, (10,5))
