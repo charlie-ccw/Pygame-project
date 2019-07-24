@@ -124,9 +124,9 @@ def main():
 
     # here we set the ending picture
     gameover_font = pygame.font.Font("font/font.ttf.ttf", 48)
-    again_image = pygame.image.load("images/30.png").convert_alpha()
+    again_image = pygame.image.load("images/29.png").convert_alpha()
     again_rect = again_image.get_rect()
-    gameover_image = pygame.image.load("images/29.png").convert_alpha()
+    gameover_image = pygame.image.load("images/30.png").convert_alpha()
     gameover_rect = gameover_image.get_rect()
     
     # here we set the supply
