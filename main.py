@@ -26,6 +26,7 @@ GREEN = [0, 255, 0]
 RED = [255, 0, 0]
 
 
+    
 # here we difine the group of enemy
 def add_enemy1(group1,group2,num):
     for i in range(num):
@@ -121,7 +122,7 @@ def main():
 
     # here we set record time
     recorded = False
-
+    
     # here we set the ending picture
     gameover_font = pygame.font.Font("font/font.ttf.ttf", 48)
     again_image = pygame.image.load("images/29.png").convert_alpha()
@@ -159,7 +160,7 @@ def main():
     clock = pygame.time.Clock()
 
 
-    # here we check if it is ok to run the game
+    # here we start the game
     while running:
         for event in pygame.event.get():
 
