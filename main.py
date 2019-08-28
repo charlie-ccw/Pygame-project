@@ -83,7 +83,7 @@ def main():
     add_enemy1(enemy1, enemies, 10)
 
     enemy2 = pygame.sprite.Group()
-    add_enemy2(enemy2, enemies, 8)
+    add_enemy2(enemy2, enemies, 6)
 
     enemy3 = pygame.sprite.Group()
     add_enemy3(enemy3, enemies, 4)
@@ -92,10 +92,10 @@ def main():
     add_enemy4(enemy4, enemies, 4)
 
     enemy5 = pygame.sprite.Group()
-    add_enemy5(enemy5, enemies, 3)
+    add_enemy5(enemy5, enemies, 2)
 
     enemy6 = pygame.sprite.Group()
-    add_enemy6(enemy6, enemies, 3)
+    add_enemy6(enemy6, enemies, 2)
     
     # here we creat the bullets
     bullet1 = []
@@ -268,29 +268,28 @@ def main():
             level = 3
 
             # add more enemy planes to increase the difficulty level
-            add_enemy1(enemy1, enemies, 5)
-            add_enemy2(enemy2, enemies, 3)
+            add_enemy1(enemy1, enemies, 3)
+            add_enemy2(enemy2, enemies, 2)
             add_enemy3(enemy3, enemies, 2)
             add_enemy4(enemy4, enemies, 2)
-            add_enemy5(enemy5, enemies, 1)
-            add_enemy6(enemy5, enemies, 1)
             
 
             # increase the speed of the small enemy plane
             inc_speed(enemy1, 1)
-
+            inc_speed(enemy5, 1)
+            inc_speed(enemy6, 1)
 
 
         elif level == 3 and score > 8000:
             level = 4
 
             # add more enemy planes to increase the difficulty level
-            add_enemy1(enemy1, enemies, 5)
+            add_enemy1(enemy1, enemies, 2)
             add_enemy2(enemy2, enemies, 3)
             add_enemy3(enemy3, enemies, 2)
-            add_enemy4(enemy4, enemies, 2)
+            add_enemy4(enemy4, enemies, 1)
             add_enemy5(enemy5, enemies, 1)
-            add_enemy6(enemy5, enemies, 1)
+            add_enemy6(enemy6, enemies, 1)
             
 
             # increase the speed of the small enemy plane
@@ -302,12 +301,10 @@ def main():
             level = 5
 
             # add more enemy planes to increase the difficulty level
-            add_enemy1(enemy1, enemies, 5)
-            add_enemy2(enemy2, enemies, 3)
+            add_enemy1(enemy1, enemies, 3)
+            add_enemy2(enemy2, enemies, 2)
             add_enemy3(enemy3, enemies, 2)
-            add_enemy4(enemy4, enemies, 2)
-            add_enemy5(enemy5, enemies, 1)
-            add_enemy6(enemy5, enemies, 1)
+            add_enemy4(enemy4, enemies, 1)
             
 
             # increase the speed of the small enemy plane
@@ -326,9 +323,9 @@ def main():
             add_enemy1(enemy1, enemies, 5)
             add_enemy2(enemy2, enemies, 3)
             add_enemy3(enemy3, enemies, 2)
-            add_enemy4(enemy4, enemies, 2)
+            add_enemy4(enemy4, enemies, 1)
             add_enemy5(enemy5, enemies, 1)
-            add_enemy6(enemy5, enemies, 1)
+            add_enemy6(enemy6, enemies, 1)
             
 
             # increase the speed of the small enemy plane
