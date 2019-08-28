@@ -83,10 +83,10 @@ def main():
     add_enemy3(enemy3, enemies, 3)
 
     enemy4 = pygame.sprite.Group()
-    add_enemy4(enemy4, enemies, 5)
+    add_enemy4(enemy4, enemies, 4)
 
     enemy5 = pygame.sprite.Group()
-    add_enemy5(enemy5, enemies, 3)
+    add_enemy5(enemy5, enemies, 2)
 
 
     # here we creat the bullets
