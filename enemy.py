@@ -1,4 +1,5 @@
 import pygame
+import math
 from random import *
 
  # here we difine the smallest enemy plane
@@ -148,7 +149,7 @@ class Enemy4(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.width = 700
         self.height = 960
-        self.speed = 3
+        self.speed = 5
         # here we set the condition of the picture
         self.active = True
         self.rect.left = randint(0,self.width - self.rect.width)
@@ -160,13 +161,13 @@ class Enemy4(pygame.sprite.Sprite):
     def move(self):
         if self.rect.top < self.height:
             self.rect.top +=self.speed
-            self.rect.left += math.sin(math.pi*self.rect.top/33)
+            self.rect.left += 6*math.sin(self.rect.top/50)
         else:
             self.reset()
 
      # here we define how the enemy reset in the game
     def reset(self):
         self.active = True
-        self.rect.left = randint(0,self.width - self.rect.width)
+        self.rect.left = randint(50,self.width - self.rect.width-50)
         self.rect.bottom = randint(self.height*-5,0)
 
