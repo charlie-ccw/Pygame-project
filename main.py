@@ -74,7 +74,7 @@ def main():
     enemies = pygame.sprite.Group()
 
     enemy1 = pygame.sprite.Group()
-    add_enemy1(enemy1, enemies, 6)
+    add_enemy1(enemy1, enemies, 10)
 
     enemy2 = pygame.sprite.Group()
     add_enemy2(enemy2, enemies, 8)

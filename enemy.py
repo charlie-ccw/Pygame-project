@@ -152,7 +152,7 @@ class Enemy4(pygame.sprite.Sprite):
         self.speed = 5
         # here we set the condition of the picture
         self.active = True
-        self.rect.left = randint(50,self.width - self.rect.width-50)
+        self.rect.left = randint(100,self.width - self.rect.width-100)
         self.rect.bottom = randint(self.height*-5,0)
         self.mask = pygame.mask.from_surface(self.image)
 
@@ -168,7 +168,7 @@ class Enemy4(pygame.sprite.Sprite):
      # here we define how the enemy reset in the game
     def reset(self):
         self.active = True
-        self.rect.left = randint(50,self.width - self.rect.width-50)
+        self.rect.left = randint(100,self.width - self.rect.width-100)
         self.rect.bottom = randint(self.height*-5,0)
 
 
@@ -189,11 +189,11 @@ class Enemy5(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.width = 700
         self.height = 960
-        self.speed = 5
+        self.speed = 4
         # here we set the condition of the picture
         self.active = True
-        self.rect.left = randint(-400,0)
-        self.rect.bottom = randint(-400,200)
+        self.rect.left = randint(-300,0)
+        self.rect.bottom = randint(-150,200)
         self.mask = pygame.mask.from_surface(self.image)
 
 
@@ -208,6 +208,6 @@ class Enemy5(pygame.sprite.Sprite):
      # here we define how the enemy reset in the game
     def reset(self):
         self.active = True
-        self.rect.left = randint(-200,-100)
-        self.rect.bottom = randint(-200,0)
+        self.rect.left = randint(-300,0)
+        self.rect.bottom = randint(-150,200)
 
