@@ -113,6 +113,14 @@ def main():
         bullet2.append(bullet.Bullet2((myplane1.rect.centerx - 23, myplane1.rect.centery)))
         bullet2.append(bullet.Bullet2((myplane1.rect.centerx + 23, myplane1.rect.centery)))
 
+
+    # here we creat the enemy bullet
+    bullet3 = []
+    bullet3_index = 0
+    bullet3_number = 2
+    if enemy3.rect.top > 0:
+        for i in range(bullet3_number):
+            bullet3.append(bullet.Bullet3(enemy3.rect.midbottom))
     
     # the index of plane when it is destoried
     e1_destroy_index = 0
@@ -407,6 +415,11 @@ def main():
                     bullets[bullet1_index].reset(myplane1.rect.midtop)
                     bullet1_index = (bullet1_index + 1) % bullet1_number
 
+            # here we shot the enemy bullets
+            if not(delay % 3) and enemy3.rect.top > 0:
+                bullet3[bullet3_index].reset(enemy3.rect.midbotton)
+                bullet3_index = (bullet3_index + 1) %  bullet3_number
+
 
             # here we check if the bullet collides with the enemy plane
             for b in bullets:
@@ -424,6 +437,8 @@ def main():
                                     e.active = False
                             else:
                                 e.active = False
+
+            
                 
                 
             # here we draw the enemy planes
