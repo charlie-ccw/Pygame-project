@@ -118,7 +118,7 @@ def main():
     bullet3 = []
     bullet3_index = 0
     bullet3_number = 2
-    if enemy3.rect.top > 0:
+    if enemy3.top > 0:
         for i in range(bullet3_number):
             bullet3.append(bullet.Bullet3(enemy3.rect.midbottom))
     
