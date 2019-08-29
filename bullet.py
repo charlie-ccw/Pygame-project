@@ -59,7 +59,7 @@ class Bullet3(pygame.sprite.Sprite):
 
     # here we difine the movement of the bullets
     def move(self):
-        self.rect.top -= self.speed
+        self.rect.top += self.speed
 
         if self.rect.top > 960:
             self.active = False
