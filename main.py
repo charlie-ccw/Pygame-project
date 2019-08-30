@@ -100,9 +100,10 @@ def main():
     # here we creat the bullets
     bullet1 = []
     bullet1_index = 0
-    bullet1_number = 7
-    for i in range(bullet1_number):
-        bullet1.append(bullet.Bullet1(myplane1.rect.midtop))
+    bullet1_number = 16
+    for i in range(bullet1_number//2):
+        bullet1.append(bullet.Bullet1((myplane1.rect.centerx-13, myplane1.rect.centery)))
+        bullet1.append(bullet.Bullet1((myplane1.rect.centerx+13, myplane1.rect.centery)))
 
 
     # here we creat the super bullet
@@ -112,8 +113,10 @@ def main():
     for i in range(bullet2_number//2):
         bullet2.append(bullet.Bullet2((myplane1.rect.centerx - 23, myplane1.rect.centery)))
         bullet2.append(bullet.Bullet2((myplane1.rect.centerx + 23, myplane1.rect.centery)))
+        
 
 
+    
     
     # the index of plane when it is destoried
     e1_destroy_index = 0
