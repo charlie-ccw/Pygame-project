@@ -439,6 +439,7 @@ def main():
             for b in bullets:
                 if b.active:
                     b.move()
+                    b.move1()
                     screen.blit(b.image, b.rect)
                     enemy_hit = pygame.sprite.spritecollide(b, enemies, False, pygame.sprite.collide_mask)
                     if enemy_hit:
@@ -456,6 +457,7 @@ def main():
             for b in bullet3:
                 if b.active:
                     b.move()
+                    b.move1()
                     screen.blit(b.image, b.rect)
                     enemy_hit = pygame.sprite.spritecollide(b, enemies, False, pygame.sprite.collide_mask)
                     if enemy_hit:
@@ -473,6 +475,7 @@ def main():
             for b in bullet4:
                 if b.active:
                     b.move()
+                    b.move1()
                     screen.blit(b.image, b.rect)
                     enemy_hit = pygame.sprite.spritecollide(b, enemies, False, pygame.sprite.collide_mask)
                     if enemy_hit:
