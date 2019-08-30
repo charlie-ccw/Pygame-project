@@ -185,7 +185,7 @@ def main():
     bullet_supply = supply.Bullet_supply(size)
     bomb_supply = supply.Bomb_supply(size)
     supply_time = USEREVENT
-    pygame.time.set_timer(supply_time, 20 * 1000)
+    pygame.time.set_timer(supply_time, 15 * 1000)
 
 
     # here we set the timing of super bullet
@@ -226,7 +226,7 @@ def main():
                     if paused:
                         pygame.time.set_timer(supply_time, 0)
                     else:
-                        pygame.time.set_timer(supply_time, 20*1000)
+                        pygame.time.set_timer(supply_time, 15*1000)
                         
 
             elif event.type == MOUSEMOTION:
@@ -391,7 +391,7 @@ def main():
                 if pygame.sprite.collide_mask(bullet_supply, myplane1):
                     # creat and shoot the super bullet
                     is_super_bullet = True
-                    pygame.time.set_timer(super_bullet_time, 12 * 1000)
+                    pygame.time.set_timer(super_bullet_time, 8 * 1000)
                     bullet_supply.active = False
                     
 
