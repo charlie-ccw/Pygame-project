@@ -115,7 +115,25 @@ def main():
         bullet2.append(bullet.Bullet2((myplane1.rect.centerx + 13, myplane1.rect.centery)))
         
 
+    # here we creat the super bullet
+    bullet3 = []
+    bullet3_index = 0
+    bullet3_number = 13
+    for i in range(bullet3_number):
+        bullet2.append(bullet.Bullet2((myplane1.rect.centerx - 23, myplane1.rect.centery)))
+        
+        
+    # here we creat the super bullet
+    bullet4 = []
+    bullet4_index = 0
+    bullet4_number = 13
+    for i in range(bullet4_number):
+        bullet2.append(bullet.Bullet2((myplane1.rect.centerx + 23, myplane1.rect.centery)))
+        
+        
 
+
+    
     
     
     # the index of plane when it is destoried
@@ -402,10 +420,14 @@ def main():
             # here we shot the bullets
             if not(delay % 10):
                 if is_super_bullet:
-                    bullets = bullet2
+                    bullets = bullet2 and bullet3 and bullet4
                     bullets[bullet2_index].reset((myplane1.rect.centerx - 13, myplane1.rect.centery))
                     bullets[bullet2_index+1].reset((myplane1.rect.centerx + 13, myplane1.rect.centery))
+                    bullets[bullet3_index].reset((myplane1.rect.centerx + 23, myplane1.rect.centery))
+                    bullets[bullet4_index].reset((myplane1.rect.centerx - 23, myplane1.rect.centery))
                     bullet2_index = (bullet2_index + 2) % bullet2_number
+                    bullet3_index = (bullet3_index + 1) % bullet3_number
+                    bullet4_index = (bullet4_index + 1) % bullet4_number
                 else:
                     bullets = bullet1
                     bullets[bullet1_index].reset((myplane1.rect.centerx - 13, myplane1.rect.centery))
