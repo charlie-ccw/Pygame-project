@@ -408,7 +408,7 @@ def main():
                     bullet2_index = (bullet2_index + 2) % bullet2_number
                 else:
                     bullets = bullet1
-                    bullets[bullet1_index].reset((myplane1.rect.centerx - 13, myplane1.rect.cnetery))
+                    bullets[bullet1_index].reset((myplane1.rect.centerx - 13, myplane1.rect.centery))
                     bullets[bullet1_index+1].reset((myplane1.rect.centerx + 13, myplane1.rect.centery))
                     bullet1_index = (bullet1_index + 2) % bullet1_number
 
