@@ -111,8 +111,8 @@ def main():
     bullet2_index = 0
     bullet2_number = 26
     for i in range(bullet2_number//2):
-        bullet2.append(bullet.Bullet2((myplane1.rect.centerx - 23, myplane1.rect.centery)))
-        bullet2.append(bullet.Bullet2((myplane1.rect.centerx + 23, myplane1.rect.centery)))
+        bullet2.append(bullet.Bullet2((myplane1.rect.centerx - 13, myplane1.rect.centery)))
+        bullet2.append(bullet.Bullet2((myplane1.rect.centerx + 13, myplane1.rect.centery)))
         
 
 
@@ -403,8 +403,8 @@ def main():
             if not(delay % 10):
                 if is_super_bullet:
                     bullets = bullet2
-                    bullets[bullet2_index].reset((myplane1.rect.centerx - 23, myplane1.rect.centery))
-                    bullets[bullet2_index+1].reset((myplane1.rect.centerx + 23, myplane1.rect.centery))
+                    bullets[bullet2_index].reset((myplane1.rect.centerx - 13, myplane1.rect.centery))
+                    bullets[bullet2_index+1].reset((myplane1.rect.centerx + 13, myplane1.rect.centery))
                     bullet2_index = (bullet2_index + 2) % bullet2_number
                 else:
                     bullets = bullet1
