@@ -120,7 +120,7 @@ def main():
     bullet3_index = 0
     bullet3_number = 13
     for i in range(bullet3_number):
-        bullet3.append(bullet.Bullet2((myplane1.rect.centerx - 23, myplane1.rect.centery)))
+        bullet3.append(bullet.Bullet3((myplane1.rect.centerx - 23, myplane1.rect.centery)))
         
         
     # here we creat the super bullet
@@ -128,7 +128,7 @@ def main():
     bullet4_index = 0
     bullet4_number = 13
     for i in range(bullet4_number):
-        bullet4.append(bullet.Bullet2((myplane1.rect.centerx + 23, myplane1.rect.centery)))
+        bullet4.append(bullet.Bullet4((myplane1.rect.centerx + 23, myplane1.rect.centery)))
         
         
 
@@ -455,8 +455,8 @@ def main():
 
             for x in bullet3:
                 if x.active:
-                    x.move()
                     x.move1()
+                    x.move()
                     screen.blit(x.image, x.rect)
                     enemy_hit = pygame.sprite.spritecollide(x, enemies, False, pygame.sprite.collide_mask)
                     if enemy_hit:
@@ -473,12 +473,12 @@ def main():
 
             for y in bullet4:
                 if y.active:
-                    y.move()
                     y.move1()
+                    y.move()
                     screen.blit(y.image, y.rect)
                     enemy_hit = pygame.sprite.spritecollide(y, enemies, False, pygame.sprite.collide_mask)
                     if enemy_hit:
-                        b.active = False
+                        y.active = False
                         for e in enemy_hit:
                             # here we check which type of planes is attacked
                             if e in enemy2 or e in enemy3:
