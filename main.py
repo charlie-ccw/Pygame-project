@@ -439,7 +439,6 @@ def main():
             for b in bullets:
                 if b.active:
                     b.move()
-                    b.move1()
                     screen.blit(b.image, b.rect)
                     enemy_hit = pygame.sprite.spritecollide(b, enemies, False, pygame.sprite.collide_mask)
                     if enemy_hit:
@@ -454,14 +453,14 @@ def main():
                                 e.active = False
 
 
-            for b in bullet3:
-                if b.active:
-                    b.move()
-                    b.move1()
-                    screen.blit(b.image, b.rect)
-                    enemy_hit = pygame.sprite.spritecollide(b, enemies, False, pygame.sprite.collide_mask)
+            for x in bullet3:
+                if x.active:
+                    x.move()
+                    x.move1()
+                    screen.blit(x.image, x.rect)
+                    enemy_hit = pygame.sprite.spritecollide(x, enemies, False, pygame.sprite.collide_mask)
                     if enemy_hit:
-                        b.active = False
+                        x.active = False
                         for e in enemy_hit:
                             # here we check which type of planes is attacked
                             if e in enemy2 or e in enemy3:
@@ -472,12 +471,12 @@ def main():
                                 e.active = False
 
 
-            for b in bullet4:
-                if b.active:
-                    b.move()
-                    b.move1()
-                    screen.blit(b.image, b.rect)
-                    enemy_hit = pygame.sprite.spritecollide(b, enemies, False, pygame.sprite.collide_mask)
+            for y in bullet4:
+                if y.active:
+                    y.move()
+                    y.move1()
+                    screen.blit(y.image, y.rect)
+                    enemy_hit = pygame.sprite.spritecollide(y, enemies, False, pygame.sprite.collide_mask)
                     if enemy_hit:
                         b.active = False
                         for e in enemy_hit:
