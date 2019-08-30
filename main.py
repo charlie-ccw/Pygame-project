@@ -420,11 +420,11 @@ def main():
             # here we shot the bullets
             if not(delay % 10):
                 if is_super_bullet:
-                    bullets = bullet2 and bullet3 and bullet4
+                    bullets = bullet2
                     bullets[bullet2_index].reset((myplane1.rect.centerx - 13, myplane1.rect.centery))
                     bullets[bullet2_index+1].reset((myplane1.rect.centerx + 13, myplane1.rect.centery))
-                    bullets[bullet3_index].reset((myplane1.rect.centerx + 23, myplane1.rect.centery))
-                    bullets[bullet4_index].reset((myplane1.rect.centerx - 23, myplane1.rect.centery))
+                    bullet3[bullet3_index].reset((myplane1.rect.centerx + 23, myplane1.rect.centery))
+                    bullet4[bullet4_index].reset((myplane1.rect.centerx - 23, myplane1.rect.centery))
                     bullet2_index = (bullet2_index + 2) % bullet2_number
                     bullet3_index = (bullet3_index + 1) % bullet3_number
                     bullet4_index = (bullet4_index + 1) % bullet4_number
@@ -451,6 +451,41 @@ def main():
                                     e.active = False
                             else:
                                 e.active = False
+
+
+            for b in bullet3:
+                if b.active:
+                    b.move()
+                    screen.blit(b.image, b.rect)
+                    enemy_hit = pygame.sprite.spritecollide(b, enemies, False, pygame.sprite.collide_mask)
+                    if enemy_hit:
+                        b.active = False
+                        for e in enemy_hit:
+                            # here we check which type of planes is attacked
+                            if e in enemy2 or e in enemy3:
+                                e.energy -= 1
+                                if e.energy == 0:
+                                    e.active = False
+                            else:
+                                e.active = False
+
+
+            for b in bullets4:
+                if b.active:
+                    b.move()
+                    screen.blit(b.image, b.rect)
+                    enemy_hit = pygame.sprite.spritecollide(b, enemies, False, pygame.sprite.collide_mask)
+                    if enemy_hit:
+                        b.active = False
+                        for e in enemy_hit:
+                            # here we check which type of planes is attacked
+                            if e in enemy2 or e in enemy3:
+                                e.energy -= 1
+                                if e.energy == 0:
+                                    e.active = False
+                            else:
+                                e.active = False
+
 
             
                 
