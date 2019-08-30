@@ -470,7 +470,7 @@ def main():
                                 e.active = False
 
 
-            for b in bullets4:
+            for b in bullet4:
                 if b.active:
                     b.move()
                     screen.blit(b.image, b.rect)
