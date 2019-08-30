@@ -120,7 +120,7 @@ def main():
     bullet3_index = 0
     bullet3_number = 13
     for i in range(bullet3_number):
-        bullet2.append(bullet.Bullet2((myplane1.rect.centerx - 23, myplane1.rect.centery)))
+        bullet3.append(bullet.Bullet2((myplane1.rect.centerx - 23, myplane1.rect.centery)))
         
         
     # here we creat the super bullet
@@ -128,7 +128,7 @@ def main():
     bullet4_index = 0
     bullet4_number = 13
     for i in range(bullet4_number):
-        bullet2.append(bullet.Bullet2((myplane1.rect.centerx + 23, myplane1.rect.centery)))
+        bullet4.append(bullet.Bullet2((myplane1.rect.centerx + 23, myplane1.rect.centery)))
         
         
 
