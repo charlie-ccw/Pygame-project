@@ -87,7 +87,7 @@ class Bullet4(pygame.sprite.Sprite):
     def move(self):
         self.rect.top -= self.speed
     def move1(self):
-        self.rect,left += self.speed1
+        self.rect.left += self.speed1
 
         if self.rect.top < 0:
             self.active = False
