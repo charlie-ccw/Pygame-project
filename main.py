@@ -74,6 +74,7 @@ def main():
 
     # here we creat background
     background1 = background.Background(size)
+    background2 = background.background(size)
     
     # here we creat myplane
     myplane1 = myplane.Myplane(size)
@@ -364,6 +365,11 @@ def main():
         if background1.active:
             background1.move()
             screen.blit(background1.image, background1.rect)
+
+        if background2.active:
+            background2.move()
+            screen.blit(background2.image, background2.rect)
+
 
 
         if life_num and not paused:

@@ -14,7 +14,7 @@ class Background(pygame.sprite.Sprite):
         # here we set the condition of the picture
         self.active = True
         self.rect.left = 0
-        self.rect.top = -960
+        self.rect.top = 0
 
 
 
@@ -30,7 +30,8 @@ class Background(pygame.sprite.Sprite):
     def reset(self):
         self.active = True
         self.rect.left = 0
-        self.rect.top = 0
+        self.rect.top = -960
+        
 
  # here we difine the background
 class background(pygame.sprite.Sprite):
