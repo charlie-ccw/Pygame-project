@@ -360,6 +360,10 @@ def main():
 
 
         
+        # here we draw the background picture
+        if background1.active:
+            background1.move()
+            screen.blit(background1.image, background1.rect)
 
 
         if life_num and not paused:
@@ -680,10 +684,6 @@ def main():
                     sys.exit()
         
 
-        # here we draw the background picture
-        if background.active:
-            background.move()
-            screen.blit(background.image, background.rect)
 
         # here we draw the bomb
         bomb_text = bomb_font.render("x %d" % bomb_num, True, BLACK)
