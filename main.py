@@ -91,25 +91,25 @@ def main():
     enemies = pygame.sprite.Group()
 
     enemy1 = pygame.sprite.Group()
-    add_enemy1(enemy1, enemies, 10)
+    add_enemy1(enemy1, enemies, 5)
 
     enemy2 = pygame.sprite.Group()
-    add_enemy2(enemy2, enemies, 6)
+    add_enemy2(enemy2, enemies, 3)
 
     enemy3 = pygame.sprite.Group()
-    add_enemy3(enemy3, enemies, 4)
+    add_enemy3(enemy3, enemies, 2)
 
     enemy4 = pygame.sprite.Group()
-    add_enemy4(enemy4, enemies, 4)
+    add_enemy4(enemy4, enemies, 2)
 
     enemy5 = pygame.sprite.Group()
-    add_enemy5(enemy5, enemies, 2)
+    add_enemy5(enemy5, enemies, 1)
 
     enemy6 = pygame.sprite.Group()
-    add_enemy6(enemy6, enemies, 2)
+    add_enemy6(enemy6, enemies, 1)
 
     enemy7 = pygame.sprite.Group()
-    add_enemy7(enemy7, enemies, 2)
+    add_enemy7(enemy7, enemies, 1)
     
     # here we creat the bullets
     bullet1 = []
@@ -290,7 +290,7 @@ def main():
             level = 2
 
             # add more enemy planes to increase the difficulty level
-            add_enemy1(enemy1, enemies, 2)
+            add_enemy1(enemy1, enemies, 1)
             add_enemy2(enemy2, enemies, 1)
             add_enemy3(enemy3, enemies, 1)
             add_enemy4(enemy4, enemies, 1)
@@ -306,7 +306,7 @@ def main():
 
             # add more enemy planes to increase the difficulty level
             add_enemy1(enemy1, enemies, 2)
-            add_enemy2(enemy2, enemies, 2)
+            add_enemy2(enemy2, enemies, 1)
             add_enemy3(enemy3, enemies, 1)
             add_enemy4(enemy4, enemies, 1)
             
@@ -321,7 +321,7 @@ def main():
             level = 4
 
             # add more enemy planes to increase the difficulty level
-            add_enemy1(enemy1, enemies, 2)
+            add_enemy1(enemy1, enemies, 1)
             add_enemy2(enemy2, enemies, 2)
             add_enemy3(enemy3, enemies, 2)
             add_enemy5(enemy5, enemies, 1)
@@ -345,12 +345,10 @@ def main():
             
 
             # increase the speed of the small enemy plane
-            inc_speed(enemy7, 1)
+    
             inc_speed(enemy2, 1)
             inc_speed(enemy3, 1)
             inc_speed(enemy4, 1)
-            inc_speed(enemy5, 1)
-            inc_speed(enemy6, 1)
 
 
         elif level == 5 and score > 25000:
