@@ -18,8 +18,6 @@ size = width,height = 700, 960
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Charlie's bullet hell")
 
- # set the picture of the background
-background = pygame.image.load("images/background.jpg").convert()
 
 # set the basic color of the game
 BLACK = [0, 0, 0]
@@ -73,6 +71,9 @@ def inc_speed(target, inc):
  # here is the main program
 def main():
 
+    # here we creat background
+    background = background.Background(size)
+    
     # here we creat myplane
     myplane1 = myplane.Myplane(size)
    
@@ -357,7 +358,6 @@ def main():
             inc_speed(enemy3, 1)
 
 
-        screen.blit(background,(0,0))
         
 
 
@@ -374,6 +374,7 @@ def main():
                 myplane1.moveRight()
             print(myplane1.rect.left)
             print(myplane1.rect.top)
+            
 
             
             # here we draw the bomb and indicate if the player get it
@@ -678,6 +679,10 @@ def main():
                     sys.exit()
         
 
+        # here we draw the background picture
+        if background.active:
+            background.move()
+            screen.blit(background.image, background.rect)
 
         # here we draw the bomb
         bomb_text = bomb_font.render("x %d" % bomb_num, True, BLACK)
