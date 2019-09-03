@@ -30,7 +30,7 @@ class Background(pygame.sprite.Sprite):
     def reset(self):
         self.active = True
         self.rect.left = 0
-        self.rect.top = -960
+        self.rect.top = -950
         
 
  # here we difine the background
@@ -38,7 +38,7 @@ class background(pygame.sprite.Sprite):
     def __init__(self,size):
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = pygame.image.load("images/background1.jpg").convert_alpha()
+        self.image = pygame.image.load("images/background2.jpg").convert_alpha()
         # here we difine the destory picture of the enemy
         self.rect = self.image.get_rect()
         self.width = 700
@@ -47,7 +47,7 @@ class background(pygame.sprite.Sprite):
         # here we set the condition of the picture
         self.active = True
         self.rect.left = 0
-        self.rect.top = -960
+        self.rect.top = -950
 
 
 
@@ -63,5 +63,5 @@ class background(pygame.sprite.Sprite):
     def reset(self):
         self.active = True
         self.rect.left = 0
-        self.rect.top = -960
+        self.rect.top = -950
 
