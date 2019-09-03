@@ -7,6 +7,7 @@ import myplane
 import enemy
 import bullet
 import supply
+import background
 from pygame.locals import *
 from random import *
 
@@ -72,7 +73,7 @@ def inc_speed(target, inc):
 def main():
 
     # here we creat background
-    background = background.Background(size)
+    background1 = background.Background(size)
     
     # here we creat myplane
     myplane1 = myplane.Myplane(size)
