@@ -64,6 +64,13 @@ def add_enemy6(group1,group2,num):
         group1.add(e6)
         group2.add(e6)
 
+def add_enemy7(group1,group2,num):
+    for i in range(num):
+        e7 = enemy.Enemy7(size)
+        group1.add(e7)
+        group2.add(e7)
+
+
 # here we difine the change of speed
 def inc_speed(target, inc):
     for each in target:
@@ -100,6 +107,9 @@ def main():
 
     enemy6 = pygame.sprite.Group()
     add_enemy6(enemy6, enemies, 2)
+
+    enemy7 = pygame.sprite.Group()
+    add_enemy7(enemy7, enemies, 2)
     
     # here we creat the bullets
     bullet1 = []
@@ -147,6 +157,7 @@ def main():
     e4_destroy_index = 0
     e5_destroy_index = 0
     e6_destroy_index = 0
+    e7_destory_index = 0
     myplane1_destroy_index = 0
 
 
@@ -279,8 +290,8 @@ def main():
             level = 2
 
             # add more enemy planes to increase the difficulty level
-            add_enemy1(enemy1, enemies, 3)
-            add_enemy2(enemy2, enemies, 2)
+            add_enemy1(enemy1, enemies, 2)
+            add_enemy2(enemy2, enemies, 1)
             add_enemy3(enemy3, enemies, 1)
             add_enemy4(enemy4, enemies, 1)
             
@@ -294,10 +305,10 @@ def main():
             level = 3
 
             # add more enemy planes to increase the difficulty level
-            add_enemy1(enemy1, enemies, 3)
+            add_enemy1(enemy1, enemies, 2)
             add_enemy2(enemy2, enemies, 2)
-            add_enemy3(enemy3, enemies, 2)
-            add_enemy4(enemy4, enemies, 2)
+            add_enemy3(enemy3, enemies, 1)
+            add_enemy4(enemy4, enemies, 1)
             
 
             # increase the speed of the small enemy plane
@@ -311,15 +322,14 @@ def main():
 
             # add more enemy planes to increase the difficulty level
             add_enemy1(enemy1, enemies, 2)
-            add_enemy2(enemy2, enemies, 3)
+            add_enemy2(enemy2, enemies, 2)
             add_enemy3(enemy3, enemies, 2)
-            add_enemy4(enemy4, enemies, 1)
             add_enemy5(enemy5, enemies, 1)
             add_enemy6(enemy6, enemies, 1)
             
 
             # increase the speed of the small enemy plane
-            inc_speed(enemy1, 1)
+
             inc_speed(enemy2, 1)
 
 
@@ -327,14 +337,15 @@ def main():
             level = 5
 
             # add more enemy planes to increase the difficulty level
-            add_enemy1(enemy1, enemies, 3)
-            add_enemy2(enemy2, enemies, 2)
-            add_enemy3(enemy3, enemies, 2)
+            add_enemy1(enemy1, enemies, 2)
+            add_enemy2(enemy2, enemies, 1)
+            add_enemy3(enemy3, enemies, 1)
             add_enemy4(enemy4, enemies, 1)
+            add_enemy7(enemy7, enemies, 1)
             
 
             # increase the speed of the small enemy plane
-            inc_speed(enemy1, 1)
+            inc_speed(enemy7, 1)
             inc_speed(enemy2, 1)
             inc_speed(enemy3, 1)
             inc_speed(enemy4, 1)
@@ -346,18 +357,20 @@ def main():
             level = 6
 
             # add more enemy planes to increase the difficulty level
-            add_enemy1(enemy1, enemies, 5)
-            add_enemy2(enemy2, enemies, 3)
-            add_enemy3(enemy3, enemies, 2)
+            add_enemy1(enemy1, enemies, 3)
+            add_enemy2(enemy2, enemies, 2)
+            add_enemy3(enemy3, enemies, 1)
             add_enemy4(enemy4, enemies, 1)
             add_enemy5(enemy5, enemies, 1)
             add_enemy6(enemy6, enemies, 1)
+            add_enemy7(enemy7, enemies, 1)
             
 
             # increase the speed of the small enemy plane
             inc_speed(enemy1, 1)
             inc_speed(enemy2, 1)
             inc_speed(enemy3, 1)
+            
 
 
         
@@ -624,6 +637,19 @@ def main():
                             score += 100
                             each.reset()
 
+
+            for each in enemy7:
+                if each.active:
+                    each.move()
+                    screen.blit(each.image, each.rect)
+                else:
+                    if not(delay % 3):
+                        # here we draw the destory pictures of the plane
+                        screen.blit(each.destroy_images[e7_destroy_index], each.rect)
+                        e7_destroy_index = (e7_destroy_index + 1) % 4
+                        if e7_destroy_index == 0:
+                            score += 100
+                            each.reset()
 
 
             # here we draw the score
