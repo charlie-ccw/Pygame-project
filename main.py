@@ -157,7 +157,7 @@ def main():
     e4_destroy_index = 0
     e5_destroy_index = 0
     e6_destroy_index = 0
-    e7_destory_index = 0
+    e7_destroy_index = 0
     myplane1_destroy_index = 0
 
 
