@@ -50,7 +50,7 @@ class Bullet2(pygame.sprite.Sprite):
 class Bullet3(pygame.sprite.Sprite):
     def __init__(self, position):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load("images/18.png").convert_alpha()
+        self.image = pygame.image.load("images/19.png").convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = position
         self.speed = 15
@@ -75,7 +75,7 @@ class Bullet3(pygame.sprite.Sprite):
 class Bullet4(pygame.sprite.Sprite):
     def __init__(self, position):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load("images/18.png").convert_alpha()
+        self.image = pygame.image.load("images/19.png").convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = position
         self.speed = 15
@@ -90,6 +90,31 @@ class Bullet4(pygame.sprite.Sprite):
         self.rect.left -= self.speed1
 
         if self.rect.top < 0:
+            self.active = False
+    # here we set the method of resetting the bullets
+    def reset(self, position):
+        self.rect.left, self.rect.top = position
+        self.active = True
+
+
+
+# here we difine the enemies' bullet of the plane
+class Bullet5(pygame.sprite.Sprite):
+    def __init__(self, position):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load("images/18.png").convert_alpha()
+        self.rect = self.image.get_rect()
+        self.rect.left, self.rect.top = position
+        self.speed = 7
+        self.speed1 = 1
+        self.active = False
+        self.mask = pygame.mask.from_surface(self.image)
+
+    # here we difine the movement of the bullets
+    def move(self):
+        self.rect.top += self.speed
+
+        if self.rect.top > 960:
             self.active = False
     # here we set the method of resetting the bullets
     def reset(self, position):
