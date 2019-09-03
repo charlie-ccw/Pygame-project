@@ -1,3 +1,4 @@
+
 import pygame
 import math
 import sys
@@ -357,6 +358,7 @@ def main():
 
 
         screen.blit(background,(0,0))
+        
 
 
         if life_num and not paused:
