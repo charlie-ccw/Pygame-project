@@ -38,7 +38,7 @@ class background(pygame.sprite.Sprite):
     def __init__(self,size):
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = pygame.image.load("images/background.jpg").convert_alpha()
+        self.image = pygame.image.load("images/background1.jpg").convert_alpha()
         # here we difine the destory picture of the enemy
         self.rect = self.image.get_rect()
         self.width = 700
