@@ -143,12 +143,14 @@ def main():
     bullet4_number = 13
     for i in range(bullet4_number):
         bullet4.append(bullet.Bullet4((myplane1.rect.centerx + 23, myplane1.rect.centery)))
+
+    # here we creat rhe enemy bullet
+    bullet5 = []
+    bullet5_index = 0
+    bullet5_number = 100
+
         
         
-
-
-    
-    
     
     # the index of plane when it is destoried
     e1_destroy_index = 0
@@ -202,6 +204,11 @@ def main():
     supply_time = USEREVENT
     pygame.time.set_timer(supply_time, 15 * 1000)
 
+    # here we set the enemy bullet
+    
+    e3bullet_time = USEREVENT + 3
+    
+    e3_shoot = False
 
     # here we set the timing of super bullet
     super_bullet_time = USEREVENT + 1
@@ -282,6 +289,11 @@ def main():
             elif event.type == invincible_time:
                 myplane1.invincible = False
                 pygame.time.set_timer(invincible_time, 0)
+
+
+            elif event.type == e3bullet_time:
+                e3_shoot = False
+                pygame.time.set_timer(e3bullet_time, 0)
 
 
                             
@@ -523,6 +535,22 @@ def main():
                 if each.active:
                     each.move()
                     screen.blit(each.image, each.rect)
+                    if each.rect.top > 0 and not e3_shoot:
+                        
+                        pygame.time.set_timer(e3bullet_time, 5 * 1000)
+                        for i in range(bullet5_number):
+                            bullet5.append(bullet.Bullet5((each.rect.centery, each.rect.centery)))
+                            bullet5[bullet5_index].reset((each.rect.centery, each.rect.centery))
+                            e3_shoot = True
+                            bullet5_index = (bullet5_index + 1) % bullet5_number
+                        for w in bullet5:
+                            if w.active:
+                                w.move()
+                                screen.blit(w.image, w.rect)
+                                plane_down = pygame.sprite.spritecollide(myplane1, w, False, pygame.sprite.collide_mask)
+                        if plane_down and not myplane1.invincible:
+                            myplane1.active = False
+                        
                     # here we draw the total blood of the enemy plane
                     pygame.draw.line(screen, BLACK, \
                                      (each.rect.left, each.rect.top - 5),\

@@ -1,4 +1,9 @@
 import pygame
+import enemy
+import main
+
+
+
 
 # here we difine the basic bullet of the plane
 class Bullet1(pygame.sprite.Sprite):
