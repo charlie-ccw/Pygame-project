@@ -67,7 +67,7 @@ class Enemy2(pygame.sprite.Sprite):
         # here we set the condition of the picture
         self.active = True
         self.rect.left = randint(0,self.width - self.rect.width)
-        self.rect.bottom = randint(self.height*-10,-self.height)
+        self.rect.bottom = randint(self.height*-3,-self.height)
         self.mask = pygame.mask.from_surface(self.image)
         self.energy = Enemy2.energy
 
@@ -84,7 +84,7 @@ class Enemy2(pygame.sprite.Sprite):
         self.active = True
         self.energy = Enemy2.energy
         self.rect.left = randint(0,self.width - self.rect.width)
-        self.rect.bottom = randint(self.height*-10,0)
+        self.rect.bottom = randint(self.height*-3,0)
 
 
 
