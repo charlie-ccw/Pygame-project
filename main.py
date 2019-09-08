@@ -321,7 +321,6 @@ def main():
             # add more enemy planes to increase the difficulty level
             add_enemy1(enemy1, enemies, 1)
             add_enemy4(enemy4, enemies, 1)
-            add_enemy7(enemy7, enemies, 1)
             
             # increase the speed of the small enemy plane
             inc_speed(enemy4, 1)
@@ -334,7 +333,6 @@ def main():
             add_enemy4(enemy4, enemies, 1)
             add_enemy5(enemy5, enemies, 1)
             add_enemy6(enemy6, enemies, 1)
-            add_enemy7(enemy7, enemies, 1)
             
             # increase the speed of the small enemy plane
             inc_speed(enemy1, 1)
