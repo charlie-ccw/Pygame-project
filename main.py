@@ -42,6 +42,7 @@ def add_enemy4(group1,group2,num):
         group1.add(e4)
         group2.add(e4)
 
+
 def add_enemy5(group1,group2,num):
     for i in range(num):
         e5 = enemy.Enemy5(size)
@@ -77,6 +78,10 @@ def main():
    
      # here we creat the enemy planes
     enemies = pygame.sprite.Group()
+    enemy3 = pygame.sprite.Group()
+    
+    e3 = enemy.Enemy3(size)
+    enemy3.add(e3)
 
     enemy1 = pygame.sprite.Group()
     add_enemy1(enemy1, enemies, 5)
@@ -125,11 +130,16 @@ def main():
     bullet4_number = 13
     for i in range(bullet4_number):
         bullet4.append(bullet.Bullet4((myplane1.rect.centerx + 23, myplane1.rect.centery)))
+
+    # here we creat the enemy bullet
+    bullet5 = bullet.Bullet5(size)
+    b5 = pygame.sprite.Group()
+    b5.add(bullet5)
         
     # the index of plane when it is destoried
     e1_destroy_index = 0
     e2_destroy_index = 0
-    e3_destroy_index = 0
+    en3_destroy_index = 0
     e4_destroy_index = 0
     e5_destroy_index = 0
     e6_destroy_index = 0
@@ -257,7 +267,6 @@ def main():
             # add more enemy planes to increase the difficulty level
             add_enemy1(enemy1, enemies, 1)
             add_enemy2(enemy2, enemies, 1)
-            add_enemy3(enemy3, enemies, 1)
             add_enemy4(enemy4, enemies, 1)
             
             # increase the speed of the small enemy plane
@@ -269,7 +278,6 @@ def main():
             # add more enemy planes to increase the difficulty level
             add_enemy1(enemy1, enemies, 2)
             add_enemy2(enemy2, enemies, 1)
-            add_enemy3(enemy3, enemies, 1)
             add_enemy4(enemy4, enemies, 1)
             
             # increase the speed of the small enemy plane
@@ -283,7 +291,6 @@ def main():
             # add more enemy planes to increase the difficulty level
             add_enemy1(enemy1, enemies, 1)
             add_enemy2(enemy2, enemies, 2)
-            add_enemy3(enemy3, enemies, 2)
             add_enemy5(enemy5, enemies, 1)
             add_enemy6(enemy6, enemies, 1)
             
@@ -297,13 +304,11 @@ def main():
             # add more enemy planes to increase the difficulty level
             add_enemy1(enemy1, enemies, 2)
             add_enemy2(enemy2, enemies, 1)
-            add_enemy3(enemy3, enemies, 1)
             add_enemy4(enemy4, enemies, 1)
             add_enemy7(enemy7, enemies, 1)
             
             # increase the speed of the small enemy plane
             inc_speed(enemy2, 1)
-            inc_speed(enemy3, 1)
             inc_speed(enemy4, 1)
 
         elif level == 5 and score > 25000:
@@ -312,7 +317,6 @@ def main():
             # add more enemy planes to increase the difficulty level
             add_enemy1(enemy1, enemies, 3)
             add_enemy2(enemy2, enemies, 2)
-            add_enemy3(enemy3, enemies, 1)
             add_enemy4(enemy4, enemies, 1)
             add_enemy5(enemy5, enemies, 1)
             add_enemy6(enemy6, enemies, 1)
@@ -321,7 +325,6 @@ def main():
             # increase the speed of the small enemy plane
             inc_speed(enemy1, 1)
             inc_speed(enemy2, 1)
-            inc_speed(enemy3, 1)
             
         # here we draw the background picture
         if background1.active:
@@ -363,12 +366,21 @@ def main():
                     pygame.time.set_timer(super_bullet_time, 8 * 1000)
                     bullet_supply.active = False
                     
-            # here we check that if the user's plane is touched by the enemies
+            # here we check that if the user's plane is touched by the enemies and their bullets
             enemies_down = pygame.sprite.spritecollide(myplane1, enemies, False, pygame.sprite.collide_mask)
+            enemy3_down = pygame.sprite.spritecollide(myplane1, enemy3, False, pygame.sprite.collide_mask)
+            b5_down = pygame.sprite.spritecollide(myplane1, b5, False, pygame.sprite.collide_mask)
             if enemies_down and not myplane1.invincible:
                 myplane1.active = False
                 for e in enemies_down:
                     e.active = False
+            if enemy3_down and not myplane1.invincible:
+                myplane1.active = False
+                e3.active = False
+            if b5_down and not myplane1.invincible:
+                myplane1.active = False
+                bullet5.active = False
+                bullet5.reset((e3.rect.centerx , e3.rect.bottom))
 
             # here we draw the user's plane
             if myplane1.active:
@@ -382,6 +394,18 @@ def main():
                         life_num -= 1
                         myplane1.reset()
                         pygame.time.set_timer(invincible_time, 3 * 1000)
+
+            # here we draw the enemy bullet
+            if bullet5.active:
+                screen.blit(bullet5.image, bullet5.rect)
+                bullet5.move()
+                if bullet5.rect.centerx > myplane1.rect.centerx and bullet5.rect.top < myplane1.rect.top:
+                    bullet5.rect.left -= 4
+                if bullet5.rect.centerx < myplane1.rect.centerx and bullet5.rect.top < myplane1.rect.top:
+                    bullet5.rect.left += 4
+            else:
+                if e3.rect.top > 0 and e3.rect.top <800:
+                    bullet5.reset((e3.rect.centerx , e3.rect.bottom))
 
             # here we shot the bullets
             if not(delay % 10):
@@ -406,16 +430,23 @@ def main():
                     b.move()
                     screen.blit(b.image, b.rect)
                     enemy_hit = pygame.sprite.spritecollide(b, enemies, False, pygame.sprite.collide_mask)
+                    enemy3_hit = pygame.sprite.spritecollide(b, enemy3, False, pygame.sprite.collide_mask)
                     if enemy_hit:
                         b.active = False
                         for e in enemy_hit:
                             # here we check which type of planes is attacked
-                            if e in enemy2 or e in enemy3:
+                            if e in enemy2:
                                 e.energy -= 1
                                 if e.energy == 0:
                                     e.active = False
                             else:
                                 e.active = False
+                    if enemy3_hit:
+                        b.active = False
+                        # here we check which type of planes is attacked
+                        e3.energy -= 1
+                        if e3.energy == 0:
+                            e3.active = False
 
             for x in bullet3:
                 if x.active:
@@ -423,16 +454,23 @@ def main():
                     x.move()
                     screen.blit(x.image, x.rect)
                     enemy_hit = pygame.sprite.spritecollide(x, enemies, False, pygame.sprite.collide_mask)
+                    enemy3_hit = pygame.sprite.spritecollide(b, enemy3, False, pygame.sprite.collide_mask)
                     if enemy_hit:
-                        x.active = False
+                        b.active = False
                         for e in enemy_hit:
                             # here we check which type of planes is attacked
-                            if e in enemy2 or e in enemy3:
+                            if e in enemy2:
                                 e.energy -= 1
                                 if e.energy == 0:
                                     e.active = False
                             else:
                                 e.active = False
+                    if enemy3_hit:
+                        b.active = False
+                        # here we check which type of planes is attacked
+                        e3.energy -= 1
+                        if e3.energy == 0:
+                            e3.active = False
 
             for y in bullet4:
                 if y.active:
@@ -440,46 +478,53 @@ def main():
                     y.move()
                     screen.blit(y.image, y.rect)
                     enemy_hit = pygame.sprite.spritecollide(y, enemies, False, pygame.sprite.collide_mask)
+                    enemy3_hit = pygame.sprite.spritecollide(b, enemy3, False, pygame.sprite.collide_mask)
                     if enemy_hit:
-                        y.active = False
+                        b.active = False
                         for e in enemy_hit:
                             # here we check which type of planes is attacked
-                            if e in enemy2 or e in enemy3:
+                            if e in enemy2:
                                 e.energy -= 1
                                 if e.energy == 0:
                                     e.active = False
                             else:
                                 e.active = False
+                    if enemy3_hit:
+                        b.active = False
+                        # here we check which type of planes is attacked
+                        e3.energy -= 1
+                        if e3.energy == 0:
+                            e3.active = False
                 
-            # here we draw the enemy planes
-            for each in enemy3:
-                # here we check the condition of the plane
-                if each.active:
-                    each.move()
-                    screen.blit(each.image, each.rect)
-                    # here we draw the total blood of the enemy plane
-                    pygame.draw.line(screen, BLACK, \
-                                     (each.rect.left, each.rect.top - 5),\
-                                     (each.rect.right, each.rect.top - 5),\
-                                     2)
-                    # when the energy is bigger than 20%, it will be green. else, it will be red
-                    energy_remain = each.energy / enemy.Enemy3.energy
-                    if energy_remain > 0.35:
-                        energy_color = GREEN
-                    else:
-                        energy_color = RED
-                    pygame.draw.line(screen, energy_color,\
-                                     (each.rect.left, each.rect.top - 5),\
-                                     (each.rect.left + each.rect.width * energy_remain,\
-                                     each.rect.top - 5), 2)
+            # here we check the condition of the enemy3
+            if e3.active:
+                e3.move()
+                screen.blit(e3.image, e3.rect)
+                # here we draw the total blood of the enemy plane
+                pygame.draw.line(screen, BLACK, \
+                                 (e3.rect.left, e3.rect.top - 5),\
+                                 (e3.rect.right, e3.rect.top - 5),\
+                                 2)
+                # when the energy is bigger than 20%, it will be green. else, it will be red
+                energy_remain = e3.energy / enemy.Enemy3.energy
+                if energy_remain > 0.35:
+                    energy_color = GREEN
                 else:
-                    if not(delay % 3):
-                        # here we draw the destory pictures of the plane
-                        screen.blit(each.destroy_images[e3_destroy_index], each.rect)
-                        e3_destroy_index = (e3_destroy_index + 1) % 4
-                        if e3_destroy_index == 0:
-                            score += 1000
-                            each.reset()
+                    energy_color = RED
+                pygame.draw.line(screen, energy_color,\
+                                 (e3.rect.left, e3.rect.top - 5),\
+                                 (e3.rect.left + e3.rect.width * energy_remain,\
+                                 e3.rect.top - 5), 2)
+            else:
+                if not(delay % 3):
+                    # here we draw the destory pictures of the plane
+                    screen.blit(e3.destroy_images[en3_destroy_index], e3.rect)
+                    en3_destroy_index = (en3_destroy_index + 1) % 4
+                    if en3_destroy_index == 0:
+                        score += 1000
+                        e3.reset()
+            if e3.rect.top > 960:
+                e3.reset()
 
             for each in enemy2:
                 if each.active:

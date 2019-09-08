@@ -110,7 +110,7 @@ class Bullet5(pygame.sprite.Sprite):
         self.image = pygame.image.load("images/18.png").convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = position
-        self.speed = 7
+        self.speed = 3
         self.speed1 = 1
         self.active = False
         self.mask = pygame.mask.from_surface(self.image)
