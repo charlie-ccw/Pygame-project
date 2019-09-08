@@ -90,7 +90,7 @@ def main():
     enemy3.add(e3)
 
     enemy1 = pygame.sprite.Group()
-    add_enemy1(enemy1, enemies, 5)
+    add_enemy1(enemy1, enemies, 3)
 
     enemy4 = pygame.sprite.Group()
     add_enemy4(enemy4, enemies, 2)
@@ -298,13 +298,11 @@ def main():
             level = 3
 
             # add more enemy planes to increase the difficulty level
-            add_enemy1(enemy1, enemies, 2)
+            add_enemy1(enemy1, enemies, 1)
             add_enemy4(enemy4, enemies, 1)
             
             # increase the speed of the small enemy plane
             inc_speed(enemy1, 1)
-            inc_speed(enemy5, 1)
-            inc_speed(enemy6, 1)
 
         elif level == 3 and score > 8000:
             level = 4
@@ -321,7 +319,7 @@ def main():
             level = 5
 
             # add more enemy planes to increase the difficulty level
-            add_enemy1(enemy1, enemies, 2)
+            add_enemy1(enemy1, enemies, 1)
             add_enemy4(enemy4, enemies, 1)
             add_enemy7(enemy7, enemies, 1)
             
@@ -332,7 +330,7 @@ def main():
             level = 6
 
             # add more enemy planes to increase the difficulty level
-            add_enemy1(enemy1, enemies, 3)
+            add_enemy1(enemy1, enemies, 2)
             add_enemy4(enemy4, enemies, 1)
             add_enemy5(enemy5, enemies, 1)
             add_enemy6(enemy6, enemies, 1)
