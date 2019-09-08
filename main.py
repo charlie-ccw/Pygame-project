@@ -139,23 +139,23 @@ def main():
     b5 = pygame.sprite.Group()
     b5.add(bullet5)
 
-    bullet51 = bullet.Bullet5(size)
+    bullet51 = bullet.Bullet6(size)
     b51 = pygame.sprite.Group()
     b51.add(bullet51)
 
-    bullet52 = bullet.Bullet5(size)
+    bullet52 = bullet.Bullet6(size)
     b52 = pygame.sprite.Group()
     b52.add(bullet52)
 
-    bullet53 = bullet.Bullet5(size)
+    bullet53 = bullet.Bullet6(size)
     b53 = pygame.sprite.Group()
     b53.add(bullet53)
 
-    bullet54 = bullet.Bullet5(size)
+    bullet54 = bullet.Bullet6(size)
     b54 = pygame.sprite.Group()
     b54.add(bullet54)
 
-    bullet55 = bullet.Bullet5(size)
+    bullet55 = bullet.Bullet6(size)
     b55 = pygame.sprite.Group()
     b55.add(bullet55)
 
@@ -340,7 +340,8 @@ def main():
             
             # increase the speed of the small enemy plane
             inc_speed(enemy1, 1)
-            
+
+        
         # here we draw the background picture
         if background1.active:
             background1.move()
