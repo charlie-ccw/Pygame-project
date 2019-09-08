@@ -1,4 +1,3 @@
-
 import pygame
 import math
 import sys
@@ -19,14 +18,11 @@ size = width,height = 700, 960
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Charlie's bullet hell")
 
-
 # set the basic color of the game
 BLACK = [0, 0, 0]
 GREEN = [0, 255, 0]
 RED = [255, 0, 0]
 
-
-    
 # here we difine the group of enemy
 def add_enemy1(group1,group2,num):
     for i in range(num):
@@ -39,12 +35,6 @@ def add_enemy2(group1,group2,num):
         e2 = enemy.Enemy2(size)
         group1.add(e2)
         group2.add(e2)
-
-def add_enemy3(group1,group2,num):
-    for i in range(num):
-        e3 = enemy.Enemy3(size)
-        group1.add(e3)
-        group2.add(e3)
 
 def add_enemy4(group1,group2,num):
     for i in range(num):
@@ -70,7 +60,6 @@ def add_enemy7(group1,group2,num):
         group1.add(e7)
         group2.add(e7)
 
-
 # here we difine the change of speed
 def inc_speed(target, inc):
     for each in target:
@@ -86,7 +75,6 @@ def main():
     # here we creat myplane
     myplane1 = myplane.Myplane(size)
    
-
      # here we creat the enemy planes
     enemies = pygame.sprite.Group()
 
@@ -95,9 +83,6 @@ def main():
 
     enemy2 = pygame.sprite.Group()
     add_enemy2(enemy2, enemies, 3)
-
-    enemy3 = pygame.sprite.Group()
-    add_enemy3(enemy3, enemies, 2)
 
     enemy4 = pygame.sprite.Group()
     add_enemy4(enemy4, enemies, 2)
@@ -119,7 +104,6 @@ def main():
         bullet1.append(bullet.Bullet1((myplane1.rect.centerx-13, myplane1.rect.centery)))
         bullet1.append(bullet.Bullet1((myplane1.rect.centerx+13, myplane1.rect.centery)))
 
-
     # here we creat the super bullet
     bullet2 = []
     bullet2_index = 0
@@ -128,30 +112,20 @@ def main():
         bullet2.append(bullet.Bullet2((myplane1.rect.centerx - 13, myplane1.rect.centery)))
         bullet2.append(bullet.Bullet2((myplane1.rect.centerx + 13, myplane1.rect.centery)))
         
-
     # here we creat the super bullet
     bullet3 = []
     bullet3_index = 0
     bullet3_number = 13
     for i in range(bullet3_number):
         bullet3.append(bullet.Bullet3((myplane1.rect.centerx - 23, myplane1.rect.centery)))
-        
-        
+                
     # here we creat the super bullet
     bullet4 = []
     bullet4_index = 0
     bullet4_number = 13
     for i in range(bullet4_number):
         bullet4.append(bullet.Bullet4((myplane1.rect.centerx + 23, myplane1.rect.centery)))
-
-    # here we creat rhe enemy bullet
-    bullet5 = []
-    bullet5_index = 0
-    bullet5_number = 100
-
         
-        
-    
     # the index of plane when it is destoried
     e1_destroy_index = 0
     e2_destroy_index = 0
@@ -162,11 +136,9 @@ def main():
     e7_destroy_index = 0
     myplane1_destroy_index = 0
 
-
     # here we add the score to the game
     score = 0
     score_font = pygame.font.Font("font/font.ttf.ttf", 36)
-
 
     #here we set the stop condtion to the game
     paused = False
@@ -177,7 +149,6 @@ def main():
     paused_rect = pause_nor_image.get_rect()
     paused_rect.left, paused_rect.top = width - paused_rect.width - 10, 10
     paused_image = pause_nor_image
-
 
     # here we set the difficulty of the game
     level = 1
@@ -204,12 +175,6 @@ def main():
     supply_time = USEREVENT
     pygame.time.set_timer(supply_time, 15 * 1000)
 
-    # here we set the enemy bullet
-    
-    e3bullet_time = USEREVENT + 3
-    
-    e3_shoot = False
-
     # here we set the timing of super bullet
     super_bullet_time = USEREVENT + 1
 
@@ -232,7 +197,6 @@ def main():
 
     clock = pygame.time.Clock()
 
-
     # here we start the game
     while running:
         for event in pygame.event.get():
@@ -250,7 +214,6 @@ def main():
                     else:
                         pygame.time.set_timer(supply_time, 15*1000)
                         
-
             elif event.type == MOUSEMOTION:
                 if paused_rect.collidepoint(event.pos):
                     if paused:
@@ -262,7 +225,6 @@ def main():
                         paused_image = resume_nor_image
                     else:
                         paused_image = pause_nor_image
-
 
         # here we set the function of the bomb
             elif event.type == KEYDOWN:
@@ -280,22 +242,13 @@ def main():
                 else:
                     bullet_supply.reset()
 
-
             elif event.type == super_bullet_time:
                 is_super_bullet = False
                 pygame.time.set_timer(super_bullet_time, 0)
 
-
             elif event.type == invincible_time:
                 myplane1.invincible = False
                 pygame.time.set_timer(invincible_time, 0)
-
-
-            elif event.type == e3bullet_time:
-                e3_shoot = False
-                pygame.time.set_timer(e3bullet_time, 0)
-
-
                             
         # here we change the levels
         if level == 1 and score > 1000:
@@ -307,11 +260,8 @@ def main():
             add_enemy3(enemy3, enemies, 1)
             add_enemy4(enemy4, enemies, 1)
             
-
             # increase the speed of the small enemy plane
             inc_speed(enemy1, 1)
-
-
 
         elif level == 2 and score > 3000:
             level = 3
@@ -322,12 +272,10 @@ def main():
             add_enemy3(enemy3, enemies, 1)
             add_enemy4(enemy4, enemies, 1)
             
-
             # increase the speed of the small enemy plane
             inc_speed(enemy1, 1)
             inc_speed(enemy5, 1)
             inc_speed(enemy6, 1)
-
 
         elif level == 3 and score > 8000:
             level = 4
@@ -339,11 +287,9 @@ def main():
             add_enemy5(enemy5, enemies, 1)
             add_enemy6(enemy6, enemies, 1)
             
-
             # increase the speed of the small enemy plane
 
             inc_speed(enemy2, 1)
-
 
         elif level == 4 and score > 15000:
             level = 5
@@ -355,13 +301,10 @@ def main():
             add_enemy4(enemy4, enemies, 1)
             add_enemy7(enemy7, enemies, 1)
             
-
             # increase the speed of the small enemy plane
-    
             inc_speed(enemy2, 1)
             inc_speed(enemy3, 1)
             inc_speed(enemy4, 1)
-
 
         elif level == 5 and score > 25000:
             level = 6
@@ -375,15 +318,11 @@ def main():
             add_enemy6(enemy6, enemies, 1)
             add_enemy7(enemy7, enemies, 1)
             
-
             # increase the speed of the small enemy plane
             inc_speed(enemy1, 1)
             inc_speed(enemy2, 1)
             inc_speed(enemy3, 1)
             
-
-
-        
         # here we draw the background picture
         if background1.active:
             background1.move()
@@ -392,8 +331,6 @@ def main():
         if background2.active:
             background2.move()
             screen.blit(background2.image, background2.rect)
-
-
 
         if life_num and not paused:
             # here we check the keyboard of user
@@ -406,11 +343,7 @@ def main():
                 myplane1.moveLeft()
             if key_pressed[K_d]:
                 myplane1.moveRight()
-            print(myplane1.rect.left)
-            print(myplane1.rect.top)
-            
-
-            
+                        
             # here we draw the bomb and indicate if the player get it
             if bomb_supply.active:
                 bomb_supply.move()
@@ -419,7 +352,6 @@ def main():
                     if bomb_num < 3:
                         bomb_num += 1
                     bomb_supply.active = False
-
 
             # here we draw the bullet supply and indicate if the player get it
             if bullet_supply.active:
@@ -431,8 +363,6 @@ def main():
                     pygame.time.set_timer(super_bullet_time, 8 * 1000)
                     bullet_supply.active = False
                     
-
-
             # here we check that if the user's plane is touched by the enemies
             enemies_down = pygame.sprite.spritecollide(myplane1, enemies, False, pygame.sprite.collide_mask)
             if enemies_down and not myplane1.invincible:
@@ -453,7 +383,6 @@ def main():
                         myplane1.reset()
                         pygame.time.set_timer(invincible_time, 3 * 1000)
 
-
             # here we shot the bullets
             if not(delay % 10):
                 if is_super_bullet:
@@ -470,7 +399,6 @@ def main():
                     bullets[bullet1_index].reset((myplane1.rect.centerx - 13, myplane1.rect.centery))
                     bullets[bullet1_index+1].reset((myplane1.rect.centerx + 13, myplane1.rect.centery))
                     bullet1_index = (bullet1_index + 2) % bullet1_number
-
 
             # here we check if the bullet collides with the enemy plane
             for b in bullets:
@@ -489,7 +417,6 @@ def main():
                             else:
                                 e.active = False
 
-
             for x in bullet3:
                 if x.active:
                     x.move1()
@@ -507,7 +434,6 @@ def main():
                             else:
                                 e.active = False
 
-
             for y in bullet4:
                 if y.active:
                     y.move1()
@@ -524,10 +450,6 @@ def main():
                                     e.active = False
                             else:
                                 e.active = False
-
-
-            
-                
                 
             # here we draw the enemy planes
             for each in enemy3:
@@ -535,22 +457,6 @@ def main():
                 if each.active:
                     each.move()
                     screen.blit(each.image, each.rect)
-                    if each.rect.top > 0 and not e3_shoot:
-                        
-                        pygame.time.set_timer(e3bullet_time, 5 * 1000)
-                        for i in range(bullet5_number):
-                            bullet5.append(bullet.Bullet5((each.rect.centery, each.rect.centery)))
-                            bullet5[bullet5_index].reset((each.rect.centery, each.rect.centery))
-                            e3_shoot = True
-                            bullet5_index = (bullet5_index + 1) % bullet5_number
-                        for w in bullet5:
-                            if w.active:
-                                w.move()
-                                screen.blit(w.image, w.rect)
-                                plane_down = pygame.sprite.spritecollide(myplane1, w, False, pygame.sprite.collide_mask)
-                        if plane_down and not myplane1.invincible:
-                            myplane1.active = False
-                        
                     # here we draw the total blood of the enemy plane
                     pygame.draw.line(screen, BLACK, \
                                      (each.rect.left, each.rect.top - 5),\
@@ -574,7 +480,6 @@ def main():
                         if e3_destroy_index == 0:
                             score += 1000
                             each.reset()
-
 
             for each in enemy2:
                 if each.active:
@@ -604,10 +509,6 @@ def main():
                             score += 500
                             each.reset()
 
-
-           
-
-
             for each in enemy1:
                 if each.active:
                     each.move()
@@ -620,7 +521,6 @@ def main():
                         if e1_destroy_index == 0:
                             score += 100
                             each.reset()
-
 
             for each in enemy4:
                 if each.active:
@@ -635,7 +535,6 @@ def main():
                             score += 100
                             each.reset()
 
-
             for each in enemy5:
                 if each.active:
                     each.move()
@@ -648,7 +547,6 @@ def main():
                         if e5_destroy_index == 0:
                             score += 100
                             each.reset()
-
 
             for each in enemy6:
                 if each.active:
@@ -663,7 +561,6 @@ def main():
                             score += 100
                             each.reset()
 
-
             for each in enemy7:
                 if each.active:
                     each.move()
@@ -676,12 +573,10 @@ def main():
                         if e7_destroy_index == 0:
                             score += 100
                             each.reset()
-
-
+                            
             # here we draw the score
             score_text = score_font.render("Score : %s" % str(score), True, BLACK)
             screen.blit(score_text, (10,5))
-
 
         # here we creat the ending
         elif life_num == 0:
@@ -740,15 +635,12 @@ def main():
                      gameover_rect.top < pos[1] < gameover_rect.bottom:
                     pygame.quit()
                     sys.exit()
-        
-
 
         # here we draw the bomb
         bomb_text = bomb_font.render("x %d" % bomb_num, True, BLACK)
         text_rect = bomb_text.get_rect()
         screen.blit(bomb_image, (10, height - 10 - bomb_rect.height))
         screen.blit(bomb_text, (20 + bomb_rect.width, height - 5 - text_rect.height))
-
 
         # here we draw the number of lives of myplane
         if life_num:
@@ -760,7 +652,6 @@ def main():
         # here we draw the pause and continue picture
         screen.blit(paused_image, paused_rect)
 
-
         # here we change the value of delay
         delay -= 1
         if not delay:
@@ -769,7 +660,6 @@ def main():
         pygame.display.flip()
         
         clock.tick(60)
-
 
 if __name__ == "__main__":
     try:
