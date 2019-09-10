@@ -395,20 +395,17 @@ def main():
             b55_down = pygame.sprite.spritecollide(myplane1, b55, False, pygame.sprite.collide_mask)
             if enemies_down and not myplane1.invincible:
                 myplane1.energy -= 1
-                pygame.time.set_timer(invincible_time, 1 * 1000)
                 if myplane1.energy == 0:
                     myplane1.active = False
                 for e in enemies_down:
                     e.active = False
             if enemy3_down and not myplane1.invincible:
                 myplane1.energy -= 1
-                pygame.time.set_timer(invincible_time, 1 * 1000)
                 if myplane1.energy == 0:
                     myplane1.active = False
                 e3.active = False
             if enemy2_down and not myplane1.invincible:
                 myplane1.energy -= 1
-                pygame.time.set_timer(invincible_time, 1 * 1000)
                 if myplane1.energy == 0:
                     myplane1.active = False
                 for m in enemy2_down:
