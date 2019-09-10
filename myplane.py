@@ -2,7 +2,7 @@ import pygame
 
  # here we difine the Myplane
 class Myplane(pygame.sprite.Sprite):
-    energy = 5
+    energy = 4
     def __init__(self,size):
         pygame.sprite.Sprite.__init__(self)
 
