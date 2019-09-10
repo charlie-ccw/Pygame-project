@@ -47,7 +47,7 @@ class Enemy1(pygame.sprite.Sprite):
 
  # here we difine the middle size enemy plane
 class Enemy2(pygame.sprite.Sprite):
-    energy = 8
+    energy = 14
     def __init__(self,size):
         pygame.sprite.Sprite.__init__(self)
 
