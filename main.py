@@ -85,6 +85,11 @@ def main():
     enemy2.add(e23)
     enemy2.add(e24)
     enemy2.add(e25)
+    enemies.add(e21)
+    enemies.add(e22)
+    enemies.add(e23)
+    enemies.add(e24)
+    enemies.add(e25)
     
     e3 = enemy.Enemy3(size)
     enemy3.add(e3)
@@ -442,9 +447,9 @@ def main():
                 screen.blit(bullet5.image, bullet5.rect)
                 bullet5.move()
                 if bullet5.rect.centerx > myplane1.rect.centerx and bullet5.rect.top < myplane1.rect.top:
-                    bullet5.rect.left -= 4
+                    bullet5.rect.left -= 2
                 if bullet5.rect.centerx < myplane1.rect.centerx and bullet5.rect.top < myplane1.rect.top:
-                    bullet5.rect.left += 4
+                    bullet5.rect.left += 2
             else:
                 if e3.rect.top > 0 and e3.rect.top <800:
                     bullet5.reset((e3.rect.centerx , e3.rect.bottom))
