@@ -395,17 +395,20 @@ def main():
             b55_down = pygame.sprite.spritecollide(myplane1, b55, False, pygame.sprite.collide_mask)
             if enemies_down and not myplane1.invincible:
                 myplane1.energy -= 1
+                pygame.time.set_timer(invincible_time, 1 * 1000)
                 if myplane1.energy == 0:
                     myplane1.active = False
                 for e in enemies_down:
                     e.active = False
             if enemy3_down and not myplane1.invincible:
                 myplane1.energy -= 1
+                pygame.time.set_timer(invincible_time, 1 * 1000)
                 if myplane1.energy == 0:
                     myplane1.active = False
                 e3.active = False
             if enemy2_down and not myplane1.invincible:
                 myplane1.energy -= 1
+                pygame.time.set_timer(invincible_time, 1 * 1000)
                 if myplane1.energy == 0:
                     myplane1.active = False
                 for m in enemy2_down:
@@ -457,14 +460,14 @@ def main():
                                  2)
                 # when the energy is bigger than 20%, it will be green. else, it will be red
                 energy_remain = myplane1.energy / myplane.Myplane.energy
-                if energy_remain > 0.4:
+                if energy_remain > 0.5:
                     energy_color = GREEN
                 else:
                     energy_color = RED
                 pygame.draw.line(screen, energy_color,\
                                  (myplane1.rect.left, myplane1.rect.bottom + 5),\
                                  (myplane1.rect.left + myplane1.rect.width * energy_remain,\
-                                 e3.rect.bottom + 5), 2)
+                                 myplane1.rect.bottom + 5), 2)
 
             else:
                 if not(delay % 3):
@@ -475,6 +478,8 @@ def main():
                         life_num -= 1
                         myplane1.reset()
                         pygame.time.set_timer(invincible_time, 3 * 1000)
+
+
 
             # here we draw the enemy bullet
             if bullet5.active:

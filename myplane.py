@@ -24,6 +24,7 @@ class Myplane(pygame.sprite.Sprite):
         self.active = True
         self.invincible = False
         self.mask = pygame.mask.from_surface(self.image)
+        self.energy = Myplane.energy
 
         
  # here we set the movement of my plane
@@ -58,6 +59,7 @@ class Myplane(pygame.sprite.Sprite):
                         (self.width - self.rect.width) // 2, \
                         self.height - self. rect.height - 60
         self.active = True
+        self.energy = Myplane.energy
         self.invincible = True
         
 
