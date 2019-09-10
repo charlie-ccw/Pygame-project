@@ -394,44 +394,78 @@ def main():
             b54_down = pygame.sprite.spritecollide(myplane1, b54, False, pygame.sprite.collide_mask)
             b55_down = pygame.sprite.spritecollide(myplane1, b55, False, pygame.sprite.collide_mask)
             if enemies_down and not myplane1.invincible:
-                myplane1.active = False
+                myplane1.energy -= 1
+                if myplane1.energy == 0:
+                    myplane1.active = False
                 for e in enemies_down:
                     e.active = False
             if enemy3_down and not myplane1.invincible:
-                myplane1.active = False
+                myplane1.energy -= 1
+                if myplane1.energy == 0:
+                    myplane1.active = False
                 e3.active = False
             if enemy2_down and not myplane1.invincible:
-                myplane1.active = False
+                myplane1.energy -= 1
+                if myplane1.energy == 0:
+                    myplane1.active = False
                 for m in enemy2_down:
                     m.active = False
             if b5_down and not myplane1.invincible:
-                myplane1.active = False
+                myplane1.energy -= 1
+                if myplane1.energy == 0:
+                    myplane1.active = False
                 bullet5.active = False
                 bullet5.reset((e3.rect.centerx , e3.rect.bottom))
             if b51_down and not myplane1.invincible:
-                myplane1.active = False
+                myplane1.energy -= 1
+                if myplane1.energy == 0:
+                    myplane1.active = False
                 bullet51.active = False
                 bullet51.reset((e21.rect.centerx , e21.rect.bottom))
             if b52_down and not myplane1.invincible:
-                myplane1.active = False
+                myplane1.energy -= 1
+                if myplane1.energy == 0:
+                    myplane1.active = False
                 bullet52.active = False
                 bullet52.reset((e22.rect.centerx , e22.rect.bottom))
             if b53_down and not myplane1.invincible:
-                myplane1.active = False
+                myplane1.energy -= 1
+                if myplane1.energy == 0:
+                    myplane1.active = False
                 bullet53.active = False
                 bullet53.reset((e23.rect.centerx , e23.rect.bottom))
             if b54_down and not myplane1.invincible:
-                myplane1.active = False
+                myplane1.energy -= 1
+                if myplane1.energy == 0:
+                    myplane1.active = False
                 bullet54.active = False
                 bullet54.reset((e24.rect.centerx , e24.rect.bottom))
             if b55_down and not myplane1.invincible:
-                myplane1.active = False
+                myplane1.energy -= 1
+                if myplane1.energy == 0:
+                    myplane1.active = False
                 bullet55.active = False
                 bullet55.reset((e25.rect.centerx , e25.rect.bottom))
 
             # here we draw the user's plane
             if myplane1.active:
                 screen.blit(myplane1.image, myplane1.rect)
+                # here we draw the total blood of my plane
+                pygame.draw.line(screen, BLACK, \
+                                 (myplane1.rect.left, myplane1.rect.bottom + 5),\
+                                 (myplane1.rect.right, myplane1.rect.bottom + 5),\
+                                 2)
+                # when the energy is bigger than 20%, it will be green. else, it will be red
+                energy_remain = myplane1.energy / myplane.Myplane.energy
+                if energy_remain > 0.4:
+                    energy_color = GREEN
+                else:
+                    energy_color = RED
+                pygame.draw.line(screen, energy_color,\
+                                 (myplane1.rect.left, myplane1.rect.bottom + 5),\
+                                 (myplane1.rect.left + myplane1.rect.width * energy_remain,\
+                                 e3.rect.bottom + 5), 2)
+
             else:
                 if not(delay % 3):
                     # here we draw the destory pictures of the plane
