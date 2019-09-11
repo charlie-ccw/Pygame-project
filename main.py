@@ -117,7 +117,7 @@ def main():
     # here we creat the bullets
     bullet1 = []
     bullet1_index = 0
-    bullet1_number = 16
+    bullet1_number = 80
     for i in range(bullet1_number//2):
         bullet1.append(bullet.Bullet1((myplane1.rect.centerx-13, myplane1.rect.centery)))
         bullet1.append(bullet.Bullet1((myplane1.rect.centerx+13, myplane1.rect.centery)))
@@ -125,7 +125,7 @@ def main():
     # here we creat the super bullet
     bullet2 = []
     bullet2_index = 0
-    bullet2_number = 26
+    bullet2_number = 80
     for i in range(bullet2_number//2):
         bullet2.append(bullet.Bullet2((myplane1.rect.centerx - 13, myplane1.rect.centery)))
         bullet2.append(bullet.Bullet2((myplane1.rect.centerx + 13, myplane1.rect.centery)))
@@ -133,27 +133,25 @@ def main():
     # here we creat the super bullet
     bullet3 = []
     bullet3_index = 0
-    bullet3_number = 13
+    bullet3_number = 40
     for i in range(bullet3_number):
         bullet3.append(bullet.Bullet3((myplane1.rect.centerx - 23, myplane1.rect.centery)))
                 
     # here we creat the super bullet
     bullet4 = []
     bullet4_index = 0
-    bullet4_number = 13
+    bullet4_number = 40
     for i in range(bullet4_number):
         bullet4.append(bullet.Bullet4((myplane1.rect.centerx + 23, myplane1.rect.centery)))
 
     bullet6 = []
     bullet6_index = 0
-    bullet6_number = 70
-    for i in range(bullet6_number//7):
+    bullet6_number = 20000
+    for i in range(bullet6_number//5):
         bullet6.append(bullet.Bullet6((boss1.rect.centerx - 300, boss1.rect.centery)))
-        bullet6.append(bullet.Bullet6((boss1.rect.centerx - 200, boss1.rect.centery)))
         bullet6.append(bullet.Bullet6((boss1.rect.centerx - 100, boss1.rect.centery)))
         bullet6.append(bullet.Bullet6((boss1.rect.centerx, boss1.rect.centery)))
         bullet6.append(bullet.Bullet6((boss1.rect.centerx + 100, boss1.rect.centery)))
-        bullet6.append(bullet.Bullet6((boss1.rect.centerx + 200, boss1.rect.centery)))
         bullet6.append(bullet.Bullet6((boss1.rect.centerx + 300, boss1.rect.centery)))
 
 
@@ -541,6 +539,7 @@ def main():
                         boss_destroy_index = (boss_destroy_index + 1) % 4
                         if boss_destroy_index == 0:
                             score += 10000
+                            
 
 
 
@@ -554,43 +553,49 @@ def main():
                 if bullet5.rect.centerx < myplane1.rect.centerx and bullet5.rect.top < myplane1.rect.top:
                     bullet5.rect.left += 2
             else:
-                if e3.rect.top > 0 and e3.rect.top <800:
-                    bullet5.reset((e3.rect.centerx , e3.rect.bottom))
+                if not level == 7:
+                    if e3.rect.top > 0 and e3.rect.top <800:
+                        bullet5.reset((e3.rect.centerx , e3.rect.bottom))
 
             if bullet51.active:
                 screen.blit(bullet51.image, bullet51.rect)
                 bullet51.move()
             else:
-                if e21.rect.top > 0 and e21.rect.top <800:
-                    bullet51.reset((e21.rect.centerx , e21.rect.bottom))
+                if not level == 7:
+                    if e21.rect.top > 0 and e21.rect.top <800:
+                        bullet51.reset((e21.rect.centerx , e21.rect.bottom))
 
             if bullet52.active:
                 screen.blit(bullet52.image, bullet52.rect)
                 bullet52.move()
             else:
-                if e22.rect.top > 0 and e22.rect.top <800:
-                    bullet52.reset((e22.rect.centerx , e22.rect.bottom))
+                if not level == 7:
+                    if e22.rect.top > 0 and e22.rect.top <800:
+                        bullet52.reset((e22.rect.centerx , e22.rect.bottom))
 
             if bullet53.active:
                 screen.blit(bullet53.image, bullet53.rect)
                 bullet53.move()
             else:
-                if e23.rect.top > 0 and e23.rect.top <800:
-                    bullet53.reset((e23.rect.centerx , e23.rect.bottom))
+                if not level == 7:
+                    if e23.rect.top > 0 and e23.rect.top <800:
+                        bullet53.reset((e23.rect.centerx , e23.rect.bottom))
 
             if bullet54.active:
                 screen.blit(bullet54.image, bullet54.rect)
                 bullet54.move()
             else:
-                if e24.rect.top > 0 and e24.rect.top <800:
-                    bullet54.reset((e24.rect.centerx , e24.rect.bottom))
+                if not level == 7:
+                    if e24.rect.top > 0 and e24.rect.top <800:
+                        bullet54.reset((e24.rect.centerx , e24.rect.bottom))
 
             if bullet55.active:
                 screen.blit(bullet55.image, bullet55.rect)
                 bullet55.move()
             else:
-                if e25.rect.top > 0 and e25.rect.top <800:
-                    bullet55.reset((e25.rect.centerx , e25.rect.bottom))
+                if not level == 7:
+                    if e25.rect.top > 0 and e25.rect.top <800:
+                        bullet55.reset((e25.rect.centerx , e25.rect.bottom))
 
             
             # here we shot the bullets
@@ -615,13 +620,11 @@ def main():
                 if not(delay % 10):
                     bossbullets = bullet6
                     bossbullets[bullet6_index].reset((boss1.rect.centerx - 300, boss1.rect.centery))
-                    bossbullets[bullet6_index+1].reset((boss1.rect.centerx - 200, boss1.rect.centery))
                     bossbullets[bullet6_index+2].reset((boss1.rect.centerx - 100, boss1.rect.centery))
                     bossbullets[bullet6_index+3].reset((boss1.rect.centerx, boss1.rect.centery))
                     bossbullets[bullet6_index+4].reset((boss1.rect.centerx + 100, boss1.rect.centery))
-                    bossbullets[bullet6_index+5].reset((boss1.rect.centerx + 200, boss1.rect.centery))
                     bossbullets[bullet6_index+6].reset((boss1.rect.centerx + 300, boss1.rect.centery))
-                    bullet6_index = (bullet6_index + 7) % bullet6_number
+                    bullet6_index = (bullet6_index + 5) % bullet6_number
 
             # here we check if the bullet collides witg the plane
             if level == 7 and boss1.active:
@@ -683,11 +686,11 @@ def main():
                     x.move()
                     screen.blit(x.image, x.rect)
                     enemy_hit = pygame.sprite.spritecollide(x, enemies, False, pygame.sprite.collide_mask)
-                    enemy3_hit = pygame.sprite.spritecollide(b, enemy3, False, pygame.sprite.collide_mask)
-                    enemy2_hit = pygame.sprite.spritecollide(b, enemy2, False, pygame.sprite.collide_mask)
-                    boss_hit = pygame.sprite.spritecollide(b, boss, False, pygame.sprite.collide_mask)
+                    enemy3_hit = pygame.sprite.spritecollide(x, enemy3, False, pygame.sprite.collide_mask)
+                    enemy2_hit = pygame.sprite.spritecollide(x, enemy2, False, pygame.sprite.collide_mask)
+                    boss_hit = pygame.sprite.spritecollide(x, boss, False, pygame.sprite.collide_mask)
                     if enemy_hit:
-                        b.active = False
+                        x.active = False
                         for e in enemy_hit:
                             # here we check which type of planes is attacked
                             if e in enemy2:
@@ -697,19 +700,19 @@ def main():
                             else:
                                 e.active = False
                     if enemy3_hit:
-                        b.active = False
+                        x.active = False
                         # here we check which type of planes is attacked
                         e3.energy -= 1
                         if e3.energy == 0:
                             e3.active = False
                     if enemy2_hit:
-                        b.active = False
+                        x.active = False
                         for z in enemy2_hit:
                             z.energy -= 1
                             if z.energy == 0:
                                 z.active = False
                     if boss_hit:
-                        b.active = False
+                        x.active = False
                         boss1.energy -= 1
                         if boss1.energy == 0:
                             boss1.active = False
@@ -720,11 +723,11 @@ def main():
                     y.move()
                     screen.blit(y.image, y.rect)
                     enemy_hit = pygame.sprite.spritecollide(y, enemies, False, pygame.sprite.collide_mask)
-                    enemy3_hit = pygame.sprite.spritecollide(b, enemy3, False, pygame.sprite.collide_mask)
-                    enemy2_hit = pygame.sprite.spritecollide(b, enemy2, False, pygame.sprite.collide_mask)
-                    boss_hit = pygame.sprite.spritecollide(b, boss, False, pygame.sprite.collide_mask)
+                    enemy3_hit = pygame.sprite.spritecollide(y, enemy3, False, pygame.sprite.collide_mask)
+                    enemy2_hit = pygame.sprite.spritecollide(y, enemy2, False, pygame.sprite.collide_mask)
+                    boss_hit = pygame.sprite.spritecollide(y, boss, False, pygame.sprite.collide_mask)
                     if enemy_hit:
-                        b.active = False
+                        y.active = False
                         for e in enemy_hit:
                             # here we check which type of planes is attacked
                             if e in enemy2:
@@ -734,19 +737,19 @@ def main():
                             else:
                                 e.active = False
                     if enemy3_hit:
-                        b.active = False
+                        y.active = False
                         # here we check which type of planes is attacked
                         e3.energy -= 1
                         if e3.energy == 0:
                             e3.active = False
                     if enemy2_hit:
-                        b.active = False
+                        y.active = False
                         for z in enemy2_hit:
                             z.energy -= 1
                             if z.energy == 0:
                                 z.active = False
                     if boss_hit:
-                        b.active = False
+                        y.active = False
                         boss1.energy -= 1
                         if boss1.energy == 0:
                             boss1.active = False
@@ -771,14 +774,15 @@ def main():
                                  (e3.rect.left + e3.rect.width * energy_remain,\
                                  e3.rect.top - 5), 2)
             else:
-                if not(delay % 3):
-                    # here we draw the destory pictures of the plane
-                    screen.blit(e3.destroy_images[en3_destroy_index], e3.rect)
-                    en3_destroy_index = (en3_destroy_index + 1) % 4
-                    if en3_destroy_index == 0:
-                        score += 1000
-                        if not level == 7:
-                            e3.reset()
+                if not level == 7:
+                    if not(delay % 3):
+                        # here we draw the destory pictures of the plane
+                        screen.blit(e3.destroy_images[en3_destroy_index], e3.rect)
+                        en3_destroy_index = (en3_destroy_index + 1) % 4
+                        if en3_destroy_index == 0:
+                            score += 1000
+                            if not level == 7:
+                                e3.reset()
             if e3.rect.top > 960 and not level == 7:
                 e3.reset()
 
@@ -804,14 +808,15 @@ def main():
                                      (each.rect.left + each.rect.width * energy_remain,\
                                      each.rect.top - 5), 2)
                 else:
-                    if not(delay % 3):
-                        # here we draw the destory pictures of the plane
-                        screen.blit(each.destroy_images[e2_destroy_index], each.rect)
-                        e2_destroy_index = (e2_destroy_index + 1) % 4
-                        if e2_destroy_index == 0:
-                            score += 500
-                            if not level == 7:
-                                each.reset()
+                    if not level == 7:
+                        if not(delay % 3):
+                            # here we draw the destory pictures of the plane
+                            screen.blit(each.destroy_images[e2_destroy_index], each.rect)
+                            e2_destroy_index = (e2_destroy_index + 1) % 4
+                            if e2_destroy_index == 0:
+                                score += 500
+                                if not level == 7:
+                                    each.reset()
                 if each.rect.top > 960 and not level == 7:
                     each.reset()
 
@@ -820,77 +825,82 @@ def main():
                     each.move()
                     screen.blit(each.image, each.rect)
                 else:
-                    if not(delay % 3):
-                        # here we draw the destory pictures of the plane
-                        screen.blit(each.destroy_images[e1_destroy_index], each.rect)
-                        e1_destroy_index = (e1_destroy_index + 1) % 4
-                        if e1_destroy_index == 0:
-                            score += 100
-                            if not level == 7:
-                                each.reset()
+                    if not level == 7:
+                        if not(delay % 3):
+                            # here we draw the destory pictures of the plane
+                            screen.blit(each.destroy_images[e1_destroy_index], each.rect)
+                            e1_destroy_index = (e1_destroy_index + 1) % 4
+                            if e1_destroy_index == 0:
+                                score += 100
+                                if not level == 7:
+                                    each.reset()
 
             for each in enemy4:
                 if each.active:
                     each.move()
                     screen.blit(each.image, each.rect)
                 else:
-                    if not(delay % 3):
-                        # here we draw the destory pictures of the plane
-                        screen.blit(each.destroy_images[e4_destroy_index], each.rect)
-                        e4_destroy_index = (e4_destroy_index + 1) % 4
-                        if e4_destroy_index == 0:
-                            score += 100
-                            if not level == 7:
-                                each.reset()
+                    if not level == 7:
+                        if not(delay % 3):
+                            # here we draw the destory pictures of the plane
+                            screen.blit(each.destroy_images[e4_destroy_index], each.rect)
+                            e4_destroy_index = (e4_destroy_index + 1) % 4
+                            if e4_destroy_index == 0:
+                                score += 100
+                                if not level == 7:
+                                    each.reset()
 
             for each in enemy5:
                 if each.active:
                     each.move()
                     screen.blit(each.image, each.rect)
                 else:
-                    if not(delay % 3):
-                        # here we draw the destory pictures of the plane
-                        screen.blit(each.destroy_images[e5_destroy_index], each.rect)
-                        e5_destroy_index = (e5_destroy_index + 1) % 4
-                        if e5_destroy_index == 0:
-                            score += 100
-                            if not level == 7:
-                                each.reset()
+                    if not level == 7:
+                        if not(delay % 3):
+                            # here we draw the destory pictures of the plane
+                            screen.blit(each.destroy_images[e5_destroy_index], each.rect)
+                            e5_destroy_index = (e5_destroy_index + 1) % 4
+                            if e5_destroy_index == 0:
+                                score += 100
+                                if not level == 7:
+                                    each.reset()
 
             for each in enemy6:
                 if each.active:
                     each.move()
                     screen.blit(each.image, each.rect)
                 else:
-                    if not(delay % 3):
-                        # here we draw the destory pictures of the plane
-                        screen.blit(each.destroy_images[e6_destroy_index], each.rect)
-                        e6_destroy_index = (e6_destroy_index + 1) % 4
-                        if e6_destroy_index == 0:
-                            score += 100
-                            if not level == 7:
-                                each.reset()
+                    if not level == 7:
+                        if not(delay % 3):
+                            # here we draw the destory pictures of the plane
+                            screen.blit(each.destroy_images[e6_destroy_index], each.rect)
+                            e6_destroy_index = (e6_destroy_index + 1) % 4
+                            if e6_destroy_index == 0:
+                                score += 100
+                                if not level == 7:
+                                    each.reset()
 
             for each in enemy7:
                 if each.active:
                     each.move()
                     screen.blit(each.image, each.rect)
                 else:
-                    if not(delay % 3):
-                        # here we draw the destory pictures of the plane
-                        screen.blit(each.destroy_images[e7_destroy_index], each.rect)
-                        e7_destroy_index = (e7_destroy_index + 1) % 4
-                        if e7_destroy_index == 0:
-                            score += 100
-                            if not level == 7:
-                                each.reset()
+                    if not level == 7:
+                        if not(delay % 3):
+                            # here we draw the destory pictures of the plane
+                            screen.blit(each.destroy_images[e7_destroy_index], each.rect)
+                            e7_destroy_index = (e7_destroy_index + 1) % 4
+                            if e7_destroy_index == 0:
+                                score += 100
+                                if not level == 7:
+                                    each.reset()
                             
             # here we draw the score
             score_text = score_font.render("Score : %s" % str(score), True, BLACK)
             screen.blit(score_text, (10,5))
 
         # here we creat the ending
-        elif life_num == 0 or level == 7 and boss1.active == False:
+        elif life_num == 0 or level == 7 and not boss1.active:
             # here we stop dropping the support
             pygame.time.set_timer(supply_time, 0)
 
