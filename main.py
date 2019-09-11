@@ -146,7 +146,7 @@ def main():
 
     bullet6 = []
     bullet6_index = 0
-    bullet6_number = 20000
+    bullet6_number = 5000
     for i in range(bullet6_number//5):
         bullet6.append(bullet.Bullet6((boss1.rect.centerx - 300, boss1.rect.centery)))
         bullet6.append(bullet.Bullet6((boss1.rect.centerx - 100, boss1.rect.centery)))
