@@ -256,6 +256,7 @@ def main():
 
     # here we start the game
     while running:
+        print (delay)
         for event in pygame.event.get():
 
             # here we quit the game and exit the system
@@ -308,7 +309,7 @@ def main():
                 pygame.time.set_timer(invincible_time, 0)
                             
         # here we change the levels
-        if level == 1 and score > 1000:
+        if level == 1 and score > 100:
             level = 2
 
             # add more enemy planes to increase the difficulty level
@@ -318,7 +319,7 @@ def main():
             # increase the speed of the small enemy plane
             inc_speed(enemy1, 1)
 
-        elif level == 2 and score > 3000:
+        elif level == 2 and score > 300:
             level = 3
 
             # add more enemy planes to increase the difficulty level
@@ -328,7 +329,7 @@ def main():
             # increase the speed of the small enemy plane
             inc_speed(enemy1, 1)
 
-        elif level == 3 and score > 8000:
+        elif level == 3 and score > 800:
             level = 4
 
             # add more enemy planes to increase the difficulty level
@@ -339,7 +340,7 @@ def main():
             # increase the speed of the small enemy plane
 
 
-        elif level == 4 and score > 15000:
+        elif level == 4 and score > 1500:
             level = 5
 
             # add more enemy planes to increase the difficulty level
@@ -349,7 +350,7 @@ def main():
             # increase the speed of the small enemy plane
             inc_speed(enemy4, 1)
 
-        elif level == 5 and score > 25000:
+        elif level == 5 and score > 2500:
             level = 6
 
             # add more enemy planes to increase the difficulty level
@@ -361,15 +362,18 @@ def main():
             # increase the speed of the small enemy plane
             inc_speed(enemy1, 1)
 
-        elif level == 6 and score > 40000:
+        elif level == 6 and score > 4000:
+            score = 4000
             level = 7
-
+            
             # delete all the enemy planes
             e3.active = False
             for each in enemies:
                 each.active = False
             boss1.active = True
-            
+        if score == 4000:
+            score += 100
+            delay = 100
         # here we draw the background picture
         if background1.active:
             background1.move()
@@ -608,15 +612,16 @@ def main():
 
             # here we draw the boss bullet
             if boss1.active:
-                bossbullets = bullet6
-                bossbullets[bullet6_index].reset((boss1.rect.centerx - 300, boss1.rect.centery))
-                bossbullets[bullet6_index+1].reset((boss1.rect.centerx - 200, boss1.rect.centery))
-                bossbullets[bullet6_index+2].reset((boss1.rect.centerx - 100, boss1.rect.centery))
-                bossbullets[bullet6_index+3].reset((boss1.rect.centerx, boss1.rect.centery))
-                bossbullets[bullet6_index+4].reset((boss1.rect.centerx + 100, boss1.rect.centery))
-                bossbullets[bullet6_index+5].reset((boss1.rect.centerx + 200, boss1.rect.centery))
-                bossbullets[bullet6_index+6].reset((boss1.rect.centerx + 300, boss1.rect.centery))
-                bullet6_index = (bullet6_index + 7) % bullet6_number
+                if not(delay % 10):
+                    bossbullets = bullet6
+                    bossbullets[bullet6_index].reset((boss1.rect.centerx - 300, boss1.rect.centery))
+                    bossbullets[bullet6_index+1].reset((boss1.rect.centerx - 200, boss1.rect.centery))
+                    bossbullets[bullet6_index+2].reset((boss1.rect.centerx - 100, boss1.rect.centery))
+                    bossbullets[bullet6_index+3].reset((boss1.rect.centerx, boss1.rect.centery))
+                    bossbullets[bullet6_index+4].reset((boss1.rect.centerx + 100, boss1.rect.centery))
+                    bossbullets[bullet6_index+5].reset((boss1.rect.centerx + 200, boss1.rect.centery))
+                    bossbullets[bullet6_index+6].reset((boss1.rect.centerx + 300, boss1.rect.centery))
+                    bullet6_index = (bullet6_index + 7) % bullet6_number
 
             # here we check if the bullet collides witg the plane
             if level == 7 and boss1.active:
@@ -772,8 +777,9 @@ def main():
                     en3_destroy_index = (en3_destroy_index + 1) % 4
                     if en3_destroy_index == 0:
                         score += 1000
-                        e3.reset()
-            if e3.rect.top > 960:
+                        if not level == 7:
+                            e3.reset()
+            if e3.rect.top > 960 and not level == 7:
                 e3.reset()
 
 
@@ -804,8 +810,9 @@ def main():
                         e2_destroy_index = (e2_destroy_index + 1) % 4
                         if e2_destroy_index == 0:
                             score += 500
-                            each.reset()
-                if each.rect.top > 960:
+                            if not level == 7:
+                                each.reset()
+                if each.rect.top > 960 and not level == 7:
                     each.reset()
 
             for each in enemy1:
@@ -819,7 +826,8 @@ def main():
                         e1_destroy_index = (e1_destroy_index + 1) % 4
                         if e1_destroy_index == 0:
                             score += 100
-                            each.reset()
+                            if not level == 7:
+                                each.reset()
 
             for each in enemy4:
                 if each.active:
@@ -832,7 +840,8 @@ def main():
                         e4_destroy_index = (e4_destroy_index + 1) % 4
                         if e4_destroy_index == 0:
                             score += 100
-                            each.reset()
+                            if not level == 7:
+                                each.reset()
 
             for each in enemy5:
                 if each.active:
@@ -845,7 +854,8 @@ def main():
                         e5_destroy_index = (e5_destroy_index + 1) % 4
                         if e5_destroy_index == 0:
                             score += 100
-                            each.reset()
+                            if not level == 7:
+                                each.reset()
 
             for each in enemy6:
                 if each.active:
@@ -858,7 +868,8 @@ def main():
                         e6_destroy_index = (e6_destroy_index + 1) % 4
                         if e6_destroy_index == 0:
                             score += 100
-                            each.reset()
+                            if not level == 7:
+                                each.reset()
 
             for each in enemy7:
                 if each.active:
@@ -871,7 +882,8 @@ def main():
                         e7_destroy_index = (e7_destroy_index + 1) % 4
                         if e7_destroy_index == 0:
                             score += 100
-                            each.reset()
+                            if not level == 7:
+                                each.reset()
                             
             # here we draw the score
             score_text = score_font.render("Score : %s" % str(score), True, BLACK)
