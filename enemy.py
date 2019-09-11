@@ -290,3 +290,38 @@ class Enemy7(pygame.sprite.Sprite):
         self.active = True
         self.rect.left = randint(100,600)
         self.rect.bottom = randint(1000,2000)
+
+ # here we difine the biggest size enemy plane
+class Enemy8(pygame.sprite.Sprite):
+    energy = 200
+    def __init__(self,size):
+        pygame.sprite.Sprite.__init__(self)
+
+        self.image = pygame.image.load("images/boss1.png").convert_alpha()
+        # here we difine the destory picture of the enemy
+        self.destroy_images = []
+        self.destroy_images.extend([\
+             pygame.image.load("images/3.png").convert_alpha(),\
+             pygame.image.load("images/4.png").convert_alpha(),\
+             pygame.image.load("images/5.png").convert_alpha(),\
+             pygame.image.load("images/1.png").convert_alpha(),\
+             ])
+        self.rect = self.image.get_rect()
+        self.width = 700
+        self.height = 960
+        self.speed = 1
+        # here we set the condition of the picture
+        self.active = False
+        self.rect.left = 0
+        self.rect.bottom = -100
+        self.mask = pygame.mask.from_surface(self.image)
+        self.energy = Enemy8.energy
+
+
+     # here we difine the movemont of the enemy
+    def move(self):
+        if self.rect.top < 0:
+            self.rect.top += self.speed
+
+
+    

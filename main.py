@@ -69,17 +69,21 @@ def main():
     background2 = background.background(size)
     
     # here we creat myplane
+    my_plane = pygame.sprite.Group()
     myplane1 = myplane.Myplane(size)
+    my_plane.add(myplane1)
    
      # here we creat the enemy planes
     enemies = pygame.sprite.Group()
     enemy3 = pygame.sprite.Group()
     enemy2 = pygame.sprite.Group()
+    boss = pygame.sprite.Group()
     e21 = enemy.Enemy2(size)
     e22 = enemy.Enemy2(size)
     e23 = enemy.Enemy2(size)
     e24 = enemy.Enemy2(size)
     e25 = enemy.Enemy2(size)
+    boss1 = enemy.Enemy8(size)
     enemy2.add(e21)
     enemy2.add(e22)
     enemy2.add(e23)
@@ -90,6 +94,7 @@ def main():
     enemies.add(e23)
     enemies.add(e24)
     enemies.add(e25)
+    boss.add(boss1)
     
     e3 = enemy.Enemy3(size)
     enemy3.add(e3)
@@ -139,6 +144,19 @@ def main():
     for i in range(bullet4_number):
         bullet4.append(bullet.Bullet4((myplane1.rect.centerx + 23, myplane1.rect.centery)))
 
+    bullet6 = []
+    bullet6_index = 0
+    bullet6_number = 70
+    for i in range(bullet6_number//7):
+        bullet6.append(bullet.Bullet6((boss1.rect.centerx - 300, boss1.rect.centery)))
+        bullet6.append(bullet.Bullet6((boss1.rect.centerx - 200, boss1.rect.centery)))
+        bullet6.append(bullet.Bullet6((boss1.rect.centerx - 100, boss1.rect.centery)))
+        bullet6.append(bullet.Bullet6((boss1.rect.centerx, boss1.rect.centery)))
+        bullet6.append(bullet.Bullet6((boss1.rect.centerx + 100, boss1.rect.centery)))
+        bullet6.append(bullet.Bullet6((boss1.rect.centerx + 200, boss1.rect.centery)))
+        bullet6.append(bullet.Bullet6((boss1.rect.centerx + 300, boss1.rect.centery)))
+
+
     # here we creat the enemy bullet
     bullet5 = bullet.Bullet5(size)
     b5 = pygame.sprite.Group()
@@ -173,6 +191,7 @@ def main():
     e6_destroy_index = 0
     e7_destroy_index = 0
     myplane1_destroy_index = 0
+    boss_destroy_index = 0
 
     # here we add the score to the game
     score = 0
@@ -342,7 +361,15 @@ def main():
             # increase the speed of the small enemy plane
             inc_speed(enemy1, 1)
 
-        
+        elif level == 6 and score > 40000:
+            level = 7
+
+            # delete all the enemy planes
+            e3.active = False
+            for each in enemies:
+                each.active = False
+            boss1.active = True
+            
         # here we draw the background picture
         if background1.active:
             background1.move()
@@ -483,6 +510,36 @@ def main():
                         pygame.time.set_timer(invincible_time, 3 * 1000)
 
 
+            # here we check the condition of the enemy3
+            if boss1.active:
+                boss1.move()
+                screen.blit(boss1.image, boss1.rect)
+                # here we draw the total blood of the enemy plane
+                pygame.draw.line(screen, BLACK, \
+                                 (boss1.rect.left, boss1.rect.top - 5),\
+                                 (boss1.rect.right, boss1.rect.top - 5),\
+                                 2)
+                # when the energy is bigger than 20%, it will be green. else, it will be red
+                energy_remain = boss1.energy / enemy.Enemy8.energy
+                if energy_remain > 0.30:
+                    energy_color = GREEN
+                else:
+                    energy_color = RED
+                pygame.draw.line(screen, energy_color,\
+                                 (boss1.rect.left, boss1.rect.top - 5),\
+                                 (boss1.rect.left + boss1.rect.width * energy_remain,\
+                                 boss1.rect.top - 5), 2)
+            else:
+                if level == 7:
+                    if not(delay % 3):
+                        # here we draw the destory pictures of the plane
+                        screen.blit(boss1.destroy_images[boss_destroy_index], boss1.rect)
+                        boss_destroy_index = (boss_destroy_index + 1) % 4
+                        if boss_destroy_index == 0:
+                            score += 10000
+
+
+
 
             # here we draw the enemy bullet
             if bullet5.active:
@@ -549,6 +606,33 @@ def main():
                     bullets[bullet1_index+1].reset((myplane1.rect.centerx + 13, myplane1.rect.centery))
                     bullet1_index = (bullet1_index + 2) % bullet1_number
 
+            # here we draw the boss bullet
+            if boss1.active:
+                bossbullets = bullet6
+                bossbullets[bullet6_index].reset((boss1.rect.centerx - 300, boss1.rect.centery))
+                bossbullets[bullet6_index+1].reset((boss1.rect.centerx - 200, boss1.rect.centery))
+                bossbullets[bullet6_index+2].reset((boss1.rect.centerx - 100, boss1.rect.centery))
+                bossbullets[bullet6_index+3].reset((boss1.rect.centerx, boss1.rect.centery))
+                bossbullets[bullet6_index+4].reset((boss1.rect.centerx + 100, boss1.rect.centery))
+                bossbullets[bullet6_index+5].reset((boss1.rect.centerx + 200, boss1.rect.centery))
+                bossbullets[bullet6_index+6].reset((boss1.rect.centerx + 300, boss1.rect.centery))
+                bullet6_index = (bullet6_index + 7) % bullet6_number
+
+            # here we check if the bullet collides witg the plane
+            if level == 7 and boss1.active:
+                for v in bossbullets:
+                    if v.active:
+                        v.move()
+                        screen.blit(v.image, v.rect)
+                        bossbullet_down = pygame.sprite.spritecollide(v, my_plane, False, pygame.sprite.collide_mask)
+                        if bossbullet_down and not myplane1.invincible:
+                            myplane1.energy -= 1
+                            if myplane1.energy == 0:
+                                myplane1.active = False
+                            v.active = False
+
+
+                    
             # here we check if the bullet collides with the enemy plane
             for b in bullets:
                 if b.active:
@@ -557,6 +641,7 @@ def main():
                     enemy_hit = pygame.sprite.spritecollide(b, enemies, False, pygame.sprite.collide_mask)
                     enemy3_hit = pygame.sprite.spritecollide(b, enemy3, False, pygame.sprite.collide_mask)
                     enemy2_hit = pygame.sprite.spritecollide(b, enemy2, False, pygame.sprite.collide_mask)
+                    boss_hit = pygame.sprite.spritecollide(b, boss, False, pygame.sprite.collide_mask)
                     if enemy_hit:
                         b.active = False
                         for e in enemy_hit:
@@ -579,6 +664,13 @@ def main():
                             z.energy -= 1
                             if z.energy == 0:
                                 z.active = False
+                    if boss_hit:
+                        b.active = False
+                        boss1.energy -= 1
+                        if boss1.energy == 0:
+                            boss1.active = False
+
+                    
 
             for x in bullet3:
                 if x.active:
@@ -588,6 +680,7 @@ def main():
                     enemy_hit = pygame.sprite.spritecollide(x, enemies, False, pygame.sprite.collide_mask)
                     enemy3_hit = pygame.sprite.spritecollide(b, enemy3, False, pygame.sprite.collide_mask)
                     enemy2_hit = pygame.sprite.spritecollide(b, enemy2, False, pygame.sprite.collide_mask)
+                    boss_hit = pygame.sprite.spritecollide(b, boss, False, pygame.sprite.collide_mask)
                     if enemy_hit:
                         b.active = False
                         for e in enemy_hit:
@@ -610,6 +703,11 @@ def main():
                             z.energy -= 1
                             if z.energy == 0:
                                 z.active = False
+                    if boss_hit:
+                        b.active = False
+                        boss1.energy -= 1
+                        if boss1.energy == 0:
+                            boss1.active = False
 
             for y in bullet4:
                 if y.active:
@@ -619,6 +717,7 @@ def main():
                     enemy_hit = pygame.sprite.spritecollide(y, enemies, False, pygame.sprite.collide_mask)
                     enemy3_hit = pygame.sprite.spritecollide(b, enemy3, False, pygame.sprite.collide_mask)
                     enemy2_hit = pygame.sprite.spritecollide(b, enemy2, False, pygame.sprite.collide_mask)
+                    boss_hit = pygame.sprite.spritecollide(b, boss, False, pygame.sprite.collide_mask)
                     if enemy_hit:
                         b.active = False
                         for e in enemy_hit:
@@ -641,6 +740,11 @@ def main():
                             z.energy -= 1
                             if z.energy == 0:
                                 z.active = False
+                    if boss_hit:
+                        b.active = False
+                        boss1.energy -= 1
+                        if boss1.energy == 0:
+                            boss1.active = False
                 
             # here we check the condition of the enemy3
             if e3.active:
@@ -672,6 +776,8 @@ def main():
             if e3.rect.top > 960:
                 e3.reset()
 
+
+            
             for each in enemy2:
                 if each.active:
                     each.move()
@@ -772,7 +878,7 @@ def main():
             screen.blit(score_text, (10,5))
 
         # here we creat the ending
-        elif life_num == 0:
+        elif life_num == 0 or level == 7 and boss1.active == False:
             # here we stop dropping the support
             pygame.time.set_timer(supply_time, 0)
 
