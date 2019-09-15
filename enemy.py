@@ -323,5 +323,10 @@ class Enemy8(pygame.sprite.Sprite):
         if self.rect.top < 0:
             self.rect.top += self.speed
 
+    def reset(self):
+        self.active = True
+        self.rect.left = 0
+        self.rect.bottom = -1000
+
 
     

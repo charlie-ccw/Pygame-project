@@ -254,7 +254,7 @@ def main():
 
     # here we start the game
     while running:
-        print (delay)
+        print (level)
         for event in pygame.event.get():
 
             # here we quit the game and exit the system
@@ -366,9 +366,12 @@ def main():
             
             # delete all the enemy planes
             e3.active = False
+            e3.reset()
             for each in enemies:
                 each.active = False
+                each.reset()
             boss1.active = True
+            
         if score == 4000:
             score += 100
             delay = 100
@@ -518,8 +521,8 @@ def main():
                 screen.blit(boss1.image, boss1.rect)
                 # here we draw the total blood of the enemy plane
                 pygame.draw.line(screen, BLACK, \
-                                 (boss1.rect.left, boss1.rect.top - 5),\
-                                 (boss1.rect.right, boss1.rect.top - 5),\
+                                 (boss1.rect.left, boss1.rect.bottom + 5),\
+                                 (boss1.rect.right, boss1.rect.bottom + 5),\
                                  2)
                 # when the energy is bigger than 20%, it will be green. else, it will be red
                 energy_remain = boss1.energy / enemy.Enemy8.energy
@@ -528,9 +531,9 @@ def main():
                 else:
                     energy_color = RED
                 pygame.draw.line(screen, energy_color,\
-                                 (boss1.rect.left, boss1.rect.top - 5),\
+                                 (boss1.rect.left, boss1.rect.bottom + 5),\
                                  (boss1.rect.left + boss1.rect.width * energy_remain,\
-                                 boss1.rect.top - 5), 2)
+                                 boss1.rect.bottom + 5), 2)
             else:
                 if level == 7:
                     if not(delay % 3):
@@ -539,6 +542,12 @@ def main():
                         boss_destroy_index = (boss_destroy_index + 1) % 4
                         if boss_destroy_index == 0:
                             score += 10000
+                            life_num -= life_num
+                            boss1.reset()
+                            
+        
+            
+                            
                             
 
 
@@ -677,6 +686,7 @@ def main():
                         boss1.energy -= 1
                         if boss1.energy == 0:
                             boss1.active = False
+                            level == 8
 
                     
 
@@ -716,6 +726,7 @@ def main():
                         boss1.energy -= 1
                         if boss1.energy == 0:
                             boss1.active = False
+                            level == 8
 
             for y in bullet4:
                 if y.active:
@@ -753,9 +764,10 @@ def main():
                         boss1.energy -= 1
                         if boss1.energy == 0:
                             boss1.active = False
+                            level == 8
                 
             # here we check the condition of the enemy3
-            if e3.active:
+            if e3.active and not level == 7:
                 e3.move()
                 screen.blit(e3.image, e3.rect)
                 # here we draw the total blood of the enemy plane
@@ -781,15 +793,14 @@ def main():
                         en3_destroy_index = (en3_destroy_index + 1) % 4
                         if en3_destroy_index == 0:
                             score += 1000
-                            if not level == 7:
-                                e3.reset()
+                            e3.reset()
             if e3.rect.top > 960 and not level == 7:
                 e3.reset()
 
 
             
             for each in enemy2:
-                if each.active:
+                if each.active and not level == 7:
                     each.move()
                     screen.blit(each.image, each.rect)
                      # here we draw the total blood of the enemy plane
@@ -815,13 +826,12 @@ def main():
                             e2_destroy_index = (e2_destroy_index + 1) % 4
                             if e2_destroy_index == 0:
                                 score += 500
-                                if not level == 7:
-                                    each.reset()
+                                each.reset()
                 if each.rect.top > 960 and not level == 7:
                     each.reset()
 
             for each in enemy1:
-                if each.active:
+                if each.active and not level == 7:
                     each.move()
                     screen.blit(each.image, each.rect)
                 else:
@@ -832,11 +842,10 @@ def main():
                             e1_destroy_index = (e1_destroy_index + 1) % 4
                             if e1_destroy_index == 0:
                                 score += 100
-                                if not level == 7:
-                                    each.reset()
+                                each.reset()
 
             for each in enemy4:
-                if each.active:
+                if each.active and not level == 7:
                     each.move()
                     screen.blit(each.image, each.rect)
                 else:
@@ -847,11 +856,10 @@ def main():
                             e4_destroy_index = (e4_destroy_index + 1) % 4
                             if e4_destroy_index == 0:
                                 score += 100
-                                if not level == 7:
-                                    each.reset()
+                                each.reset()
 
             for each in enemy5:
-                if each.active:
+                if each.active and not level == 7:
                     each.move()
                     screen.blit(each.image, each.rect)
                 else:
@@ -862,11 +870,10 @@ def main():
                             e5_destroy_index = (e5_destroy_index + 1) % 4
                             if e5_destroy_index == 0:
                                 score += 100
-                                if not level == 7:
-                                    each.reset()
+                                each.reset()
 
             for each in enemy6:
-                if each.active:
+                if each.active and not level == 7:
                     each.move()
                     screen.blit(each.image, each.rect)
                 else:
@@ -877,11 +884,10 @@ def main():
                             e6_destroy_index = (e6_destroy_index + 1) % 4
                             if e6_destroy_index == 0:
                                 score += 100
-                                if not level == 7:
-                                    each.reset()
+                                each.reset()
 
             for each in enemy7:
-                if each.active:
+                if each.active and not level == 7:
                     each.move()
                     screen.blit(each.image, each.rect)
                 else:
@@ -892,15 +898,14 @@ def main():
                             e7_destroy_index = (e7_destroy_index + 1) % 4
                             if e7_destroy_index == 0:
                                 score += 100
-                                if not level == 7:
-                                    each.reset()
+                                each.reset()
                             
             # here we draw the score
             score_text = score_font.render("Score : %s" % str(score), True, BLACK)
             screen.blit(score_text, (10,5))
 
         # here we creat the ending
-        elif life_num == 0 or level == 7 and not boss1.active:
+        elif life_num == 0:
             # here we stop dropping the support
             pygame.time.set_timer(supply_time, 0)
 
