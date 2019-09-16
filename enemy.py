@@ -301,10 +301,10 @@ class Enemy8(pygame.sprite.Sprite):
         # here we difine the destory picture of the enemy
         self.destroy_images = []
         self.destroy_images.extend([\
-             pygame.image.load("images/3.png").convert_alpha(),\
-             pygame.image.load("images/4.png").convert_alpha(),\
-             pygame.image.load("images/5.png").convert_alpha(),\
-             pygame.image.load("images/1.png").convert_alpha(),\
+             pygame.image.load("images/boss2.jpg").convert_alpha(),\
+             pygame.image.load("images/boss3.png").convert_alpha(),\
+             pygame.image.load("images/boss4.png").convert_alpha(),\
+             pygame.image.load("images/boss5.png").convert_alpha(),\
              ])
         self.rect = self.image.get_rect()
         self.width = 700
