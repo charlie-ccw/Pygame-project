@@ -150,7 +150,6 @@ def main():
     for i in range(bullet6_number//5):
         bullet6.append(bullet.Bullet6((boss1.rect.centerx - 300, boss1.rect.centery)))
         bullet6.append(bullet.Bullet6((boss1.rect.centerx - 100, boss1.rect.centery)))
-        bullet6.append(bullet.Bullet6((boss1.rect.centerx, boss1.rect.centery)))
         bullet6.append(bullet.Bullet6((boss1.rect.centerx + 100, boss1.rect.centery)))
         bullet6.append(bullet.Bullet6((boss1.rect.centerx + 300, boss1.rect.centery)))
 
@@ -254,7 +253,7 @@ def main():
 
     # here we start the game
     while running:
-        print (level)
+        print (delay)
         for event in pygame.event.get():
 
             # here we quit the game and exit the system
@@ -494,14 +493,14 @@ def main():
                                  (myplane1.rect.right, myplane1.rect.bottom + 5),\
                                  2)
                 # when the energy is bigger than 20%, it will be green. else, it will be red
-                energy_remain = myplane1.energy / myplane.Myplane.energy
-                if energy_remain > 0.5:
+                energy_remain1 = myplane1.energy / myplane.Myplane.energy
+                if energy_remain1 > 0.5:
                     energy_color = GREEN
                 else:
                     energy_color = RED
                 pygame.draw.line(screen, energy_color,\
                                  (myplane1.rect.left, myplane1.rect.bottom + 5),\
-                                 (myplane1.rect.left + myplane1.rect.width * energy_remain,\
+                                 (myplane1.rect.left + myplane1.rect.width * energy_remain1,\
                                  myplane1.rect.bottom + 5), 2)
 
             else:
@@ -521,19 +520,19 @@ def main():
                 screen.blit(boss1.image, boss1.rect)
                 # here we draw the total blood of the enemy plane
                 pygame.draw.line(screen, BLACK, \
-                                 (boss1.rect.left, boss1.rect.bottom + 5),\
-                                 (boss1.rect.right, boss1.rect.bottom + 5),\
+                                 (boss1.rect.left, boss1.rect.bottom - 50),\
+                                 (boss1.rect.right, boss1.rect.bottom - 50),\
                                  2)
                 # when the energy is bigger than 20%, it will be green. else, it will be red
-                energy_remain = boss1.energy / enemy.Enemy8.energy
-                if energy_remain > 0.30:
+                energy_remain2 = boss1.energy / enemy.Enemy8.energy
+                if energy_remain2 > 0.30:
                     energy_color = GREEN
                 else:
                     energy_color = RED
                 pygame.draw.line(screen, energy_color,\
-                                 (boss1.rect.left, boss1.rect.bottom + 5),\
-                                 (boss1.rect.left + boss1.rect.width * energy_remain,\
-                                 boss1.rect.bottom + 5), 2)
+                                 (boss1.rect.left, boss1.rect.bottom - 50),\
+                                 (boss1.rect.left + boss1.rect.width * energy_remain2,\
+                                 boss1.rect.bottom - 50), 2)
             else:
                 if level == 7:
                     if not(delay % 3):
@@ -626,20 +625,36 @@ def main():
 
             # here we draw the boss bullet
             if boss1.active:
-                if not(delay % 10):
+                if not(delay % 25):
                     bossbullets = bullet6
                     bossbullets[bullet6_index].reset((boss1.rect.centerx - 300, boss1.rect.centery))
                     bossbullets[bullet6_index+2].reset((boss1.rect.centerx - 100, boss1.rect.centery))
-                    bossbullets[bullet6_index+3].reset((boss1.rect.centerx, boss1.rect.centery))
                     bossbullets[bullet6_index+4].reset((boss1.rect.centerx + 100, boss1.rect.centery))
                     bossbullets[bullet6_index+6].reset((boss1.rect.centerx + 300, boss1.rect.centery))
-                    bullet6_index = (bullet6_index + 5) % bullet6_number
+                    bullet6_index = (bullet6_index + 4) % bullet6_number
 
             # here we check if the bullet collides witg the plane
             if level == 7 and boss1.active:
                 for v in bossbullets:
                     if v.active:
-                        v.move()
+                        if energy_remain2 >= 0.8:
+                            v.move()
+                        if energy_remain2 >= 0.6 and energy_remain2 < 0.8:
+                            v.move()
+                            v.move1()
+                        if energy_remain2 >= 0.4 and energy_remain2 < 0.6:
+                            v.move()
+                            v.move2()
+                        if energy_remain2 >= 0.2 and energy_remain2 < 0.4:
+                            v.move()
+                            v.move3()
+                        if energy_remain2 < 0.2:
+                            v.move()
+                            if v.rect.centerx > myplane1.rect.centerx and v.rect.top < myplane1.rect.top:
+                                v.rect.left -= 2
+                            if v.rect.centerx < myplane1.rect.centerx and v.rect.top < myplane1.rect.top:
+                                v.rect.left += 2
+
                         screen.blit(v.image, v.rect)
                         bossbullet_down = pygame.sprite.spritecollide(v, my_plane, False, pygame.sprite.collide_mask)
                         if bossbullet_down and not myplane1.invincible:

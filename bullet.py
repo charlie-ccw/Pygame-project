@@ -1,6 +1,7 @@
 import pygame
 import enemy
 import main
+import math
 
 
 
@@ -145,6 +146,16 @@ class Bullet6(pygame.sprite.Sprite):
 
         if self.rect.top > 960:
             self.active = False
+
+    def move1(self):
+        self.rect.left += 3
+
+    def move2(self):
+        self.rect.left -= 3
+
+    def move3(self):
+        self.rect.left += 4*math.sin(self.rect.top/50)
+
     # here we set the method of resetting the bullets
     def reset(self, position):
         self.rect.left, self.rect.top = position
