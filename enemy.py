@@ -293,7 +293,7 @@ class Enemy7(pygame.sprite.Sprite):
 
  # here we difine the biggest size enemy plane
 class Enemy8(pygame.sprite.Sprite):
-    energy = 200
+    energy = 1000
     def __init__(self,size):
         pygame.sprite.Sprite.__init__(self)
 

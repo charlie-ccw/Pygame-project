@@ -244,7 +244,7 @@ def main():
     life_num = 3
     
     # here we set the delay to make the picture change smoothly
-    delay = 100
+    delay = 120
 
     # here we set the state of running to check if we need to end the game
     running = True
@@ -289,6 +289,8 @@ def main():
                             for each in enemies:
                                 if each.rect.bottom > 0:
                                     each.active = False
+                            if level == 7:
+                                boss1.energy -= 100
 
         # here we set the supply type
             elif event.type == supply_time:
@@ -373,7 +375,7 @@ def main():
             
         if score == 4000:
             score += 100
-            delay = 100
+            delay = 120
         # here we draw the background picture
         if background1.active:
             background1.move()
@@ -625,29 +627,42 @@ def main():
 
             # here we draw the boss bullet
             if boss1.active:
-                if not(delay % 25):
+                if not(delay % 40):
                     bossbullets = bullet6
                     bossbullets[bullet6_index].reset((boss1.rect.centerx - 300, boss1.rect.centery))
-                    bossbullets[bullet6_index+2].reset((boss1.rect.centerx - 100, boss1.rect.centery))
-                    bossbullets[bullet6_index+4].reset((boss1.rect.centerx + 100, boss1.rect.centery))
-                    bossbullets[bullet6_index+6].reset((boss1.rect.centerx + 300, boss1.rect.centery))
+                    bossbullets[bullet6_index+1].reset((boss1.rect.centerx - 100, boss1.rect.centery))
+                    bossbullets[bullet6_index+2].reset((boss1.rect.centerx + 100, boss1.rect.centery))
+                    bossbullets[bullet6_index+3].reset((boss1.rect.centerx + 300, boss1.rect.centery))
                     bullet6_index = (bullet6_index + 4) % bullet6_number
 
             # here we check if the bullet collides witg the plane
             if level == 7 and boss1.active:
                 for v in bossbullets:
                     if v.active:
-                        if energy_remain2 >= 0.8:
+                        if energy_remain2 >= 0.9:
                             v.move()
-                        if energy_remain2 >= 0.6 and energy_remain2 < 0.8:
+                        if energy_remain2 >= 0.8 and energy_remain2 < 0.9:
                             v.move()
                             v.move1()
-                        if energy_remain2 >= 0.4 and energy_remain2 < 0.6:
-                            v.move()
-                            v.move2()
-                        if energy_remain2 >= 0.2 and energy_remain2 < 0.4:
+                        if energy_remain2 >= 0.7 and energy_remain2 < 0.8:
                             v.move()
                             v.move3()
+                        if energy_remain2 >= 0.6 and energy_remain2 < 0.7:
+                            v.move()
+                            v.move2()
+                        if energy_remain2 >= 0.5 and energy_remain2 < 0.6:
+                            v.move()
+                            v.move3()
+                        if energy_remain2 >= 0.4 and energy_remain2 < 0.5:
+                            v.move()
+                            v.rect.top += 1
+                            v.move1()
+                        if energy_remain2 >= 0.3 and energy_remain2 < 0.4:
+                            v.move()
+                            v.rect.top += 2
+                            v.move2()
+                        if energy_remain2 >= 0.2 and energy_remain2 < 0.3:
+                            v.move()
                         if energy_remain2 < 0.2:
                             v.move()
                             if v.rect.centerx > myplane1.rect.centerx and v.rect.top < myplane1.rect.top:
@@ -996,7 +1011,7 @@ def main():
         # here we change the value of delay
         delay -= 1
         if not delay:
-            delay = 100
+            delay = 120
         
         pygame.display.flip()
         
