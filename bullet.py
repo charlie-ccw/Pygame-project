@@ -156,6 +156,7 @@ class Bullet6(pygame.sprite.Sprite):
     def move3(self):
         self.rect.left += 4*math.sin(self.rect.top/50)
 
+
     # here we set the method of resetting the bullets
     def reset(self, position):
         self.rect.left, self.rect.top = position
