@@ -177,13 +177,13 @@ class Enemy5(pygame.sprite.Sprite):
     def __init__(self,size):
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = pygame.image.load("images/6.png").convert_alpha()
+        self.image = pygame.image.load("images/b1.png").convert_alpha()
         # here we difine the destory picture of the enemy
         self.destroy_images = []
         self.destroy_images.extend([\
-             pygame.image.load("images/7.png").convert_alpha(),\
-             pygame.image.load("images/8.png").convert_alpha(),\
-             pygame.image.load("images/9.png").convert_alpha(),\
+             pygame.image.load("images/b2.png").convert_alpha(),\
+             pygame.image.load("images/b3.png").convert_alpha(),\
+             pygame.image.load("images/b4.png").convert_alpha(),\
              pygame.image.load("images/1.png").convert_alpha(),\
              ])
         self.rect = self.image.get_rect()
@@ -217,13 +217,13 @@ class Enemy6(pygame.sprite.Sprite):
     def __init__(self,size):
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = pygame.image.load("images/6.png").convert_alpha()
+        self.image = pygame.image.load("images/b1.png").convert_alpha()
         # here we difine the destory picture of the enemy
         self.destroy_images = []
         self.destroy_images.extend([\
-             pygame.image.load("images/7.png").convert_alpha(),\
-             pygame.image.load("images/8.png").convert_alpha(),\
-             pygame.image.load("images/9.png").convert_alpha(),\
+             pygame.image.load("images/b2.png").convert_alpha(),\
+             pygame.image.load("images/b3.png").convert_alpha(),\
+             pygame.image.load("images/b4.png").convert_alpha(),\
              pygame.image.load("images/1.png").convert_alpha(),\
              ])
         self.rect = self.image.get_rect()
@@ -257,13 +257,13 @@ class Enemy7(pygame.sprite.Sprite):
     def __init__(self,size):
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = pygame.image.load("images/32.png").convert_alpha()
+        self.image = pygame.image.load("images/r1.png").convert_alpha()
         # here we difine the destory picture of the enemy
         self.destroy_images = []
         self.destroy_images.extend([\
-             pygame.image.load("images/33.png").convert_alpha(),\
-             pygame.image.load("images/34.png").convert_alpha(),\
-             pygame.image.load("images/35.png").convert_alpha(),\
+             pygame.image.load("images/r2.png").convert_alpha(),\
+             pygame.image.load("images/r3.png").convert_alpha(),\
+             pygame.image.load("images/r4.png").convert_alpha(),\
              pygame.image.load("images/1.png").convert_alpha(),\
              ])
         self.rect = self.image.get_rect()

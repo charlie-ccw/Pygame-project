@@ -291,6 +291,8 @@ def main():
                                     each.active = False
                             if level == 7:
                                 boss1.energy -= 100
+                                if boss1.energy < 0:
+                                    boss1.active = False
 
         # here we set the supply type
             elif event.type == supply_time:
